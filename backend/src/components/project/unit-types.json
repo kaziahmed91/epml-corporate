@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_project_unit_types",
+  "info": {
+    "displayName": "Unit Types",
+    "icon": "search"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "sold_out": {
+      "type": "boolean"
+    },
+    "images": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "units_available": {
+      "type": "integer"
+    },
+    "size": {
+      "type": "integer"
+    }
+  }
+}

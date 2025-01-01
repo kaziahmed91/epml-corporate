@@ -1,0 +1,88 @@
+{
+  "kind": "collectionType",
+  "collectionName": "projects",
+  "info": {
+    "singularName": "project",
+    "pluralName": "projects",
+    "displayName": "Project",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "constructionStart": {
+      "type": "date"
+    },
+    "constructionEnd": {
+      "type": "date"
+    },
+    "floors": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "photos": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "brochure": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "Unit": {
+      "type": "component",
+      "repeatable": true,
+      "component": "project.unit-types"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
+    },
+    "project_type": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::project-type.project-type",
+      "inversedBy": "projects"
+    },
+    "location": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::location.location",
+      "inversedBy": "projects"
+    },
+    "project_status": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::project-status.project-status"
+    },
+    "parking_floors": {
+      "type": "integer"
+    },
+    "parking_spaces": {
+      "type": "integer"
+    }
+  }
+}

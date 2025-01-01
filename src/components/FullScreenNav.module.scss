@@ -1,0 +1,25 @@
+.logo {
+  img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+  }
+}
+
+.image {
+  position: relative;
+  
+  
+  img {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+  }
+} 
+
+.closeButton {
+  left: -178px;
+  top: 20px;
+  position: relative;
+}
