@@ -19,7 +19,12 @@
       "mappedBy": "project_type"
     },
     "Type": {
-      "type": "string"
+      "type": "enumeration",
+      "enum": [
+        "Residential",
+        "Commercial",
+        "Mixed-Use"
+      ]
     }
   }
 }

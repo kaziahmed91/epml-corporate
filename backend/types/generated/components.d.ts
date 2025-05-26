@@ -1,23 +1,26 @@
-import type { Schema, Attribute } from '@strapi/strapi';
+import type { Schema, Struct } from '@strapi/strapi';
 
-export interface ProjectUnitTypes extends Schema.Component {
+export interface ProjectUnitTypes extends Struct.ComponentSchema {
   collectionName: 'components_project_unit_types';
   info: {
     displayName: 'Unit Types';
     icon: 'search';
   };
   attributes: {
-    name: Attribute.String;
-    sold_out: Attribute.Boolean;
-    images: Attribute.Media;
-    units_available: Attribute.Integer;
-    size: Attribute.Integer;
+    images: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    name: Schema.Attribute.String;
+    size: Schema.Attribute.Integer;
+    sold_out: Schema.Attribute.Boolean;
+    units_available: Schema.Attribute.Integer;
   };
 }
 
-declare module '@strapi/types' {
-  export module Shared {
-    export interface Components {
+declare module '@strapi/strapi' {
+  export module Public {
+    export interface ComponentSchemas {
       'project.unit-types': ProjectUnitTypes;
     }
   }

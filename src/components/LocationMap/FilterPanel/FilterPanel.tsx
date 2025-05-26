@@ -13,18 +13,23 @@ import { Button } from "@/components/ui/button";
 import { locations, status, type } from "./filterElements";
 import { RotateCcw, Filter, MoveLeft } from "lucide-react";
 
-const SelectField = ({ label, placeholder, selections }) => {
+type SelectionItem = {
+  key: string;
+  value: string;
+};
+
+const SelectField = ({ label, placeholder, selections }: { label: string; placeholder: string; selections: SelectionItem[] }) => {
   return (
     <div className="mb-2 w-full">
       <Label htmlFor="location-select">{label}</Label>
-      <Select id="location-select">
+      <Select>
         <SelectTrigger className="w-full">
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
             <SelectLabel>Locations</SelectLabel>
-            {selections.map(({ key, value }) => (
+            {selections.map(({ key, value }: { key: string; value: string }) => (
               <SelectItem key={key} value={value}>
                 {value}
               </SelectItem>

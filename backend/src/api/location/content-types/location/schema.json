@@ -12,9 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Name": {
-      "type": "string"
-    },
     "projects": {
       "type": "relation",
       "relation": "oneToMany",
@@ -26,6 +23,16 @@
       "relation": "manyToOne",
       "target": "api::city.city",
       "inversedBy": "locations"
+    },
+    "Name": {
+      "type": "enumeration",
+      "enum": [
+        "Khulshi",
+        "Mehedibagh",
+        "Agrabad Commercial ",
+        "Devpahar",
+        "Agrabad Residential "
+      ]
     }
   }
 }
