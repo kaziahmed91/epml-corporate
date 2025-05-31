@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_pricing_price_ranges",
+  "info": {
+    "displayName": "Price Range",
+    "description": "Price range for projects"
+  },
+  "options": {},
+  "attributes": {
+    "minPrice": {
+      "type": "biginteger"
+    },
+    "maxPrice": {
+      "type": "biginteger"
+    },
+    "currency": {
+      "type": "string",
+      "default": "BDT"
+    }
+  }
+}

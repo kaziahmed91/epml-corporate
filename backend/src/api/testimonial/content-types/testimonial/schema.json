@@ -1,0 +1,66 @@
+{
+  "kind": "collectionType",
+  "collectionName": "testimonials",
+  "info": {
+    "singularName": "testimonial",
+    "pluralName": "testimonials",
+    "displayName": "Testimonial",
+    "description": "Customer testimonials and reviews"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "customerName": {
+      "type": "string",
+      "required": true
+    },
+    "customerTitle": {
+      "type": "string"
+    },
+    "customerImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "content": {
+      "type": "text",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "rating": {
+      "type": "integer",
+      "min": 1,
+      "max": 5,
+      "default": 5
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": ["customer", "landowner", "employee", "partner"]
+    },
+    "isFeatured": {
+      "type": "boolean",
+      "default": false
+    },
+    "displayOrder": {
+      "type": "integer",
+      "default": 0
+    },
+    "project": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::project.project",
+      "inversedBy": "testimonials"
+    }
+  }
+}

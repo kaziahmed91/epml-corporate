@@ -2,31 +2,93 @@
   "collectionName": "components_project_unit_types",
   "info": {
     "displayName": "Unit Types",
-    "icon": "search"
+    "description": "Comprehensive unit specifications for residential and commercial properties"
   },
   "options": {},
   "attributes": {
     "name": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
-    "sold_out": {
-      "type": "boolean"
+    "unitCategory": {
+      "type": "enumeration",
+      "enum": ["residential", "commercial", "parking", "utility"],
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "studio",
+        "1bed",
+        "2bed",
+        "3bed",
+        "4bed",
+        "penthouse",
+        "duplex",
+        "shop",
+        "showroom",
+        "atm",
+        "food_court",
+        "bank",
+        "office",
+        "warehouse"
+      ]
+    },
+    "dimensions": {
+      "type": "component",
+      "repeatable": false,
+      "component": "specifications.dimensions"
+    },
+    "residentialSpecs": {
+      "type": "component",
+      "repeatable": false,
+      "component": "specifications.residential"
+    },
+    "commercialSpecs": {
+      "type": "component",
+      "repeatable": false,
+      "component": "specifications.commercial"
+    },
+    "floorPlan": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images", "files"]
     },
     "images": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
       "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "hasLayoutPlan": {
+      "type": "boolean",
+      "default": false
+    },
+    "facing": {
+      "type": "enumeration",
+      "enum": [
+        "North",
+        "South",
+        "East",
+        "West",
+        "North-East",
+        "North-West",
+        "South-East",
+        "South-West"
+      ],
       "multiple": true
     },
-    "units_available": {
-      "type": "integer"
+    "floors": {
+      "type": "json",
+      "description": "Array of floor numbers where this unit type is available"
     },
-    "size": {
-      "type": "integer"
+    "features": {
+      "type": "json",
+      "description": "Unit-specific features"
+    },
+    "description": {
+      "type": "text"
     }
   }
 }

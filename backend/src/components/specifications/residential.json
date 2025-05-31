@@ -1,0 +1,54 @@
+{
+  "collectionName": "components_specifications_residential",
+  "info": {
+    "displayName": "Residential Specifications",
+    "description": "Specifications specific to residential units"
+  },
+  "options": {},
+  "attributes": {
+    "bedrooms": {
+      "type": "integer",
+      "min": 0
+    },
+    "bathrooms": {
+      "type": "integer",
+      "min": 0
+    },
+    "livingRooms": {
+      "type": "integer",
+      "min": 0
+    },
+    "diningRooms": {
+      "type": "integer",
+      "min": 0
+    },
+    "kitchens": {
+      "type": "integer",
+      "min": 0
+    },
+    "balconies": {
+      "type": "integer",
+      "min": 0
+    },
+    "studyRooms": {
+      "type": "integer",
+      "min": 0
+    },
+    "servantRooms": {
+      "type": "integer",
+      "min": 0
+    },
+    "storeRooms": {
+      "type": "integer",
+      "min": 0
+    },
+    "parkingSpaces": {
+      "type": "integer",
+      "min": 0
+    },
+    "additionalFeatures": {
+      "type": "json",
+      "description": "Any additional residential features"
+    }
+  }
+}

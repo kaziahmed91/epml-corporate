@@ -10,7 +10,7 @@ const Appshell = ({ children }: AppshellProps) => {
   return (
     <>
       <Header />
-      <main className="mx-auto px-4 sm:px-6 lg:px-8 max-w-[1400px]">
+      <main className="w-full">
         {children}
       </main>
       <Footer />

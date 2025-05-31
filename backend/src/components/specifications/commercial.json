@@ -1,0 +1,64 @@
+{
+  "collectionName": "components_specifications_commercial",
+  "info": {
+    "displayName": "Commercial Specifications",
+    "description": "Specifications specific to commercial units"
+  },
+  "options": {},
+  "attributes": {
+    "commercialType": {
+      "type": "enumeration",
+      "enum": [
+        "ATM",
+        "Food Court",
+        "Small Shop",
+        "Large Shop",
+        "Showroom",
+        "Bank",
+        "Office",
+        "Warehouse",
+        "Restaurant",
+        "Clinic",
+        "Salon",
+        "Pharmacy",
+        "Other"
+      ]
+    },
+    "frontage": {
+      "type": "decimal",
+      "description": "Street frontage in feet"
+    },
+    "basement": {
+      "type": "boolean",
+      "default": false
+    },
+    "mezzanine": {
+      "type": "boolean",
+      "default": false
+    },
+    "loadingDock": {
+      "type": "boolean",
+      "default": false
+    },
+    "powerLoad": {
+      "type": "string",
+      "description": "Power load capacity"
+    },
+    "airConditioning": {
+      "type": "enumeration",
+      "enum": ["Central", "Split", "Window", "None", "Provision"]
+    },
+    "washrooms": {
+      "type": "integer",
+      "min": 0
+    },
+    "storageArea": {
+      "type": "decimal",
+      "description": "Storage area in square feet"
+    },
+    "additionalFeatures": {
+      "type": "json",
+      "description": "Any additional commercial features"
+    }
+  }
+}

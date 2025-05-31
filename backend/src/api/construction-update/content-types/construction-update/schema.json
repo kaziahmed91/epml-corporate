@@ -1,0 +1,69 @@
+{
+  "kind": "collectionType",
+  "collectionName": "construction_updates",
+  "info": {
+    "singularName": "construction-update",
+    "pluralName": "construction-updates",
+    "displayName": "Construction Update",
+    "description": "Monthly construction progress updates"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "month": {
+      "type": "integer",
+      "min": 1,
+      "max": 12,
+      "required": true
+    },
+    "year": {
+      "type": "integer",
+      "required": true
+    },
+    "stage": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "description": {
+      "type": "richtext",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "progressPercentage": {
+      "type": "decimal",
+      "min": 0,
+      "max": 100
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "workCompleted": {
+      "type": "json"
+    },
+    "upcomingWork": {
+      "type": "json"
+    },
+    "project": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::project.project",
+      "inversedBy": "constructionUpdates"
+    }
+  }
+}
