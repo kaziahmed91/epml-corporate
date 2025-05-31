@@ -101,7 +101,7 @@ export default function NavigationMenu({
       {/* Mobile Navigation
       <MobileNav>
         <MobileNavHeader>
-          <NavbarLogo />
+          
           <MobileNavToggle isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
         </MobileNavHeader>
         <MobileNavMenu isOpen={isOpen} onClose={() => setIsOpen(false)}>

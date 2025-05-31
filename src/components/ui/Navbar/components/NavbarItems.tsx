@@ -92,15 +92,27 @@ export const Navbar = ({ children, className }: NavbarProps) => {
 };
 
 export const NavBody = ({ children, className, visible }: NavBodyProps) => {
+  const { scrollY } = useScroll();
+  const [shouldReshape, setShouldReshape] = useState(false);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    // Get the viewport height and calculate 80vh in pixels
+    const viewportHeight = window.innerHeight;
+    const heroHeight = viewportHeight * 0.8;
+
+    // Only reshape after scrolling past the hero section
+    setShouldReshape(latest > heroHeight);
+  });
+
   return (
     <motion.div
       animate={{
-        backdropFilter: visible ? "blur(10px)" : "none",
-        boxShadow: visible
+        backdropFilter: shouldReshape ? "blur(10px)" : "none",
+        boxShadow: shouldReshape
           ? "0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
           : "none",
-        width: visible ? "40%" : "100%",
-        y: visible ? 20 : 0,
+        width: shouldReshape ? "40%" : "100%",
+        y: shouldReshape ? 20 : 0,
       }}
       transition={{
         type: "spring",
@@ -112,7 +124,8 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
       }}
       className={cn(
         "relative z-[60] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start rounded-full bg-transparent px-4 py-2 lg:flex dark:bg-transparent",
-        visible && "bg-white/80 dark:bg-neutral-950/80",
+        shouldReshape && "bg-white/80 dark:bg-neutral-950/80",
+        !shouldReshape && "text-white",
         className
       )}
     >
@@ -132,7 +145,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
         setActive(null);
       }}
       className={cn(
-        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium text-zinc-600 transition duration-200 hover:text-zinc-800 lg:flex lg:space-x-2",
+        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium transition duration-200 lg:flex lg:space-x-2",
         className
       )}
     >
@@ -149,13 +162,13 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
         >
           <a
             onClick={onItemClick}
-            className="relative px-4 py-2 text-neutral-600 dark:text-neutral-300 cursor-pointer"
+            className="relative px-4 py-2 cursor-pointer"
             href={item.link || "#"}
           >
             {hovered === idx && (
               <motion.div
                 layoutId="hovered"
-                className="absolute inset-0 h-full w-full rounded-full bg-gray-100 dark:bg-neutral-800"
+                className="absolute inset-0 h-full w-full rounded-full bg-white/10 dark:bg-white/10"
                 transition={{
                   type: "spring",
                   stiffness: 200,
@@ -271,23 +284,6 @@ export const MobileNavToggle = ({
     <XIcon className="text-black dark:text-white" onClick={onClick} />
   ) : (
     <MenuIcon className="text-black dark:text-white" onClick={onClick} />
-  );
-};
-
-export const NavbarLogo = () => {
-  return (
-    <a
-      href="#"
-      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black"
-    >
-      <img
-        src="https://assets.aceternity.com/logo-dark.png"
-        alt="logo"
-        width={30}
-        height={30}
-      />
-      <span className="font-medium text-black dark:text-white">Startup</span>
-    </a>
   );
 };
 

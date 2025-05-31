@@ -12,7 +12,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="w-full relative mb-10 mt-10">
+      <header className="w-full relative">
         {/* <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-[1400px]"> */}
         {/* <div className="flex items-center justify-between h-16"> */}
 
