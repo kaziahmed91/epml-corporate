@@ -40,6 +40,7 @@ export default function NavigationMenu({
     },
     {
       name: "Projects",
+      fullWidth: true,
       children: (
         <div className="text-sm grid grid-cols-2 gap-10 p-4">
           <ProductItem
@@ -93,8 +94,7 @@ export default function NavigationMenu({
         <Logo size="md" />
         <NavItems items={navItems} />
         <div className="flex space-x-2">
-          {/* <NavbarButton variant="secondary">Login</NavbarButton> */}
-          <NavbarButton>Contact Us</NavbarButton>
+          <NavbarButton>Sign Up</NavbarButton>
         </div>
       </NavBody>
 

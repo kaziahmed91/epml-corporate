@@ -8,7 +8,7 @@ import {
   useMotionValueEvent,
 } from "motion/react";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useCallback } from "react";
 
 const transition = {
   type: "spring",
@@ -35,6 +35,7 @@ interface NavItemsProps {
     name: string;
     link?: string;
     children?: React.ReactNode;
+    fullWidth?: boolean; // New flag for full-width dropdowns
   }[];
   className?: string;
   onItemClick?: () => void;
@@ -137,67 +138,144 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
 export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
   const [hovered, setHovered] = useState<number | null>(null);
   const [active, setActive] = useState<string | null>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const clearActiveWithDelay = useCallback(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    timeoutRef.current = setTimeout(() => {
+      setActive(null);
+      setHovered(null);
+    }, 100); // Small delay to allow moving between elements
+  }, []);
+
+  const keepActive = useCallback(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+  }, []);
+
+  const setActiveItem = useCallback(
+    (itemName: string, index: number) => {
+      keepActive();
+      setActive(itemName);
+      setHovered(index);
+    },
+    [keepActive]
+  );
 
   return (
     <motion.div
-      onMouseLeave={() => {
-        setHovered(null);
-        setActive(null);
-      }}
+      onMouseLeave={clearActiveWithDelay}
       className={cn(
         "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium transition duration-200 lg:flex lg:space-x-2",
         className
       )}
     >
-      {items.map((item, idx) => (
-        <div
-          key={`link-${idx}`}
-          onMouseEnter={() => {
-            setHovered(idx);
-            if (item.children) {
-              setActive(item.name);
-            }
-          }}
-          className="relative"
-        >
-          <a
-            onClick={onItemClick}
-            className="relative px-4 py-2 cursor-pointer"
-            href={item.link || "#"}
+      {items.map((item, idx) => {
+        const isFullWidth = item.fullWidth || false;
+        const isActive = active === item.name;
+
+        return (
+          <div
+            key={`link-${idx}`}
+            onMouseEnter={() => {
+              if (item.children) {
+                setActiveItem(item.name, idx);
+              } else {
+                setHovered(idx);
+              }
+            }}
+            onMouseLeave={clearActiveWithDelay}
+            className="relative"
           >
-            {hovered === idx && (
-              <motion.div
-                layoutId="hovered"
-                className="absolute inset-0 h-full w-full rounded-full bg-white/10 dark:bg-white/10"
-                transition={{
-                  type: "spring",
-                  stiffness: 200,
-                  damping: 30,
-                }}
-              />
-            )}
-            <span className="relative z-20">{item.name}</span>
-          </a>
-          {active === item.name && item.children && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.85, y: 10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={transition}
-              className="absolute top-[calc(100%_+_0.5rem)] left-0 pt-2"
+            <a
+              onClick={onItemClick}
+              className="relative px-4 py-2 cursor-pointer"
+              href={item.link || "#"}
             >
+              {hovered === idx && (
+                <motion.div
+                  layoutId="hovered"
+                  className="absolute inset-0 h-full w-full rounded-full bg-white/10 dark:bg-white/10"
+                  transition={{
+                    type: "spring",
+                    stiffness: 200,
+                    damping: 30,
+                  }}
+                />
+              )}
+              <span className="relative z-20">{item.name}</span>
+            </a>
+
+            {/* Regular dropdown */}
+            {!isFullWidth && (
+              <AnimatePresence>
+                {isActive && item.children && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.85, y: 10 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.85, y: 10 }}
+                    transition={transition}
+                    className="absolute top-[calc(100%_+_0.5rem)] left-0 pt-2 z-[100]"
+                    onMouseEnter={keepActive}
+                    onMouseLeave={clearActiveWithDelay}
+                  >
+                    <motion.div
+                      transition={transition}
+                      layoutId={`regular-dropdown-${item.name}`}
+                      className="bg-white dark:bg-black backdrop-blur-sm rounded-2xl overflow-hidden border border-black/[0.2] dark:border-white/[0.2] shadow-xl"
+                    >
+                      <motion.div layout className="w-max h-full p-4">
+                        {item.children}
+                      </motion.div>
+                    </motion.div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            )}
+          </div>
+        );
+      })}
+
+      {/* Full-width dropdowns rendered separately */}
+      {items.map((item, idx) => {
+        const isFullWidth = item.fullWidth || false;
+        const isActive = active === item.name;
+
+        if (!isFullWidth) return null;
+
+        return (
+          <AnimatePresence key={`fullwidth-${idx}`}>
+            {isActive && item.children && (
               <motion.div
+                initial={{ opacity: 0, scale: 0.85, y: 10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.85, y: 10 }}
                 transition={transition}
-                layoutId="active"
-                className="bg-white dark:bg-black backdrop-blur-sm rounded-2xl overflow-hidden border border-black/[0.2] dark:border-white/[0.2] shadow-xl"
+                className="absolute left-0 z-[100] w-full"
+                style={{
+                  top: "calc(100% + 0.5rem)",
+                }}
+                onMouseEnter={keepActive}
+                onMouseLeave={clearActiveWithDelay}
               >
-                <motion.div layout className="w-max h-full p-4">
-                  {item.children}
+                <motion.div
+                  transition={transition}
+                  layoutId={`fullwidth-dropdown-${item.name}`}
+                  className="bg-white dark:bg-black backdrop-blur-sm rounded-2xl overflow-hidden border border-black/[0.2] dark:border-white/[0.2] shadow-xl"
+                >
+                  <motion.div layout className="max-w-7xl mx-auto p-8">
+                    {item.children}
+                  </motion.div>
                 </motion.div>
               </motion.div>
-            </motion.div>
-          )}
-        </div>
-      ))}
+            )}
+          </AnimatePresence>
+        );
+      })}
     </motion.div>
   );
 };
