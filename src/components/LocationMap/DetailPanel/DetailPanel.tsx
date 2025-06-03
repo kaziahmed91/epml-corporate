@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { CircleX, Menu } from "lucide-react";
 
-const PanelDetail = ({ header, text }) => {
+const PanelDetail = ({ header, text }: { header: string; text: string }) => {
   return (
     <div className="flex items-center mt-2 mb-2">
       <p className="w-32 text-sm mr-3 font-bold">{header}</p>
@@ -15,7 +15,7 @@ const PanelDetail = ({ header, text }) => {
   );
 };
 
-const DetailPanel = ({ id, title, location, type }) => {
+const DetailPanel = ({ id, title, location, type }: { id: string; title: string; location: string; type: string }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   return isCollapsed ? (
     <div className="p-3 absolute w-16 top-[20%] h-[500px] right-0 z-10 bg-white shadow-lg rounded-l-lg	">

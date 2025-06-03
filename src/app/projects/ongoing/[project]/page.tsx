@@ -1,14 +1,15 @@
 import React from "react";
 
-const OngoingProjectsPage = ({ params }) => {
+// Using a more compatible way to define Next.js app router pages
+export default function OngoingProjectsPage(props: any) {
+  const { project } = props.params;
+  
   return (
     <main>
       <div>
         <p>project specific page</p>
-        <p>Title: {params.project}</p>
+        <p>Title: {project}</p>
       </div>
     </main>
   );
-};
-
-export default OngoingProjectsPage;
+}

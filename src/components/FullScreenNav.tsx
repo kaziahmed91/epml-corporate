@@ -9,9 +9,10 @@ import styles from "@/components/FullScreenNav.module.scss";
 
 interface FullScreenNavProps {
   isOpen: boolean;
+  onClose?: () => void;
 }
 
-export default function FullScreenNav({ isOpen }: FullScreenNavProps) {
+export default function FullScreenNav({ isOpen, onClose }: FullScreenNavProps) {
   return (
     <nav
       className={`fixed top-0 bg-opacity-95 h-full z-9 transition-transform duration-300 scroll- ${

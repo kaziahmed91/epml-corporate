@@ -1,4 +1,6 @@
 import React from "react";
+import Header from "../Header";
+import Footer from "../Footer";
 
 interface AppshellProps {
   children?: React.ReactNode;
@@ -6,11 +8,13 @@ interface AppshellProps {
 
 const Appshell = ({ children }: AppshellProps) => {
   return (
-    <div className="w-full min-h-screen bg-background">
-      <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-[1400px]">
+    <>
+      <Header />
+      <main className="mx-auto px-4 sm:px-6 lg:px-8 max-w-[1400px]">
         {children}
-      </div>
-    </div>
+      </main>
+      <Footer />
+    </>
   );
 };
 

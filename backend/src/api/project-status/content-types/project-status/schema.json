@@ -4,15 +4,22 @@
   "info": {
     "singularName": "project-status",
     "pluralName": "project-statuses",
-    "displayName": "ProjectStatus"
+    "displayName": "ProjectStatus",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "Status": {
-      "type": "string"
+    "Statuses": {
+      "type": "enumeration",
+      "enum": [
+        "Upcoming",
+        "Ongoing",
+        "Completed"
+      ],
+      "required": true
     }
   }
 }
