@@ -25,6 +25,69 @@ export interface PricingPriceRange extends Struct.ComponentSchema {
   };
 }
 
+export interface ProjectAmenityItem extends Struct.ComponentSchema {
+  collectionName: 'components_project_amenities';
+  info: {
+    displayName: 'Amenity Item';
+    icon: 'star';
+  };
+  attributes: {
+    category: Schema.Attribute.Enumeration<
+      ['recreation', 'wellness', 'community', 'parking', 'services', 'outdoor']
+    >;
+    icon: Schema.Attribute.String & Schema.Attribute.Required;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ProjectDocumentItem extends Struct.ComponentSchema {
+  collectionName: 'components_project_document_items';
+  info: {
+    description: 'Individual project documents with display names';
+    displayName: 'Document Item';
+    icon: 'file-text';
+  };
+  attributes: {
+    category: Schema.Attribute.Enumeration<
+      [
+        'Floor Plans',
+        'Architectural Drawings',
+        'Approvals',
+        'Legal Documents',
+        'Specifications',
+        'Other',
+      ]
+    >;
+    description: Schema.Attribute.Text;
+    displayName: Schema.Attribute.String & Schema.Attribute.Required;
+    displayOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    document: Schema.Attribute.Media<'files' | 'images'> &
+      Schema.Attribute.Required;
+  };
+}
+
+export interface ProjectFeatureItem extends Struct.ComponentSchema {
+  collectionName: 'components_project_feature_list';
+  info: {
+    description: 'Individual feature with icon and translations';
+    displayName: 'Feature Item';
+    icon: 'check-circle';
+  };
+  attributes: {
+    category: Schema.Attribute.Enumeration<
+      ['security', 'convenience', 'utilities', 'accessibility', 'technology']
+    >;
+    icon: Schema.Attribute.String & Schema.Attribute.Required;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+  };
+}
+
 export interface ProjectUnitTypes extends Struct.ComponentSchema {
   collectionName: 'components_project_unit_types';
   info: {
@@ -82,6 +145,21 @@ export interface ProjectUnitTypes extends Struct.ComponentSchema {
       ['residential', 'commercial', 'parking', 'utility']
     > &
       Schema.Attribute.Required;
+  };
+}
+
+export interface ProjectYoutubeVideo extends Struct.ComponentSchema {
+  collectionName: 'components_project_youtube_videos';
+  info: {
+    description: 'YouTube video links for projects';
+    displayName: 'YouTube Video';
+    icon: 'play-circle';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    displayOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    youtubeUrl: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -231,7 +309,11 @@ declare module '@strapi/strapi' {
     export interface ComponentSchemas {
       'location.coordinates': LocationCoordinates;
       'pricing.price-range': PricingPriceRange;
+      'project.amenity-item': ProjectAmenityItem;
+      'project.document-item': ProjectDocumentItem;
+      'project.feature-item': ProjectFeatureItem;
       'project.unit-types': ProjectUnitTypes;
+      'project.youtube-video': ProjectYoutubeVideo;
       'specifications.commercial': SpecificationsCommercial;
       'specifications.dimensions': SpecificationsDimensions;
       'specifications.residential': SpecificationsResidential;

@@ -55,12 +55,6 @@
     "displayOrder": {
       "type": "integer",
       "default": 0
-    },
-    "project": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::project.project",
-      "inversedBy": "testimonials"
     }
   }
 }

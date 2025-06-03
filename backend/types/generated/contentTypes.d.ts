@@ -373,16 +373,17 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiAmenityAmenity extends Struct.CollectionTypeSchema {
-  collectionName: 'amenities';
+export interface ApiAmenityTemplateAmenityTemplate
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'amenity_templates';
   info: {
-    description: 'Project amenities';
-    displayName: 'Amenity';
-    pluralName: 'amenities';
-    singularName: 'amenity';
+    description: 'Pre-defined amenities that can be selected when creating projects';
+    displayName: 'Amenity Template';
+    pluralName: 'amenity-templates';
+    singularName: 'amenity-template';
   };
   options: {
-    draftAndPublish: false;
+    draftAndPublish: true;
   };
   pluginOptions: {
     i18n: {
@@ -390,20 +391,20 @@ export interface ApiAmenityAmenity extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
+    category: Schema.Attribute.Enumeration<
+      ['recreation', 'wellness', 'community', 'parking', 'services', 'outdoor']
+    > &
+      Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Text &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    icon: Schema.Attribute.String;
+    displayOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    icon: Schema.Attribute.String & Schema.Attribute.Required;
+    isActive: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::amenity.amenity'
+      'api::amenity-template.amenity-template'
     >;
     name: Schema.Attribute.String &
       Schema.Attribute.Required &
@@ -412,7 +413,6 @@ export interface ApiAmenityAmenity extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    projects: Schema.Attribute.Relation<'manyToMany', 'api::project.project'>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -513,16 +513,17 @@ export interface ApiConstructionUpdateConstructionUpdate
   };
 }
 
-export interface ApiFeatureFeature extends Struct.CollectionTypeSchema {
-  collectionName: 'features';
+export interface ApiFeatureTemplateFeatureTemplate
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'feature_templates';
   info: {
-    description: 'Project features and amenities';
-    displayName: 'Feature';
-    pluralName: 'features';
-    singularName: 'feature';
+    description: 'Pre-defined features that can be selected when creating projects';
+    displayName: 'Feature Template';
+    pluralName: 'feature-templates';
+    singularName: 'feature-template';
   };
   options: {
-    draftAndPublish: false;
+    draftAndPublish: true;
   };
   pluginOptions: {
     i18n: {
@@ -531,29 +532,19 @@ export interface ApiFeatureFeature extends Struct.CollectionTypeSchema {
   };
   attributes: {
     category: Schema.Attribute.Enumeration<
-      [
-        'security',
-        'convenience',
-        'recreation',
-        'parking',
-        'utilities',
-        'structural',
-      ]
-    >;
+      ['security', 'convenience', 'utilities', 'accessibility', 'technology']
+    > &
+      Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Text &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    icon: Schema.Attribute.String;
+    displayOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    icon: Schema.Attribute.String & Schema.Attribute.Required;
+    isActive: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::feature.feature'
+      'api::feature-template.feature-template'
     >;
     name: Schema.Attribute.String &
       Schema.Attribute.Required &
@@ -562,66 +553,10 @@ export interface ApiFeatureFeature extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    projects: Schema.Attribute.Relation<'manyToMany', 'api::project.project'>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-  };
-}
-
-export interface ApiLeadLead extends Struct.CollectionTypeSchema {
-  collectionName: 'leads';
-  info: {
-    description: 'Customer inquiries and leads';
-    displayName: 'Lead';
-    pluralName: 'leads';
-    singularName: 'lead';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    assignedTo: Schema.Attribute.String;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    email: Schema.Attribute.Email & Schema.Attribute.Required;
-    followUpDate: Schema.Attribute.DateTime;
-    inquiryType: Schema.Attribute.Enumeration<
-      [
-        'general',
-        'project_specific',
-        'landowner',
-        'career',
-        'media',
-        'complaint',
-      ]
-    >;
-    leadReference: Schema.Attribute.String & Schema.Attribute.Unique;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::lead.lead'> &
-      Schema.Attribute.Private;
-    message: Schema.Attribute.Text;
-    name: Schema.Attribute.String & Schema.Attribute.Required;
-    notes: Schema.Attribute.JSON;
-    phone: Schema.Attribute.String & Schema.Attribute.Required;
-    project: Schema.Attribute.Relation<'manyToOne', 'api::project.project'>;
-    publishedAt: Schema.Attribute.DateTime;
-    source: Schema.Attribute.Enumeration<
-      ['website', 'facebook', 'google', 'referral', 'walk_in', 'phone']
-    >;
-    status: Schema.Attribute.Enumeration<
-      ['new', 'contacted', 'qualified', 'converted', 'closed', 'lost']
-    > &
-      Schema.Attribute.DefaultTo<'new'>;
-    unitInterest: Schema.Attribute.String;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    utmCampaign: Schema.Attribute.String;
-    utmMedium: Schema.Attribute.String;
-    utmSource: Schema.Attribute.String;
   };
 }
 
@@ -741,126 +676,65 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
   options: {
     draftAndPublish: true;
   };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
-  };
   attributes: {
-    address: Schema.Attribute.String &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    amenities: Schema.Attribute.Relation<'manyToMany', 'api::amenity.amenity'>;
-    brochure: Schema.Attribute.Media<'files'>;
-    cdaApproval: Schema.Attribute.String;
+    address: Schema.Attribute.String;
+    amenities: Schema.Attribute.Component<'project.amenity-item', true>;
+    brochure: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     constructionEnd: Schema.Attribute.Date;
     constructionStart: Schema.Attribute.Date;
     constructionUpdates: Schema.Attribute.Relation<
       'oneToMany',
       'api::construction-update.construction-update'
     >;
-    coordinates: Schema.Attribute.Component<'location.coordinates', false>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.RichText &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    displayOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
-    facingDirections: Schema.Attribute.Enumeration<
+    description: Schema.Attribute.Text;
+    features: Schema.Attribute.Component<'project.feature-item', true>;
+    floors: Schema.Attribute.String;
+    landFacing: Schema.Attribute.Enumeration<
       [
-        'North',
-        'South',
         'East',
         'West',
-        'North-East',
-        'North-West',
-        'South-East',
-        'South-West',
+        'South',
+        'North',
+        'Corner Plot',
+        'East-West',
+        'North-South',
       ]
     >;
-    featuredImage: Schema.Attribute.Media<'images'>;
-    features: Schema.Attribute.Relation<'manyToMany', 'api::feature.feature'>;
-    floorPlans: Schema.Attribute.Media<'images' | 'files', true>;
-    floors: Schema.Attribute.String;
-    isFeatured: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    leads: Schema.Attribute.Relation<'oneToMany', 'api::lead.lead'>;
-    locale: Schema.Attribute.String;
+    landSize: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::project.project'
-    >;
+    > &
+      Schema.Attribute.Private;
     location: Schema.Attribute.Relation<'manyToOne', 'api::location.location'>;
-    name: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    nearbyLandmarks: Schema.Attribute.JSON;
-    otherApprovals: Schema.Attribute.JSON;
+    name: Schema.Attribute.String;
     parking_floors: Schema.Attribute.Integer;
     parking_spaces: Schema.Attribute.Integer;
-    photos: Schema.Attribute.Media<'images' | 'videos', true>;
-    plotSize: Schema.Attribute.String;
-    priceRange: Schema.Attribute.Component<'pricing.price-range', false>;
+    photos: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
     project_status: Schema.Attribute.Relation<
-      'manyToOne',
+      'oneToOne',
       'api::project-status.project-status'
     >;
     project_type: Schema.Attribute.Relation<
       'manyToOne',
       'api::project-type.project-type'
     >;
+    projectDocuments: Schema.Attribute.Component<'project.document-item', true>;
     publishedAt: Schema.Attribute.DateTime;
-    rajukApproval: Schema.Attribute.String;
-    seoDescription: Schema.Attribute.Text &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }> &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 160;
-      }>;
-    seoKeywords: Schema.Attribute.JSON;
-    seoTitle: Schema.Attribute.String &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }> &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 60;
-      }>;
-    shortDescription: Schema.Attribute.Text &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }> &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 200;
-      }>;
+    roadWidth: Schema.Attribute.Decimal;
     slug: Schema.Attribute.UID<'name'>;
-    testimonials: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::testimonial.testimonial'
-    >;
-    totalUnits: Schema.Attribute.Integer;
     Unit: Schema.Attribute.Component<'project.unit-types', true>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    videos: Schema.Attribute.Media<'videos', true>;
-    virtualTourUrl: Schema.Attribute.String;
+    youtubeVideos: Schema.Attribute.Component<'project.youtube-video', true>;
   };
 }
 
@@ -934,7 +808,6 @@ export interface ApiTestimonialTestimonial extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::testimonial.testimonial'
     >;
-    project: Schema.Attribute.Relation<'manyToOne', 'api::project.project'>;
     publishedAt: Schema.Attribute.DateTime;
     rating: Schema.Attribute.Integer &
       Schema.Attribute.SetMinMax<
@@ -1463,11 +1336,10 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
-      'api::amenity.amenity': ApiAmenityAmenity;
+      'api::amenity-template.amenity-template': ApiAmenityTemplateAmenityTemplate;
       'api::city.city': ApiCityCity;
       'api::construction-update.construction-update': ApiConstructionUpdateConstructionUpdate;
-      'api::feature.feature': ApiFeatureFeature;
-      'api::lead.lead': ApiLeadLead;
+      'api::feature-template.feature-template': ApiFeatureTemplateFeatureTemplate;
       'api::location.location': ApiLocationLocation;
       'api::project-status.project-status': ApiProjectStatusProjectStatus;
       'api::project-type.project-type': ApiProjectTypeProjectType;

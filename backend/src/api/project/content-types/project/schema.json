@@ -10,55 +10,74 @@
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {
-    "i18n": {
-      "localized": true
-    }
-  },
+  "pluginOptions": {},
   "attributes": {
     "name": {
-      "type": "string",
-      "required": true,
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "constructionStart": {
+      "type": "date"
+    },
+    "constructionEnd": {
+      "type": "date"
+    },
+    "floors": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "landSize": {
+      "type": "string"
+    },
+    "landFacing": {
+      "type": "enumeration",
+      "enum": [
+        "East",
+        "West",
+        "South",
+        "North",
+        "Corner Plot",
+        "East-West",
+        "North-South"
+      ]
+    },
+    "roadWidth": {
+      "type": "decimal"
+    },
+    "youtubeVideos": {
+      "type": "component",
+      "repeatable": true,
+      "component": "project.youtube-video"
+    },
+    "projectDocuments": {
+      "type": "component",
+      "repeatable": true,
+      "component": "project.document-item"
+    },
+    "photos": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": ["images", "files", "videos", "audios"]
+    },
+    "brochure": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images", "files", "videos", "audios"]
+    },
+    "Unit": {
+      "type": "component",
+      "repeatable": true,
+      "component": "project.unit-types"
     },
     "slug": {
       "type": "uid",
       "targetField": "name"
-    },
-    "shortDescription": {
-      "type": "text",
-      "maxLength": 200,
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "description": {
-      "type": "richtext",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "address": {
-      "type": "string",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "project_status": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::project-status.project-status",
-      "inversedBy": "projects"
     },
     "project_type": {
       "type": "relation",
@@ -72,15 +91,10 @@
       "target": "api::location.location",
       "inversedBy": "projects"
     },
-    "constructionStart": {
-      "type": "date"
-    },
-    "constructionEnd": {
-      "type": "date"
-    },
-    "floors": {
-      "type": "string",
-      "description": "Number of floors (e.g., '10+2' for 10 regular floors plus 2 basement/parking floors)"
+    "project_status": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::project-status.project-status"
     },
     "parking_floors": {
       "type": "integer"
@@ -88,143 +102,20 @@
     "parking_spaces": {
       "type": "integer"
     },
-    "totalUnits": {
-      "type": "integer"
-    },
-    "plotSize": {
-      "type": "string"
-    },
-    "facingDirections": {
-      "type": "enumeration",
-      "enum": [
-        "North",
-        "South",
-        "East",
-        "West",
-        "North-East",
-        "North-West",
-        "South-East",
-        "South-West"
-      ],
-      "multiple": true
-    },
-    "rajukApproval": {
-      "type": "string"
-    },
-    "cdaApproval": {
-      "type": "string"
-    },
-    "otherApprovals": {
-      "type": "json"
-    },
-    "coordinates": {
-      "type": "component",
-      "repeatable": false,
-      "component": "location.coordinates"
-    },
-    "nearbyLandmarks": {
-      "type": "json"
-    },
-    "featuredImage": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": ["images"]
-    },
-    "photos": {
-      "type": "media",
-      "multiple": true,
-      "required": false,
-      "allowedTypes": ["images", "videos"]
-    },
-    "floorPlans": {
-      "type": "media",
-      "multiple": true,
-      "required": false,
-      "allowedTypes": ["images", "files"]
-    },
-    "videos": {
-      "type": "media",
-      "multiple": true,
-      "required": false,
-      "allowedTypes": ["videos"]
-    },
-    "brochure": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": ["files"]
-    },
-    "virtualTourUrl": {
-      "type": "string"
-    },
-    "Unit": {
+    "features": {
       "type": "component",
       "repeatable": true,
-      "component": "project.unit-types"
-    },
-    "features": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::feature.feature",
-      "mappedBy": "projects"
+      "component": "project.feature-item"
     },
     "amenities": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::amenity.amenity",
-      "mappedBy": "projects"
-    },
-    "isFeatured": {
-      "type": "boolean",
-      "default": false
-    },
-    "displayOrder": {
-      "type": "integer",
-      "default": 0
-    },
-    "priceRange": {
       "type": "component",
-      "repeatable": false,
-      "component": "pricing.price-range"
-    },
-    "seoTitle": {
-      "type": "string",
-      "maxLength": 60,
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "seoDescription": {
-      "type": "text",
-      "maxLength": 160,
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "seoKeywords": {
-      "type": "json"
+      "repeatable": true,
+      "component": "project.amenity-item"
     },
     "constructionUpdates": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::construction-update.construction-update",
-      "mappedBy": "project"
-    },
-    "testimonials": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::testimonial.testimonial",
-      "mappedBy": "project"
-    },
-    "leads": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::lead.lead",
       "mappedBy": "project"
     }
   }

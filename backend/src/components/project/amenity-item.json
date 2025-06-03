@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_project_amenities",
+  "info": {
+    "displayName": "Amenity Item",
+    "icon": "star"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "icon": {
+      "type": "string",
+      "required": true
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "recreation",
+        "wellness",
+        "community",
+        "parking",
+        "services",
+        "outdoor"
+      ]
+    }
+  }
+}

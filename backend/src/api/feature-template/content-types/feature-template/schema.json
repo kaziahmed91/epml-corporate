@@ -1,0 +1,52 @@
+{
+  "kind": "collectionType",
+  "collectionName": "feature_templates",
+  "info": {
+    "singularName": "feature-template",
+    "pluralName": "feature-templates",
+    "displayName": "Feature Template",
+    "description": "Pre-defined features that can be selected when creating projects"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "icon": {
+      "type": "string",
+      "required": true
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "security",
+        "convenience",
+        "utilities",
+        "accessibility",
+        "technology"
+      ],
+      "required": true
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true
+    },
+    "displayOrder": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}
