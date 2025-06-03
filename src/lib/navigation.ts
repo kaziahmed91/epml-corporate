@@ -1,11 +1,11 @@
 export const navigationItems = [
   {
     href: "/",
-    label: "Home"
+    label: "Home",
   },
   {
     href: "/about",
-    label: "About"
+    label: "About",
   },
   {
     href: "/projects",
@@ -13,62 +13,62 @@ export const navigationItems = [
     children: [
       {
         href: "/projects/ongoing",
-        label: "Ongoing"
+        label: "Ongoing",
       },
       {
-        href: "/projects/upcoming", 
-        label: "Upcoming"
+        href: "/projects/upcoming",
+        label: "Upcoming",
       },
       {
         href: "/projects/completed",
-        label: "Completed"
-      }
-    ]
+        label: "Completed",
+      },
+    ],
   },
   {
     href: "/news",
-    label: "News"
+    label: "News",
   },
   {
     href: "/buyers-guide",
-    label: "Buyers Guide"
+    label: "Buyers Guide",
   },
   {
     href: "/landowners",
-    label: "Landowners"
+    label: "Landowners",
   },
   {
     href: "/careers",
-    label: "Careers"
+    label: "Careers",
   },
   {
     href: "/construction-status",
-    label: "Construction Status"
+    label: "Construction Status",
   },
   {
     href: "/contact",
-    label: "Contact"
-  }
+    label: "Contact",
+  },
 ];
 
 export const footerLinks = {
   company: [
-    { href: "/about", label: "About Us" },
+    // { href: "/about", label: "About Us" },
     { href: "/careers", label: "Careers" },
-    { href: "/contact", label: "Contact" }
+    { href: "/contact", label: "Contact" },
   ],
   projects: [
     { href: "/projects/ongoing", label: "Ongoing Projects" },
     { href: "/projects/upcoming", label: "Upcoming Projects" },
-    { href: "/projects/completed", label: "Completed Projects" }
+    { href: "/projects/completed", label: "Completed Projects" },
   ],
   services: [
     { href: "/buyers-guide", label: "Buyers Guide" },
     { href: "/landowners", label: "For Landowners" },
-    { href: "/construction-status", label: "Construction Status" }
+    { href: "/construction-status", label: "Construction Status" },
   ],
   resources: [
     { href: "/news", label: "News & Updates" },
-    { href: "/contact", label: "Support" }
-  ]
+    { href: "/contact", label: "Support" },
+  ],
 };

@@ -14,12 +14,14 @@
   "attributes": {
     "Statuses": {
       "type": "enumeration",
-      "enum": [
-        "Upcoming",
-        "Ongoing",
-        "Completed"
-      ],
+      "enum": ["Upcoming", "Ongoing", "Completed"],
       "required": true
+    },
+    "projects": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::project.project",
+      "mappedBy": "project_status"
     }
   }
 }

@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_project_youtube_videos",
+  "info": {
+    "displayName": "YouTube Video",
+    "icon": "play-circle",
+    "description": "YouTube video links for projects"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "youtubeUrl": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "displayOrder": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

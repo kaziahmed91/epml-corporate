@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_specifications_dimensions",
+  "info": {
+    "displayName": "Dimensions",
+    "description": "Physical dimensions of units"
+  },
+  "options": {},
+  "attributes": {
+    "length": {
+      "type": "decimal",
+      "description": "Length in feet"
+    },
+    "width": {
+      "type": "decimal",
+      "description": "Width in feet"
+    },
+    "height": {
+      "type": "decimal",
+      "description": "Height in feet"
+    },
+    "totalArea": {
+      "type": "decimal",
+      "description": "Total area in square feet"
+    },
+    "carpetArea": {
+      "type": "decimal",
+      "description": "Carpet area in square feet"
+    },
+    "balconyArea": {
+      "type": "decimal",
+      "description": "Balcony area in square feet"
+    }
+  }
+}

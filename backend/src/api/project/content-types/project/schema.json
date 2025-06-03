@@ -30,27 +30,45 @@
     "description": {
       "type": "text"
     },
+    "landSize": {
+      "type": "string"
+    },
+    "landFacing": {
+      "type": "enumeration",
+      "enum": [
+        "East",
+        "West",
+        "South",
+        "North",
+        "Corner Plot",
+        "East-West",
+        "North-South"
+      ]
+    },
+    "roadWidth": {
+      "type": "decimal"
+    },
+    "youtubeVideos": {
+      "type": "component",
+      "repeatable": true,
+      "component": "project.youtube-video"
+    },
+    "projectDocuments": {
+      "type": "component",
+      "repeatable": true,
+      "component": "project.document-item"
+    },
     "photos": {
       "type": "media",
       "multiple": true,
       "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+      "allowedTypes": ["images", "files", "videos", "audios"]
     },
     "brochure": {
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+      "allowedTypes": ["images", "files", "videos", "audios"]
     },
     "Unit": {
       "type": "component",
@@ -83,6 +101,22 @@
     },
     "parking_spaces": {
       "type": "integer"
+    },
+    "features": {
+      "type": "component",
+      "repeatable": true,
+      "component": "project.feature-item"
+    },
+    "amenities": {
+      "type": "component",
+      "repeatable": true,
+      "component": "project.amenity-item"
+    },
+    "constructionUpdates": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::construction-update.construction-update",
+      "mappedBy": "project"
     }
   }
 }

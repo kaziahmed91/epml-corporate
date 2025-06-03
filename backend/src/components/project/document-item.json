@@ -1,0 +1,39 @@
+{
+  "collectionName": "components_project_document_items",
+  "info": {
+    "displayName": "Document Item",
+    "icon": "file-text",
+    "description": "Individual project documents with display names"
+  },
+  "options": {},
+  "attributes": {
+    "displayName": {
+      "type": "string",
+      "required": true
+    },
+    "document": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["files", "images"]
+    },
+    "description": {
+      "type": "text"
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "Floor Plans",
+        "Architectural Drawings",
+        "Approvals",
+        "Legal Documents",
+        "Specifications",
+        "Other"
+      ]
+    },
+    "displayOrder": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}
