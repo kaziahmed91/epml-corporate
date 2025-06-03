@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { MenuIcon, XIcon } from "lucide-react";
+import { MenuIcon, XIcon, ChevronDown } from "lucide-react";
 import {
   motion,
   AnimatePresence,
@@ -193,7 +193,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
           >
             <a
               onClick={onItemClick}
-              className="relative px-4 py-2 cursor-pointer"
+              className="relative px-4 py-2 cursor-pointer flex items-center gap-1 text-lg"
               href={item.link || "#"}
             >
               {hovered === idx && (
@@ -208,6 +208,21 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
                 />
               )}
               <span className="relative z-20">{item.name}</span>
+              {item.children && (
+                <motion.div
+                  animate={{
+                    rotate: isActive ? 180 : 0,
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 200,
+                    damping: 20,
+                  }}
+                  className="relative z-20"
+                >
+                  <ChevronDown className="w-4 h-4" />
+                </motion.div>
+              )}
             </a>
 
             {/* Regular dropdown */}
@@ -441,7 +456,7 @@ export const HoveredLink = ({ children, ...rest }: any) => {
   return (
     <a
       {...rest}
-      className="text-neutral-700 dark:text-neutral-200 hover:text-black "
+      className="text-neutral-700 dark:text-neutral-200 hover:text-black"
     >
       {children}
     </a>

@@ -28,13 +28,13 @@ export default function NavigationMenu({
 
   const navItems = [
     {
-      name: "Services",
+      name: "Company",
       children: (
-        <div className="flex flex-col space-y-4 text-sm">
-          <HoveredLink href="/web-dev">Web Development</HoveredLink>
-          <HoveredLink href="/interface-design">Interface Design</HoveredLink>
-          <HoveredLink href="/seo">Search Engine Optimization</HoveredLink>
-          <HoveredLink href="/branding">Branding</HoveredLink>
+        <div className="flex flex-col space-y-4 text-lg">
+          <HoveredLink href="/about-us">Our Brand</HoveredLink>
+          <HoveredLink href="/about-us">Our Team</HoveredLink>
+          <HoveredLink href="/news">News</HoveredLink>
+          <HoveredLink href="/careers">Careers</HoveredLink>
         </div>
       ),
     },
@@ -70,21 +70,25 @@ export default function NavigationMenu({
         </div>
       ),
     },
-    {
-      name: "Company",
-      children: (
-        <div className="flex flex-col space-y-4 text-sm">
-          <HoveredLink href="/hobby">Hobby</HoveredLink>
-          <HoveredLink href="/individual">Individual</HoveredLink>
-          <HoveredLink href="/team">Team</HoveredLink>
-          <HoveredLink href="/enterprise">Enterprise</HoveredLink>
-        </div>
-      ),
-    },
     // {
-    //   name: "About",
-    //   link: "/about",
+    //   name: "Company",
+    //   children: (
+    //     <div className="flex flex-col space-y-4 text-sm">
+    //       <HoveredLink href="/hobby">Hobby</HoveredLink>
+    //       <HoveredLink href="/individual">Individual</HoveredLink>
+    //       <HoveredLink href="/team">Team</HoveredLink>
+    //       <HoveredLink href="/enterprise">Enterprise</HoveredLink>
+    //     </div>
+    //   ),
     // },
+    {
+      name: "Landowners",
+      link: "/landowners",
+    },
+    {
+      name: "Buyers Guide",
+      link: "/buyers-guide",
+    },
   ];
 
   return (
