@@ -373,53 +373,6 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiAmenityTemplateAmenityTemplate
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'amenity_templates';
-  info: {
-    description: 'Pre-defined amenities that can be selected when creating projects';
-    displayName: 'Amenity Template';
-    pluralName: 'amenity-templates';
-    singularName: 'amenity-template';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
-  };
-  attributes: {
-    category: Schema.Attribute.Enumeration<
-      ['recreation', 'wellness', 'community', 'parking', 'services', 'outdoor']
-    > &
-      Schema.Attribute.Required;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    displayOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
-    icon: Schema.Attribute.String & Schema.Attribute.Required;
-    isActive: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::amenity-template.amenity-template'
-    >;
-    name: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiCityCity extends Struct.CollectionTypeSchema {
   collectionName: 'cities';
   info: {
@@ -439,120 +392,6 @@ export interface ApiCityCity extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     locations: Schema.Attribute.Relation<'oneToMany', 'api::location.location'>;
     Name: Schema.Attribute.String;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiConstructionUpdateConstructionUpdate
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'construction_updates';
-  info: {
-    description: 'Monthly construction progress updates';
-    displayName: 'Construction Update';
-    pluralName: 'construction-updates';
-    singularName: 'construction-update';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    description: Schema.Attribute.RichText &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    images: Schema.Attribute.Media<'images', true>;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::construction-update.construction-update'
-    >;
-    month: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMax<
-        {
-          max: 12;
-          min: 1;
-        },
-        number
-      >;
-    progressPercentage: Schema.Attribute.Decimal &
-      Schema.Attribute.SetMinMax<
-        {
-          max: 100;
-          min: 0;
-        },
-        number
-      >;
-    project: Schema.Attribute.Relation<'manyToOne', 'api::project.project'>;
-    publishedAt: Schema.Attribute.DateTime;
-    stage: Schema.Attribute.String &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    upcomingWork: Schema.Attribute.JSON;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    workCompleted: Schema.Attribute.JSON;
-    year: Schema.Attribute.Integer & Schema.Attribute.Required;
-  };
-}
-
-export interface ApiFeatureTemplateFeatureTemplate
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'feature_templates';
-  info: {
-    description: 'Pre-defined features that can be selected when creating projects';
-    displayName: 'Feature Template';
-    pluralName: 'feature-templates';
-    singularName: 'feature-template';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
-  };
-  attributes: {
-    category: Schema.Attribute.Enumeration<
-      ['security', 'convenience', 'utilities', 'accessibility', 'technology']
-    > &
-      Schema.Attribute.Required;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    displayOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
-    icon: Schema.Attribute.String & Schema.Attribute.Required;
-    isActive: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::feature-template.feature-template'
-    >;
-    name: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -582,15 +421,7 @@ export interface ApiLocationLocation extends Struct.CollectionTypeSchema {
       'api::location.location'
     > &
       Schema.Attribute.Private;
-    Name: Schema.Attribute.Enumeration<
-      [
-        'Khulshi',
-        'Mehedibagh',
-        'Agrabad Commercial ',
-        'Devpahar',
-        'Agrabad Residential ',
-      ]
-    >;
+    Name: Schema.Attribute.String;
     projects: Schema.Attribute.Relation<'oneToMany', 'api::project.project'>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
@@ -603,7 +434,6 @@ export interface ApiProjectStatusProjectStatus
   extends Struct.CollectionTypeSchema {
   collectionName: 'project_statuses';
   info: {
-    description: '';
     displayName: 'ProjectStatus';
     pluralName: 'project-statuses';
     singularName: 'project-status';
@@ -621,12 +451,8 @@ export interface ApiProjectStatusProjectStatus
       'api::project-status.project-status'
     > &
       Schema.Attribute.Private;
-    projects: Schema.Attribute.Relation<'oneToMany', 'api::project.project'>;
     publishedAt: Schema.Attribute.DateTime;
-    Statuses: Schema.Attribute.Enumeration<
-      ['Upcoming', 'Ongoing', 'Completed']
-    > &
-      Schema.Attribute.Required;
+    Status: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -656,9 +482,7 @@ export interface ApiProjectTypeProjectType extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     projects: Schema.Attribute.Relation<'oneToMany', 'api::project.project'>;
     publishedAt: Schema.Attribute.DateTime;
-    Type: Schema.Attribute.Enumeration<
-      ['Residential', 'Commercial', 'Mixed-Use']
-    >;
+    Type: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -678,32 +502,14 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
   };
   attributes: {
     address: Schema.Attribute.String;
-    amenities: Schema.Attribute.Component<'project.amenity-item', true>;
     brochure: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     constructionEnd: Schema.Attribute.Date;
     constructionStart: Schema.Attribute.Date;
-    constructionUpdates: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::construction-update.construction-update'
-    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
-    features: Schema.Attribute.Component<'project.feature-item', true>;
     floors: Schema.Attribute.String;
-    landFacing: Schema.Attribute.Enumeration<
-      [
-        'East',
-        'West',
-        'South',
-        'North',
-        'Corner Plot',
-        'East-West',
-        'North-South',
-      ]
-    >;
-    landSize: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -726,15 +532,12 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
       'manyToOne',
       'api::project-type.project-type'
     >;
-    projectDocuments: Schema.Attribute.Component<'project.document-item', true>;
     publishedAt: Schema.Attribute.DateTime;
-    roadWidth: Schema.Attribute.Decimal;
     slug: Schema.Attribute.UID<'name'>;
     Unit: Schema.Attribute.Component<'project.unit-types', true>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    youtubeVideos: Schema.Attribute.Component<'project.youtube-video', true>;
   };
 }
 
@@ -765,62 +568,6 @@ export interface ApiRecentNewsRecentNews extends Struct.SingleTypeSchema {
       true
     >;
     publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiTestimonialTestimonial extends Struct.CollectionTypeSchema {
-  collectionName: 'testimonials';
-  info: {
-    description: 'Customer testimonials and reviews';
-    displayName: 'Testimonial';
-    pluralName: 'testimonials';
-    singularName: 'testimonial';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
-  };
-  attributes: {
-    content: Schema.Attribute.Text &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    customerImage: Schema.Attribute.Media<'images'>;
-    customerName: Schema.Attribute.String & Schema.Attribute.Required;
-    customerTitle: Schema.Attribute.String;
-    displayOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
-    isFeatured: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::testimonial.testimonial'
-    >;
-    publishedAt: Schema.Attribute.DateTime;
-    rating: Schema.Attribute.Integer &
-      Schema.Attribute.SetMinMax<
-        {
-          max: 5;
-          min: 1;
-        },
-        number
-      > &
-      Schema.Attribute.DefaultTo<5>;
-    type: Schema.Attribute.Enumeration<
-      ['customer', 'landowner', 'employee', 'partner']
-    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1336,16 +1083,12 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
-      'api::amenity-template.amenity-template': ApiAmenityTemplateAmenityTemplate;
       'api::city.city': ApiCityCity;
-      'api::construction-update.construction-update': ApiConstructionUpdateConstructionUpdate;
-      'api::feature-template.feature-template': ApiFeatureTemplateFeatureTemplate;
       'api::location.location': ApiLocationLocation;
       'api::project-status.project-status': ApiProjectStatusProjectStatus;
       'api::project-type.project-type': ApiProjectTypeProjectType;
       'api::project.project': ApiProjectProject;
       'api::recent-news.recent-news': ApiRecentNewsRecentNews;
-      'api::testimonial.testimonial': ApiTestimonialTestimonial;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
