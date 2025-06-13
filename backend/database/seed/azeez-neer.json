@@ -1,0 +1,141 @@
+{
+  "data": {
+    "name": "Equity Aziz Neer",
+    "slug": "equity-aziz-neer",
+    "address": "146, 40 Dewanbari Hill, Dewanji Pukur Par, Sirajuddaula Road, Kotowali, Chattogram",
+    "constructionStart": "2024-01-01",
+    "constructionEnd": "2026-12-31",
+    "floors": "13",
+    "description": "A highland retreat amidst serene Chittagong. Situated at the epicentre of convenience and connectivity, Aziz Neer offers a perfect balance of urban accessibility and serene retreat. Tucked away from the bustling main roads, this exclusive corner-plot residence provides a sanctuary of elegance and tranquility. Thoughtfully designed to blend modern luxury with timeless comfort, Aziz Neer embodies refined living experience at a prime location.",
+    "landSize": "7.76 Katha",
+    "landFacing": "Corner Plot",
+    "roadWidth": 40.0,
+    "parking_floors": 1,
+    "parking_spaces": 18,
+    "project_type": 1,
+    "location": 6,
+    "project_status": 2,
+    "youtubeVideos": [],
+    "projectDocuments": [
+      {
+        "displayName": "Ground Floor Plan",
+        "description": "Complete ground floor layout with parking and facilities",
+        "category": "Floor Plans",
+        "displayOrder": 1
+      },
+      {
+        "displayName": "Unit C Floor Plan",
+        "description": "3BHK apartment layout - 2015 sqft",
+        "category": "Floor Plans",
+        "displayOrder": 2
+      },
+      {
+        "displayName": "Unit D Floor Plan",
+        "description": "3BHK apartment layout - 2015 sqft",
+        "category": "Floor Plans",
+        "displayOrder": 3
+      },
+      {
+        "displayName": "Rooftop Floor Plan",
+        "description": "Rooftop amenities and facilities layout",
+        "category": "Floor Plans",
+        "displayOrder": 4
+      },
+      {
+        "displayName": "Material Specifications",
+        "description": "Complete material specifications for construction",
+        "category": "Specifications",
+        "displayOrder": 5
+      }
+    ],
+    "Unit": [
+      {
+        "name": "Unit C - 3BHK",
+        "sold_out": false,
+        "units_available": 9,
+        "size": 2015
+      },
+      {
+        "name": "Unit D - 3BHK",
+        "sold_out": false,
+        "units_available": 9,
+        "size": 2015
+      }
+    ],
+    "features": [
+      {
+        "name": "24/7 CCTV Surveillance",
+        "icon": "camera",
+        "category": "security"
+      },
+      {
+        "name": "24/7 Security Guard",
+        "icon": "shield-check",
+        "category": "security"
+      },
+      {
+        "name": "Fire Safety System",
+        "icon": "fire-extinguisher",
+        "category": "security"
+      },
+      {
+        "name": "Backup Generator",
+        "icon": "zap",
+        "category": "utilities"
+      },
+      {
+        "name": "Water Treatment Plant",
+        "icon": "droplets",
+        "category": "utilities"
+      },
+      {
+        "name": "High-Speed Elevators",
+        "icon": "move-vertical",
+        "category": "convenience"
+      },
+      {
+        "name": "Management Office",
+        "icon": "building",
+        "category": "convenience"
+      },
+      {
+        "name": "Wheelchair Accessible",
+        "icon": "accessibility",
+        "category": "accessibility"
+      }
+    ],
+    "amenities": [
+      {
+        "name": "Rooftop Garden",
+        "icon": "trees",
+        "category": "outdoor"
+      },
+      {
+        "name": "Gymnasium",
+        "icon": "dumbbell",
+        "category": "wellness"
+      },
+      {
+        "name": "Community Hall",
+        "icon": "users",
+        "category": "community"
+      },
+      {
+        "name": "BBQ Area",
+        "icon": "chef-hat",
+        "category": "recreation"
+      },
+      {
+        "name": "Covered Parking",
+        "icon": "car",
+        "category": "parking"
+      },
+      {
+        "name": "Landscaped Garden",
+        "icon": "flower-2",
+        "category": "outdoor"
+      }
+    ],
+    "publishedAt": "2025-06-03T10:30:00.000Z"
+  }
+}
