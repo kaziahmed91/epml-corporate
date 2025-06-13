@@ -8,10 +8,9 @@
     "start": "strapi start",
     "build": "strapi build",
     "strapi": "strapi",
-    "seed:bootstrap": "node scripts/seed-data.js",
     "seed:all": "SEED_ENABLE=true yarn develop",
-    "seed:force": "SEED_ENABLE=true FORCE_RESEED=true yarn develop",
-    "seed:prod": "NODE_ENV=production FORCE_PRODUCTION_SEED=true yarn start",
+    "seed:force": "SEED_ENABLE=true yarn develop",
+    "seed:prod": "NODE_ENV=production yarn start",
     "type-check": "tsc --noEmit",
     "type-check:watch": "tsc --noEmit --watch"
   },

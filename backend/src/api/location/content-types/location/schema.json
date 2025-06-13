@@ -11,6 +11,9 @@
     "draftAndPublish": true
   },
   "pluginOptions": {},
+  "settings": {
+    "mainField": "Name"
+  },
   "attributes": {
     "projects": {
       "type": "relation",

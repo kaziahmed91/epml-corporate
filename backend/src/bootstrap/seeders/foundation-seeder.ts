@@ -4,6 +4,12 @@ import type { Core } from "@strapi/strapi";
 type Strapi = Core.Strapi;
 import { StrapiSeeder } from "../utils/seeder-helper";
 
+// data
+import cities from "./data/base-data/cities.json";
+import locations from "./data/base-data/locations.json";
+import projectTypes from "./data/base-data/project-types.json";
+import projectStatuses from "./data/base-data/project-statuses.json";
+
 interface FoundationMaps {
   locationMap: Record<string, number>;
   typeMap: Record<string, number>;
@@ -18,61 +24,53 @@ export async function seedFoundationData(
   console.log("🏗️  Seeding foundation data...");
 
   // 1. Seed Cities
-  const chattogram = await seeder.findOrCreate(
-    "api::city.city",
-    { Name: "Chattogram" },
-    { Name: "Chattogram" },
-  );
-
-  const dhaka = await seeder.findOrCreate(
-    "api::city.city",
-    { Name: "Dhaka" },
-    { Name: "Dhaka" },
-  );
+  const cityMap: Record<string, number> = {};
+  for (const cityData of cities) {
+    const city = await seeder.findOrCreate(
+      "api::city.city",
+      { Name: cityData.Name },
+      cityData,
+    );
+    cityMap[cityData.Name] = city.id;
+  }
 
   // 2. Seed Locations
-  const locations = [
-    { Name: "Agrabad Residential ", city: chattogram.id },
-    { Name: "Agrabad Commercial ", city: chattogram.id },
-    { Name: "Khulshi", city: chattogram.id },
-    { Name: "Mehedibagh", city: chattogram.id },
-    { Name: "Devpahar", city: chattogram.id },
-  ];
-
   const locationMap: Record<string, number> = {};
   for (const locationData of locations) {
+    const cityId = cityMap[locationData.cityName];
+    if (!cityId) {
+      console.warn(`City not found for location: ${locationData.Name}`);
+      continue;
+    }
+
     const location = await seeder.findOrCreate(
       "api::location.location",
       { Name: locationData.Name },
-      locationData,
+      { ...locationData, city: cityId },
     );
     locationMap[locationData.Name] = location.id;
   }
 
   // 3. Seed Project Types
-  const projectTypes = ["Residential", "Commercial", "Mixed-Use"];
   const typeMap: Record<string, number> = {};
-
-  for (const type of projectTypes) {
+  for (const typeData of projectTypes) {
     const projectType = await seeder.findOrCreate(
       "api::project-type.project-type",
-      { Type: type },
-      { Type: type },
+      { Type: typeData.Type },
+      typeData,
     );
-    typeMap[type] = projectType.id;
+    typeMap[typeData.Type] = projectType.id;
   }
 
   // 4. Seed Project Statuses
-  const statuses = ["Upcoming", "Ongoing", "Completed"];
   const statusMap: Record<string, number> = {};
-
-  for (const status of statuses) {
+  for (const statusData of projectStatuses) {
     const projectStatus = await seeder.findOrCreate(
       "api::project-status.project-status",
-      { Statuses: status },
-      { Statuses: status },
+      { Statuses: statusData.Statuses },
+      statusData,
     );
-    statusMap[status] = projectStatus.id;
+    statusMap[statusData.Statuses] = projectStatus.id;
   }
 
   console.log("✅ Foundation data seeding completed");

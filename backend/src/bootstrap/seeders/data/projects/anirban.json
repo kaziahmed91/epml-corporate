@@ -152,7 +152,7 @@
           "kitchen": "10'-5\" x 7'-0\""
         }
       },
-      "facing": ["East", "West"],
+      "facing": "East",
       "hasLayoutPlan": true,
       "description": "Spacious 3-bedroom apartment with family living area"
     },
@@ -189,7 +189,7 @@
           "kitchen": "7'-0\" x 4'-0\""
         }
       },
-      "facing": ["North", "South"],
+      "facing": "North",
       "hasLayoutPlan": true,
       "description": "Largest 3-bedroom apartment with spacious dining area"
     },
@@ -226,7 +226,7 @@
           "kitchen": "8'-1\" x 9'-5\""
         }
       },
-      "facing": ["East", "West"],
+      "facing": "East",
       "hasLayoutPlan": true,
       "description": "Well-designed 3-bedroom apartment with spacious living room"
     },
@@ -264,7 +264,7 @@
           "dressing_room": "4'-0\" x 4'-0\""
         }
       },
-      "facing": ["North", "East"],
+      "facing": "North-East",
       "hasLayoutPlan": true,
       "description": "Premium 3-bedroom apartment with dressing room"
     },
@@ -301,7 +301,7 @@
           "utility": "4' wide"
         }
       },
-      "facing": ["South", "West"],
+      "facing": "South-West",
       "hasLayoutPlan": true,
       "description": "Compact 3-bedroom apartment with utility area"
     }
@@ -321,7 +321,7 @@
     },
     {
       "displayName": "Basement Floor Plan",
-      "category": "Floor Plans", 
+      "category": "Floor Plans",
       "description": "Basement parking and generator room layout",
       "displayOrder": 3
     },
@@ -344,24 +344,5 @@
       "displayOrder": 6
     }
   ],
-  "constructionUpdates": [
-    {
-      "month": 1,
-      "year": 2025,
-      "stage": "Foundation Work",
-      "description": "Foundation and basement construction completed",
-      "progressPercentage": 15.0,
-      "workCompleted": ["Foundation laying", "Basement structure"],
-      "upcomingWork": ["Ground floor construction", "Plumbing installation"]
-    },
-    {
-      "month": 3,
-      "year": 2025,
-      "stage": "Ground Floor Construction",
-      "description": "Ground floor structure and parking area completed",
-      "progressPercentage": 30.0,
-      "workCompleted": ["Ground floor structure", "Parking layout"],
-      "upcomingWork": ["1st-3rd floor construction", "Elevator installation"]
-    }
-  ]
+  "constructionUpdates": []
 }
