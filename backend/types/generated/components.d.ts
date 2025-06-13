@@ -33,7 +33,16 @@ export interface ProjectAmenityItem extends Struct.ComponentSchema {
   };
   attributes: {
     category: Schema.Attribute.Enumeration<
-      ['recreation', 'wellness', 'community', 'parking', 'services', 'outdoor']
+      [
+        'recreation',
+        'wellness',
+        'community',
+        'parking',
+        'services',
+        'outdoor',
+        'security',
+        'utilities',
+      ]
     >;
     icon: Schema.Attribute.String & Schema.Attribute.Required;
     name: Schema.Attribute.String & Schema.Attribute.Required;

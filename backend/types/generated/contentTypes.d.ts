@@ -588,7 +588,8 @@ export interface ApiLocationLocation extends Struct.CollectionTypeSchema {
         'Mehedibagh',
         'Agrabad Commercial ',
         'Devpahar',
-        'Agrabad Residential ',
+        'Agrabad Residential',
+        'Sirajuddaula Road',
       ]
     >;
     projects: Schema.Attribute.Relation<'oneToMany', 'api::project.project'>;

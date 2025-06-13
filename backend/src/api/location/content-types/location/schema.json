@@ -11,9 +11,6 @@
     "draftAndPublish": true
   },
   "pluginOptions": {},
-  "settings": {
-    "mainField": "Name"
-  },
   "attributes": {
     "projects": {
       "type": "relation",
@@ -34,7 +31,8 @@
         "Mehedibagh",
         "Agrabad Commercial ",
         "Devpahar",
-        "Agrabad Residential "
+        "Agrabad Residential",
+        "Sirajuddaula Road"
       ]
     }
   }

@@ -1,141 +1,246 @@
 {
-  "data": {
-    "name": "Equity Aziz Neer",
-    "slug": "equity-aziz-neer",
-    "address": "146, 40 Dewanbari Hill, Dewanji Pukur Par, Sirajuddaula Road, Kotowali, Chattogram",
-    "constructionStart": "2024-01-01",
-    "constructionEnd": "2026-12-31",
-    "floors": "13",
-    "description": "A highland retreat amidst serene Chittagong. Situated at the epicentre of convenience and connectivity, Aziz Neer offers a perfect balance of urban accessibility and serene retreat. Tucked away from the bustling main roads, this exclusive corner-plot residence provides a sanctuary of elegance and tranquility. Thoughtfully designed to blend modern luxury with timeless comfort, Aziz Neer embodies refined living experience at a prime location.",
-    "landSize": "7.76 Katha",
-    "landFacing": "Corner Plot",
-    "roadWidth": 40.0,
-    "parking_floors": 1,
-    "parking_spaces": 18,
-    "project_type": 1,
-    "location": 6,
-    "project_status": 2,
-    "youtubeVideos": [],
-    "projectDocuments": [
-      {
-        "displayName": "Ground Floor Plan",
-        "description": "Complete ground floor layout with parking and facilities",
-        "category": "Floor Plans",
-        "displayOrder": 1
+  "name": "Equity Aziz Neer",
+  "slug": "aziz-neer",
+  "address": "146, 40 Dewanhat Hill, Dewanji Pukur Par, Sirajuddaula Road, Kotowali, Chattogram",
+  "description": "Situated at the epicentre of convenience and connectivity, Aziz Neer offers a perfect balance of urban accessibility and serene retreat. Tucked away from the bustling main roads, this exclusive corner-plot residence provides a sanctuary of elegance and tranquility. Thoughtfully designed to blend modern luxury with timeless comfort, Aziz Neer embodies refined living experience at a prime location. Developed by Equity, Chittagong's real estate pioneer synonymous with quality and trust, this exquisite address is crafted for those who seek peace without compromising on connectivity and lifestyle.",
+  "floors": "15 stories with rooftop amenities",
+  "landSize": "7.76 katha",
+  "landFacing": "Corner Plot",
+  "roadWidth": 40.0,
+  "parking_floors": 2,
+  "parking_spaces": 18,
+  "features": [
+    {
+      "name": "Corner Plot Design",
+      "icon": "layout",
+      "category": "convenience"
+    },
+    {
+      "name": "Modern Architectural Elevation",
+      "icon": "building",
+      "category": "convenience"
+    },
+    {
+      "name": "24/7 Security & Surveillance",
+      "icon": "shield",
+      "category": "security"
+    },
+    {
+      "name": "CCTV with Trained Personnel",
+      "icon": "camera",
+      "category": "security"
+    },
+    {
+      "name": "Generator Backup",
+      "icon": "zap",
+      "category": "utilities"
+    },
+    {
+      "name": "Two High-Speed Elevators",
+      "icon": "arrow-up",
+      "category": "convenience"
+    },
+    {
+      "name": "Fire Safety Measures",
+      "icon": "shield-check",
+      "category": "security"
+    },
+    {
+      "name": "Water Filtration System",
+      "icon": "droplet",
+      "category": "utilities"
+    },
+    {
+      "name": "Reserved Parking Area",
+      "icon": "car",
+      "category": "convenience"
+    },
+    {
+      "name": "Premium Finishing Materials",
+      "icon": "star",
+      "category": "convenience"
+    }
+  ],
+  "amenities": [
+    {
+      "name": "Rooftop BBQ Lounge",
+      "icon": "grill",
+      "category": "outdoor"
+    },
+    {
+      "name": "Multipurpose Hall",
+      "icon": "home",
+      "category": "recreation"
+    },
+    {
+      "name": "Gymnasium",
+      "icon": "dumbbell",
+      "category": "wellness"
+    },
+    {
+      "name": "Community Space",
+      "icon": "users",
+      "category": "community"
+    },
+    {
+      "name": "Terrace & BBQ Space",
+      "icon": "sun",
+      "category": "outdoor"
+    },
+    {
+      "name": "Pantry & Services",
+      "icon": "coffee",
+      "category": "services"
+    },
+    {
+      "name": "Lift Machine Room",
+      "icon": "settings",
+      "category": "services"
+    },
+    {
+      "name": "18 Car Parking Spaces",
+      "icon": "car",
+      "category": "parking"
+    },
+    {
+      "name": "Guard Room",
+      "icon": "shield",
+      "category": "security"
+    },
+    {
+      "name": "Electro-Mechanical Room",
+      "icon": "cpu",
+      "category": "utilities"
+    },
+    {
+      "name": "Garden & Plantation",
+      "icon": "leaf",
+      "category": "outdoor"
+    }
+  ],
+  "Unit": [
+    {
+      "name": "Unit C",
+      "unitCategory": "residential",
+      "type": "3bed",
+      "dimensions": {
+        "totalArea": 2015,
+        "carpetArea": null,
+        "balconyArea": null,
+        "length": null,
+        "width": null,
+        "height": null
       },
-      {
-        "displayName": "Unit C Floor Plan",
-        "description": "3BHK apartment layout - 2015 sqft",
-        "category": "Floor Plans",
-        "displayOrder": 2
+      "residentialSpecs": {
+        "bedrooms": 3,
+        "bathrooms": 3,
+        "livingRooms": 1,
+        "diningRooms": 1,
+        "kitchens": 1,
+        "balconies": 4,
+        "studyRooms": 0,
+        "servantRooms": 0,
+        "storeRooms": 0,
+        "parkingSpaces": 1,
+        "additionalFeatures": {
+          "foyer": "5'-0\"X7'-0\"",
+          "living_room": "11'-6\"X14'-0\"",
+          "dining_room": "12'-0\"X22'-2\"",
+          "kitchen": "10'-0\"X10'-3\"",
+          "master_bedroom": "15'-0\"X11'-5\"",
+          "child_bedroom": "15'-1\"X11'-1\"",
+          "guest_bedroom": "11'-7\"X12'-6\"",
+          "bathrooms": "5'-0\"X10'-0\", 4'-6\"X9'-6\", 4'-6\"X9'-0\"",
+          "verandas": "4 nos Veranda & 1 Plantation space"
+        }
       },
-      {
-        "displayName": "Unit D Floor Plan",
-        "description": "3BHK apartment layout - 2015 sqft",
-        "category": "Floor Plans",
-        "displayOrder": 3
+      "facing": "North",
+      "hasLayoutPlan": true,
+      "description": "Spacious 3-bedroom apartment with foyer and multiple verandas"
+    },
+    {
+      "name": "Unit D",
+      "unitCategory": "residential",
+      "type": "3bed",
+      "dimensions": {
+        "totalArea": 2015,
+        "carpetArea": null,
+        "balconyArea": null,
+        "length": null,
+        "width": null,
+        "height": null
       },
-      {
-        "displayName": "Rooftop Floor Plan",
-        "description": "Rooftop amenities and facilities layout",
-        "category": "Floor Plans",
-        "displayOrder": 4
+      "residentialSpecs": {
+        "bedrooms": 3,
+        "bathrooms": 3,
+        "livingRooms": 1,
+        "diningRooms": 1,
+        "kitchens": 1,
+        "balconies": 4,
+        "studyRooms": 0,
+        "servantRooms": 0,
+        "storeRooms": 0,
+        "parkingSpaces": 1,
+        "additionalFeatures": {
+          "foyer": "5'-4\"X5'-8\"",
+          "living_room": "11'-6\"X15'-6\"",
+          "dining_room": "13'-1\"X16'-8\"",
+          "kitchen": "10'-0\"X10'-3\"",
+          "master_bedroom": "12'-0\"X15'-1\"",
+          "child_bedroom": "11'-6\"X15'-6\"",
+          "guest_bedroom": "12'-8\"X12'-9\"",
+          "bathrooms": "4'-6\"X9'-0\", 4'-6\"X9'-0\", 8'-0\"X4'-3\"",
+          "verandas": "4 nos Veranda & 1 Plantation space"
+        }
       },
-      {
-        "displayName": "Material Specifications",
-        "description": "Complete material specifications for construction",
-        "category": "Specifications",
-        "displayOrder": 5
-      }
-    ],
-    "Unit": [
-      {
-        "name": "Unit C - 3BHK",
-        "sold_out": false,
-        "units_available": 9,
-        "size": 2015
-      },
-      {
-        "name": "Unit D - 3BHK",
-        "sold_out": false,
-        "units_available": 9,
-        "size": 2015
-      }
-    ],
-    "features": [
-      {
-        "name": "24/7 CCTV Surveillance",
-        "icon": "camera",
-        "category": "security"
-      },
-      {
-        "name": "24/7 Security Guard",
-        "icon": "shield-check",
-        "category": "security"
-      },
-      {
-        "name": "Fire Safety System",
-        "icon": "fire-extinguisher",
-        "category": "security"
-      },
-      {
-        "name": "Backup Generator",
-        "icon": "zap",
-        "category": "utilities"
-      },
-      {
-        "name": "Water Treatment Plant",
-        "icon": "droplets",
-        "category": "utilities"
-      },
-      {
-        "name": "High-Speed Elevators",
-        "icon": "move-vertical",
-        "category": "convenience"
-      },
-      {
-        "name": "Management Office",
-        "icon": "building",
-        "category": "convenience"
-      },
-      {
-        "name": "Wheelchair Accessible",
-        "icon": "accessibility",
-        "category": "accessibility"
-      }
-    ],
-    "amenities": [
-      {
-        "name": "Rooftop Garden",
-        "icon": "trees",
-        "category": "outdoor"
-      },
-      {
-        "name": "Gymnasium",
-        "icon": "dumbbell",
-        "category": "wellness"
-      },
-      {
-        "name": "Community Hall",
-        "icon": "users",
-        "category": "community"
-      },
-      {
-        "name": "BBQ Area",
-        "icon": "chef-hat",
-        "category": "recreation"
-      },
-      {
-        "name": "Covered Parking",
-        "icon": "car",
-        "category": "parking"
-      },
-      {
-        "name": "Landscaped Garden",
-        "icon": "flower-2",
-        "category": "outdoor"
-      }
-    ],
-    "publishedAt": "2025-06-03T10:30:00.000Z"
-  }
+      "facing": "South",
+      "hasLayoutPlan": true,
+      "description": "Well-designed 3-bedroom apartment with spacious dining area"
+    }
+  ],
+  "projectDocuments": [
+    {
+      "displayName": "Ground Floor Plan",
+      "category": "Floor Plans",
+      "description": "Ground floor layout with parking, guard room, and mechanical facilities",
+      "displayOrder": 1
+    },
+    {
+      "displayName": "Typical Floor Plan",
+      "category": "Floor Plans",
+      "description": "Standard residential floor layout with Unit C and Unit D",
+      "displayOrder": 2
+    },
+    {
+      "displayName": "Unit C Floor Plan",
+      "category": "Floor Plans",
+      "description": "Detailed layout of 2015 sqft 3-bedroom Unit C",
+      "displayOrder": 3
+    },
+    {
+      "displayName": "Unit D Floor Plan",
+      "category": "Floor Plans",
+      "description": "Detailed layout of 2015 sqft 3-bedroom Unit D",
+      "displayOrder": 4
+    },
+    {
+      "displayName": "Rooftop Floor Plan",
+      "category": "Floor Plans",
+      "description": "Rooftop amenities layout with multipurpose hall and BBQ area",
+      "displayOrder": 5
+    },
+    {
+      "displayName": "Material Specifications",
+      "category": "Specifications",
+      "description": "Detailed material and finishing specifications",
+      "displayOrder": 6
+    },
+    {
+      "displayName": "Terms & Conditions",
+      "category": "Legal Documents",
+      "description": "Booking, payment, handover and legal compliance terms",
+      "displayOrder": 7
+    }
+  ],
+  "constructionUpdates": []
 }

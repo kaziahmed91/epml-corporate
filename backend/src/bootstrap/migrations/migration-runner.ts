@@ -85,7 +85,7 @@ export class MigrationRunner {
           console.log("🏢 Running Equity Anirban project migration...");
           const maps = await this.getFoundationMaps(strapi);
           const factory = new ProjectSeederFactory(strapi);
-          const projectData = getProjectBySlug("equity-anirban");
+          const projectData = await getProjectBySlug("equity-anirban");
 
           if (!projectData) {
             throw new Error("Equity Anirban project data not found");
@@ -107,6 +107,64 @@ export class MigrationRunner {
         down: async (strapi: Strapi) => {
           console.log("🗑️  Rolling back Equity Anirban project...");
           await this.rollbackProject("equity-anirban");
+        },
+      },
+      {
+        id: "2025-01-01-004",
+        name: "create-equity-azeez-neer-project",
+        description: "Equity Azeez Neer project with all related data",
+        dependencies: ["2025-01-01-001", "2025-01-01-002"],
+        affectedEntities: [
+          "api::project.project",
+          "api::construction-update.construction-update",
+        ],
+        affectedTables: ["projects"],
+        up: async (strapi: Strapi) => {
+          console.log("🏢 Running Equity Azeez Neer project migration...");
+          const maps = await this.getFoundationMaps(strapi);
+          const factory = new ProjectSeederFactory(strapi);
+          const projectData = await getProjectBySlug("aziz-neer");
+
+          if (!projectData) {
+            throw new Error("Equity Azeez Neer project data not found");
+          }
+
+          // Enhance project data with required fields before seeding
+          const enhancedProjectData = {
+            ...projectData,
+            project_type: maps.typeMap["Residential"],
+            location: maps.locationMap["Agrabad Residential"],
+            project_status: maps.statusMap["Ongoing"],
+            // Ensure arrays are initialized if not present
+            youtubeVideos: projectData.youtubeVideos || [],
+            constructionUpdates: projectData.constructionUpdates || [],
+            features: projectData.features || [],
+            amenities: projectData.amenities || [],
+            Unit: projectData.Unit || [],
+            testimonials: projectData.testimonials || [],
+            mediaFiles: projectData.mediaFiles || [],
+            projectDocuments: projectData.projectDocuments || [],
+          };
+
+          // Log the enhanced data for debugging
+          console.log("📝 Enhanced project data:", {
+            name: enhancedProjectData.name,
+            slug: enhancedProjectData.slug,
+            address: enhancedProjectData.address,
+            project_type: enhancedProjectData.project_type,
+            location: enhancedProjectData.location,
+            project_status: enhancedProjectData.project_status,
+          });
+
+          const seededProject = await factory.seedProject(
+            enhancedProjectData,
+            "2025-01-01-004",
+          );
+          return { entityCount: 1, projectId: seededProject.id };
+        },
+        down: async (strapi: Strapi) => {
+          console.log("🗑️  Rolling back Equity Azeez Neer project...");
+          await this.rollbackProject("aziz-neer");
         },
       },
     ];
@@ -313,5 +371,38 @@ export class MigrationRunner {
       map[entity[keyField]] = entity.id;
       return map;
     }, {});
+  }
+
+  private async getAllProjectFiles(): Promise<any[]> {
+    const fs = require("fs");
+    const path = require("path");
+    const projectsDir = path.join(__dirname, "../seeders/data/projects");
+
+    try {
+      console.log("📂 Reading projects from directory:", projectsDir);
+      const files = await fs.promises.readdir(projectsDir);
+      console.log("📄 Found files:", files);
+
+      const projectFiles = [];
+
+      for (const file of files) {
+        if (file.endsWith(".json")) {
+          console.log(`📖 Processing file: ${file}`);
+          const filePath = path.join(projectsDir, file);
+          const content = await fs.promises.readFile(filePath, "utf8");
+          const projectData = JSON.parse(content);
+          console.log(
+            `✅ Successfully parsed ${file} - Project: ${projectData.name}`,
+          );
+          projectFiles.push(projectData);
+        }
+      }
+
+      console.log(`📊 Total projects loaded: ${projectFiles.length}`);
+      return projectFiles;
+    } catch (error) {
+      console.error("❌ Error reading project files:", error);
+      throw error;
+    }
   }
 }

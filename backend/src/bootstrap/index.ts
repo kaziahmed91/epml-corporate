@@ -1,5 +1,31 @@
 // src/data/projects/index.ts
 import { ProjectData } from "../types/project-types";
+import fs from "fs";
+import path from "path";
+
+export async function getAllProjects(): Promise<ProjectData[]> {
+  const projectsDir = path.join(__dirname, "./seeders/data/projects");
+  const files = await fs.promises.readdir(projectsDir);
+  const projects: ProjectData[] = [];
+
+  for (const file of files) {
+    if (file.endsWith(".json")) {
+      const filePath = path.join(projectsDir, file);
+      const content = await fs.promises.readFile(filePath, "utf8");
+      const projectData = JSON.parse(content) as ProjectData;
+      projects.push(projectData);
+    }
+  }
+
+  return projects;
+}
+
+export async function getProjectBySlug(
+  slug: string,
+): Promise<ProjectData | null> {
+  const projects = await getAllProjects();
+  return projects.find((p) => p.slug === slug) || null;
+}
 
 const equityAnirban =
   require("./seeders/data/projects/anirban.json") as ProjectData;
@@ -28,22 +54,6 @@ export const getProjectsForEnvironment = (
   env: string = "development",
 ): ProjectData[] => {
   return projects[env] || projects.development;
-};
-
-export const getAllProjects = (): ProjectData[] => {
-  return Object.values(projects)
-    .flat()
-    .reduce((unique: ProjectData[], project: ProjectData) => {
-      if (!unique.find((p) => p.slug === project.slug)) {
-        unique.push(project);
-      }
-      return unique;
-    }, []);
-};
-
-export const getProjectBySlug = (slug: string): ProjectData | undefined => {
-  const allProjects = getAllProjects();
-  return allProjects.find((p) => p.slug === slug);
 };
 
 export const addProjectToEnvironment = (

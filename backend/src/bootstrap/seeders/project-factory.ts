@@ -57,13 +57,20 @@ export class ProjectSeederFactory {
     projectsData: ProjectData[],
     migrationId: string | null = null,
   ): Promise<SeedResult[]> {
+    console.log(`🏗️ Starting to seed ${projectsData.length} projects...`);
     const results: SeedResult[] = [];
 
     for (const projectData of projectsData) {
+      console.log(`\n📝 Processing project: ${projectData.name}`);
       try {
         const project = await this.seedProject(projectData, migrationId);
+        console.log(`✅ Successfully seeded project: ${projectData.name}`);
         results.push({ success: true, project });
       } catch (error: any) {
+        console.error(
+          `❌ Failed to seed project ${projectData.name}:`,
+          error.message,
+        );
         results.push({
           success: false,
           error: error.message,
@@ -71,6 +78,12 @@ export class ProjectSeederFactory {
         });
       }
     }
+
+    const successCount = results.filter((r) => r.success).length;
+    const failedCount = results.filter((r) => !r.success).length;
+    console.log(`\n📊 Seeding Summary:`);
+    console.log(`✅ Successfully seeded: ${successCount} projects`);
+    console.log(`❌ Failed to seed: ${failedCount} projects`);
 
     return results;
   }

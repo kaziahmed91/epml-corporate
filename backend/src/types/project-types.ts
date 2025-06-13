@@ -50,7 +50,9 @@ export interface AmenityItem {
     | "community"
     | "parking"
     | "services"
-    | "outdoor";
+    | "outdoor"
+    | "security"
+    | "utilities";
 }
 
 export interface UnitType {

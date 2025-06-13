@@ -36,6 +36,17 @@
         "api::construction-update.construction-update"
       ],
       "affectedTables": ["projects"]
+    },
+    {
+      "id": "2025-01-01-004",
+      "name": "create-equity-azeez-neer-project",
+      "description": "Equity Azeez Neer project with all related data",
+      "dependencies": ["2025-01-01-001", "2025-01-01-002"],
+      "affectedEntities": [
+        "api::project.project",
+        "api::construction-update.construction-update"
+      ],
+      "affectedTables": ["projects"]
     }
   ]
 }
