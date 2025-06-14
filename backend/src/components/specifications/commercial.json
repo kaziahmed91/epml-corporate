@@ -57,8 +57,9 @@
       "description": "Storage area in square feet"
     },
     "additionalFeatures": {
-      "type": "json",
-      "description": "Any additional commercial features"
+      "type": "component",
+      "repeatable": true,
+      "component": "common.text-list-item"
     }
   }
 }

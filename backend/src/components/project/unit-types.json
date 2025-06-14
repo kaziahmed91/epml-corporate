@@ -56,10 +56,10 @@
       "allowedTypes": ["images", "files"]
     },
     "images": {
-      "type": "media",
-      "multiple": true,
+      "type": "component",
+      "repeatable": true,
       "required": false,
-      "allowedTypes": ["images"]
+      "component": "project.photo-item"
     },
     "hasLayoutPlan": {
       "type": "boolean",
@@ -80,12 +80,14 @@
       "multiple": true
     },
     "floors": {
-      "type": "json",
-      "description": "Array of floor numbers where this unit type is available"
+      "type": "component",
+      "repeatable": true,
+      "component": "project.floor-availability"
     },
     "features": {
-      "type": "json",
-      "description": "Unit-specific features"
+      "type": "component",
+      "repeatable": true,
+      "component": "common.text-list-item"
     },
     "description": {
       "type": "text"

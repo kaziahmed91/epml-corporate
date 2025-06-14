@@ -17,6 +17,7 @@
   "dependencies": {
     "@strapi/plugin-cloud": "5.14.0",
     "@strapi/plugin-users-permissions": "5.14.0",
+    "@strapi/provider-upload-cloudinary": "^5.15.1",
     "@strapi/strapi": "5.14.0",
     "commander": "^11.0.0",
     "dotenv": "^16.5.0",

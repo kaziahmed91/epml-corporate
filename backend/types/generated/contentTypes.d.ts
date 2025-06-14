@@ -504,11 +504,11 @@ export interface ApiConstructionUpdateConstructionUpdate
           localized: true;
         };
       }>;
-    upcomingWork: Schema.Attribute.JSON;
+    upcomingWork: Schema.Attribute.Component<'common.text-list-item', true>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    workCompleted: Schema.Attribute.JSON;
+    workCompleted: Schema.Attribute.Component<'common.text-list-item', true>;
     year: Schema.Attribute.Integer & Schema.Attribute.Required;
   };
 }
@@ -669,7 +669,7 @@ export interface ApiProjectTypeProjectType extends Struct.CollectionTypeSchema {
 export interface ApiProjectProject extends Struct.CollectionTypeSchema {
   collectionName: 'projects';
   info: {
-    description: '';
+    description: "Equity's Projects";
     displayName: 'Project';
     pluralName: 'projects';
     singularName: 'project';
@@ -681,6 +681,10 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     address: Schema.Attribute.String;
     amenities: Schema.Attribute.Component<'project.amenity-item', true>;
     brochure: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    bulkPhotoUploads: Schema.Attribute.Component<
+      'project.bulk-photo-upload',
+      true
+    >;
     constructionEnd: Schema.Attribute.Date;
     constructionStart: Schema.Attribute.Date;
     constructionUpdates: Schema.Attribute.Relation<
@@ -715,10 +719,7 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     name: Schema.Attribute.String;
     parking_floors: Schema.Attribute.Integer;
     parking_spaces: Schema.Attribute.Integer;
-    photos: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios',
-      true
-    >;
+    photos: Schema.Attribute.Component<'project.photo-item', true>;
     project_status: Schema.Attribute.Relation<
       'oneToOne',
       'api::project-status.project-status'

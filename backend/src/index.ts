@@ -6,7 +6,54 @@ import { MigrationRunner } from "./bootstrap/migrations/migration-runner";
 
 export default {
   register({ strapi }: { strapi: Strapi }) {
-    // Plugin registration
+    // Override the upload service to handle dynamic folders
+    const originalUpload = strapi.plugin('upload').service('upload').upload;
+    
+    strapi.plugin('upload').service('upload').upload = async function(file, options: any = {}) {
+      const { entity, field } = options;
+      const ctx = strapi.requestContext.get();
+      
+      if (ctx?.request?.headers?.referer) {
+        const referer = ctx.request.headers.referer;
+        strapi.log.info(`Upload referer: ${referer}`);
+        
+        // Extract project ID from admin panel URLs
+        const projectMatch = referer.match(/content-manager\/collection-types\/api::project\.project\/(\d+)/);
+        
+        if (projectMatch) {
+          const projectId = projectMatch[1];
+          strapi.log.info(`Found project ID: ${projectId}`);
+          
+          try {
+            // Fetch project to get slug
+            const project = await strapi.entityService.findOne('api::project.project', projectId, {
+              fields: ['slug', 'name']
+            });
+            
+            let folder = 'projects/general';
+            if (project && project.slug) {
+              folder = `projects/${project.slug}`;
+              strapi.log.info(`Upload: Setting folder to ${folder} for project ${project.name}`);
+            } else if (project) {
+              folder = `projects/project-${projectId}`;
+              strapi.log.info(`Upload: Setting folder to ${folder} for project ${project.name || 'Unknown'}`);
+            }
+            
+            // Set the folder in provider metadata
+            if (!file.provider_metadata) {
+              file.provider_metadata = {};
+            }
+            file.provider_metadata.folder = folder;
+            
+          } catch (error) {
+            strapi.log.warn('Could not fetch project for upload:', error.message);
+          }
+        }
+      }
+      
+      // Call the original upload function
+      return originalUpload.call(this, file, options);
+    };
   },
 
   async bootstrap({ strapi }: { strapi: Strapi }) {

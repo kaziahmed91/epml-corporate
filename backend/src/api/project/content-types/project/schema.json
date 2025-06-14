@@ -5,7 +5,7 @@
     "singularName": "project",
     "pluralName": "projects",
     "displayName": "Project",
-    "description": ""
+    "description": "Equity's Projects"
   },
   "options": {
     "draftAndPublish": true
@@ -56,29 +56,26 @@
     "projectDocuments": {
       "type": "component",
       "repeatable": true,
+      "required": false,
       "component": "project.document-item"
     },
     "photos": {
-      "type": "media",
-      "multiple": true,
+      "type": "component",
+      "repeatable": true,
       "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+      "component": "project.photo-item"
+    },
+    "bulkPhotoUploads": {
+      "type": "component",
+      "repeatable": true,
+      "required": false,
+      "component": "project.bulk-photo-upload"
     },
     "brochure": {
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+      "allowedTypes": ["images", "files", "videos", "audios"]
     },
     "Unit": {
       "type": "component",
