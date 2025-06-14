@@ -1,0 +1,52 @@
+{
+  "migrations": [
+    {
+      "id": "2025-01-01-001",
+      "name": "create-foundation-data",
+      "description": "Initial foundation data seeding (cities, locations, types)",
+      "dependencies": [],
+      "affectedEntities": [
+        "api::project.project",
+        "api::construction-update.construction-update",
+        "api::location.location",
+        "api::city.city",
+        "api::project-type.project-type",
+        "api::project-status.project-status"
+      ],
+      "affectedTables": ["cities", "locations", "projects"]
+    },
+    {
+      "id": "2025-01-01-002",
+      "name": "create-template-data",
+      "description": "Feature and amenity templates",
+      "dependencies": ["2025-01-01-001"],
+      "affectedEntities": [
+        "api::feature-template.feature-template",
+        "api::amenity-template.amenity-template"
+      ],
+      "affectedTables": ["templates"]
+    },
+    {
+      "id": "2025-01-01-003",
+      "name": "create-equity-anirban-project",
+      "description": "Equity Anirban project with all related data",
+      "dependencies": ["2025-01-01-001", "2025-01-01-002"],
+      "affectedEntities": [
+        "api::project.project",
+        "api::construction-update.construction-update"
+      ],
+      "affectedTables": ["projects"]
+    },
+    {
+      "id": "2025-01-01-004",
+      "name": "create-equity-azeez-neer-project",
+      "description": "Equity Azeez Neer project with all related data",
+      "dependencies": ["2025-01-01-001", "2025-01-01-002"],
+      "affectedEntities": [
+        "api::project.project",
+        "api::construction-update.construction-update"
+      ],
+      "affectedTables": ["projects"]
+    }
+  ]
+}

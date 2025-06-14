@@ -22,7 +22,9 @@
         "community",
         "parking",
         "services",
-        "outdoor"
+        "outdoor",
+        "security",
+        "utilities"
       ]
     }
   }
