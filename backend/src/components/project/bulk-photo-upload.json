@@ -1,0 +1,54 @@
+{
+  "collectionName": "components_project_bulk_photo_uploads",
+  "info": {
+    "displayName": "Bulk Photo Upload",
+    "description": "Allows bulk upload of photos with batch category assignment and individual captions"
+  },
+  "options": {},
+  "attributes": {
+    "photos": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "exterior",
+        "interior",
+        "construction_progress",
+        "floor_plan",
+        "amenities",
+        "site_plan",
+        "elevation",
+        "lobby",
+        "sample_unit",
+        "parking",
+        "common_areas",
+        "landscaping",
+        "brochure"
+      ],
+      "required": true,
+      "description": "Category applied to all photos in this bulk upload"
+    },
+    "subcategory": {
+      "type": "string",
+      "description": "Optional subcategory applied to all photos in this bulk upload"
+    },
+    "defaultCaption": {
+      "type": "string",
+      "description": "Default caption applied to all photos (can be overridden individually)"
+    },
+    "photoMetadata": {
+      "type": "json",
+      "description": "Individual metadata for each photo including custom captions, sort order, and hero status",
+      "default": []
+    },
+    "sortOrder": {
+      "type": "integer",
+      "default": 0,
+      "description": "Starting sort order for this batch of photos"
+    }
+  }
+}

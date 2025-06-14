@@ -1,5 +1,18 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface CommonTextListItem extends Struct.ComponentSchema {
+  collectionName: 'components_common_text_list_items';
+  info: {
+    description: 'Simple text item for creating lists';
+    displayName: 'Text List Item';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    sortOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    text: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface LocationCoordinates extends Struct.ComponentSchema {
   collectionName: 'components_location_coordinates';
   info: {
@@ -49,6 +62,39 @@ export interface ProjectAmenityItem extends Struct.ComponentSchema {
   };
 }
 
+export interface ProjectBulkPhotoUpload extends Struct.ComponentSchema {
+  collectionName: 'components_project_bulk_photo_uploads';
+  info: {
+    description: 'Allows bulk upload of photos with batch category assignment and individual captions';
+    displayName: 'Bulk Photo Upload';
+  };
+  attributes: {
+    category: Schema.Attribute.Enumeration<
+      [
+        'exterior',
+        'interior',
+        'construction_progress',
+        'floor_plan',
+        'amenities',
+        'site_plan',
+        'elevation',
+        'lobby',
+        'sample_unit',
+        'parking',
+        'common_areas',
+        'landscaping',
+        'brochure',
+      ]
+    > &
+      Schema.Attribute.Required;
+    defaultCaption: Schema.Attribute.String;
+    photoMetadata: Schema.Attribute.JSON & Schema.Attribute.DefaultTo<[]>;
+    photos: Schema.Attribute.Media<'images', true> & Schema.Attribute.Required;
+    sortOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    subcategory: Schema.Attribute.String;
+  };
+}
+
 export interface ProjectDocumentItem extends Struct.ComponentSchema {
   collectionName: 'components_project_document_items';
   info: {
@@ -70,8 +116,7 @@ export interface ProjectDocumentItem extends Struct.ComponentSchema {
     description: Schema.Attribute.Text;
     displayName: Schema.Attribute.String & Schema.Attribute.Required;
     displayOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
-    document: Schema.Attribute.Media<'files' | 'images'> &
-      Schema.Attribute.Required;
+    document: Schema.Attribute.Media<'files' | 'images'>;
   };
 }
 
@@ -94,6 +139,67 @@ export interface ProjectFeatureItem extends Struct.ComponentSchema {
           localized: true;
         };
       }>;
+  };
+}
+
+export interface ProjectFloorAvailability extends Struct.ComponentSchema {
+  collectionName: 'components_project_floor_availabilities';
+  info: {
+    description: 'Floor numbers where unit type is available';
+    displayName: 'Floor Availability';
+  };
+  attributes: {
+    floorNumber: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    isAvailable: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    notes: Schema.Attribute.String;
+    unitCount: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<1>;
+  };
+}
+
+export interface ProjectPhotoItem extends Struct.ComponentSchema {
+  collectionName: 'components_project_photo_items';
+  info: {
+    description: 'Categorized photo item for projects with Cloudinary folder organization';
+    displayName: 'Photo Item';
+  };
+  attributes: {
+    caption: Schema.Attribute.String;
+    category: Schema.Attribute.Enumeration<
+      [
+        'exterior',
+        'interior',
+        'construction_progress',
+        'floor_plan',
+        'amenities',
+        'site_plan',
+        'elevation',
+        'lobby',
+        'sample_unit',
+        'parking',
+        'common_areas',
+        'landscaping',
+        'brochure',
+      ]
+    > &
+      Schema.Attribute.Required;
+    isHero: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    photo: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    sortOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    subcategory: Schema.Attribute.String;
   };
 }
 
@@ -122,11 +228,11 @@ export interface ProjectUnitTypes extends Struct.ComponentSchema {
         'South-West',
       ]
     >;
-    features: Schema.Attribute.JSON;
+    features: Schema.Attribute.Component<'common.text-list-item', true>;
     floorPlan: Schema.Attribute.Media<'images' | 'files'>;
-    floors: Schema.Attribute.JSON;
+    floors: Schema.Attribute.Component<'project.floor-availability', true>;
     hasLayoutPlan: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    images: Schema.Attribute.Media<'images', true>;
+    images: Schema.Attribute.Component<'project.photo-item', true>;
     name: Schema.Attribute.String & Schema.Attribute.Required;
     residentialSpecs: Schema.Attribute.Component<
       'specifications.residential',
@@ -179,7 +285,10 @@ export interface SpecificationsCommercial extends Struct.ComponentSchema {
     displayName: 'Commercial Specifications';
   };
   attributes: {
-    additionalFeatures: Schema.Attribute.JSON;
+    additionalFeatures: Schema.Attribute.Component<
+      'common.text-list-item',
+      true
+    >;
     airConditioning: Schema.Attribute.Enumeration<
       ['Central', 'Split', 'Window', 'None', 'Provision']
     >;
@@ -239,7 +348,10 @@ export interface SpecificationsResidential extends Struct.ComponentSchema {
     displayName: 'Residential Specifications';
   };
   attributes: {
-    additionalFeatures: Schema.Attribute.JSON;
+    additionalFeatures: Schema.Attribute.Component<
+      'common.text-list-item',
+      true
+    >;
     balconies: Schema.Attribute.Integer &
       Schema.Attribute.SetMinMax<
         {
@@ -316,11 +428,15 @@ export interface SpecificationsResidential extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'common.text-list-item': CommonTextListItem;
       'location.coordinates': LocationCoordinates;
       'pricing.price-range': PricingPriceRange;
       'project.amenity-item': ProjectAmenityItem;
+      'project.bulk-photo-upload': ProjectBulkPhotoUpload;
       'project.document-item': ProjectDocumentItem;
       'project.feature-item': ProjectFeatureItem;
+      'project.floor-availability': ProjectFloorAvailability;
+      'project.photo-item': ProjectPhotoItem;
       'project.unit-types': ProjectUnitTypes;
       'project.youtube-video': ProjectYoutubeVideo;
       'specifications.commercial': SpecificationsCommercial;

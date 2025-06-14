@@ -47,8 +47,9 @@
       "min": 0
     },
     "additionalFeatures": {
-      "type": "json",
-      "description": "Any additional residential features"
+      "type": "component",
+      "repeatable": true,
+      "component": "common.text-list-item"
     }
   }
 }

@@ -504,12 +504,63 @@ export interface ApiConstructionUpdateConstructionUpdate
           localized: true;
         };
       }>;
-    upcomingWork: Schema.Attribute.JSON;
+    upcomingWork: Schema.Attribute.Component<'common.text-list-item', true>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    workCompleted: Schema.Attribute.JSON;
+    workCompleted: Schema.Attribute.Component<'common.text-list-item', true>;
     year: Schema.Attribute.Integer & Schema.Attribute.Required;
+  };
+}
+
+export interface ApiDocumentDocument extends Struct.CollectionTypeSchema {
+  collectionName: 'documents';
+  info: {
+    description: 'Project documents including brochures, floorplans, permits, and other paper-based documents';
+    displayName: 'Document';
+    pluralName: 'documents';
+    singularName: 'document';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    category: Schema.Attribute.Enumeration<
+      [
+        'Brochure',
+        'Floor Plans',
+        'Permits',
+        'Legal Documents',
+        'Specifications',
+        'Architectural Drawings',
+        'Construction Documents',
+        'Marketing Materials',
+        'Other',
+      ]
+    > &
+      Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    displayOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    file: Schema.Attribute.Media<'files'> & Schema.Attribute.Required;
+    fileSize: Schema.Attribute.BigInteger;
+    isPublic: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::document.document'
+    > &
+      Schema.Attribute.Private;
+    mimeType: Schema.Attribute.String;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    project: Schema.Attribute.Relation<'manyToOne', 'api::project.project'>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    uploadedAt: Schema.Attribute.DateTime;
   };
 }
 
@@ -669,7 +720,7 @@ export interface ApiProjectTypeProjectType extends Struct.CollectionTypeSchema {
 export interface ApiProjectProject extends Struct.CollectionTypeSchema {
   collectionName: 'projects';
   info: {
-    description: '';
+    description: "Equity's Projects";
     displayName: 'Project';
     pluralName: 'projects';
     singularName: 'project';
@@ -681,6 +732,10 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     address: Schema.Attribute.String;
     amenities: Schema.Attribute.Component<'project.amenity-item', true>;
     brochure: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    bulkPhotoUploads: Schema.Attribute.Component<
+      'project.bulk-photo-upload',
+      true
+    >;
     constructionEnd: Schema.Attribute.Date;
     constructionStart: Schema.Attribute.Date;
     constructionUpdates: Schema.Attribute.Relation<
@@ -691,6 +746,7 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
+    documents: Schema.Attribute.Relation<'oneToMany', 'api::document.document'>;
     features: Schema.Attribute.Component<'project.feature-item', true>;
     floors: Schema.Attribute.String;
     landFacing: Schema.Attribute.Enumeration<
@@ -715,10 +771,7 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     name: Schema.Attribute.String;
     parking_floors: Schema.Attribute.Integer;
     parking_spaces: Schema.Attribute.Integer;
-    photos: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios',
-      true
-    >;
+    photos: Schema.Attribute.Component<'project.photo-item', true>;
     project_status: Schema.Attribute.Relation<
       'oneToOne',
       'api::project-status.project-status'
@@ -1340,6 +1393,7 @@ declare module '@strapi/strapi' {
       'api::amenity-template.amenity-template': ApiAmenityTemplateAmenityTemplate;
       'api::city.city': ApiCityCity;
       'api::construction-update.construction-update': ApiConstructionUpdateConstructionUpdate;
+      'api::document.document': ApiDocumentDocument;
       'api::feature-template.feature-template': ApiFeatureTemplateFeatureTemplate;
       'api::location.location': ApiLocationLocation;
       'api::project-status.project-status': ApiProjectStatusProjectStatus;

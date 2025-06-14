@@ -54,10 +54,14 @@
       "allowedTypes": ["images"]
     },
     "workCompleted": {
-      "type": "json"
+      "type": "component",
+      "repeatable": true,
+      "component": "common.text-list-item"
     },
     "upcomingWork": {
-      "type": "json"
+      "type": "component", 
+      "repeatable": true,
+      "component": "common.text-list-item"
     },
     "project": {
       "type": "relation",

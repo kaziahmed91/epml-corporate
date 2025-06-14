@@ -14,8 +14,11 @@
     "document": {
       "type": "media",
       "multiple": false,
-      "required": true,
-      "allowedTypes": ["files", "images"]
+      "required": false,
+      "allowedTypes": [
+        "files",
+        "images"
+      ]
     },
     "description": {
       "type": "text"

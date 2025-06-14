@@ -1,0 +1,68 @@
+{
+  "kind": "collectionType",
+  "collectionName": "documents",
+  "info": {
+    "singularName": "document",
+    "pluralName": "documents",
+    "displayName": "Document",
+    "description": "Project documents including brochures, floorplans, permits, and other paper-based documents"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "file": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["files"]
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "Brochure",
+        "Floor Plans",
+        "Permits",
+        "Legal Documents",
+        "Specifications",
+        "Architectural Drawings",
+        "Construction Documents",
+        "Marketing Materials",
+        "Other"
+      ],
+      "required": true
+    },
+    "project": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::project.project",
+      "inversedBy": "documents"
+    },
+    "fileSize": {
+      "type": "biginteger"
+    },
+    "mimeType": {
+      "type": "string"
+    },
+    "uploadedAt": {
+      "type": "datetime",
+      "default": null
+    },
+    "displayOrder": {
+      "type": "integer",
+      "default": 0
+    },
+    "isPublic": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

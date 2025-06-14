@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_common_text_list_items",
+  "info": {
+    "displayName": "Text List Item",
+    "description": "Simple text item for creating lists"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "sortOrder": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}
