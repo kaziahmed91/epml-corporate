@@ -170,6 +170,40 @@ export interface ProjectFloorAvailability extends Struct.ComponentSchema {
   };
 }
 
+export interface ProjectFloorUnit extends Struct.ComponentSchema {
+  collectionName: 'components_project_floor_units';
+  info: {
+    description: 'Individual unit within a floor';
+    displayName: 'Floor Unit';
+    icon: 'building';
+  };
+  attributes: {
+    area: Schema.Attribute.Integer & Schema.Attribute.Required;
+    description: Schema.Attribute.Text;
+    isAvailable: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    number: Schema.Attribute.String & Schema.Attribute.Required;
+    type: Schema.Attribute.Enumeration<
+      [
+        'shop',
+        'office',
+        'showroom',
+        'studio',
+        'penthouse',
+        'duplex',
+        'warehouse',
+        'atm',
+        'food_court',
+        'bank',
+        'clinic',
+        'salon',
+        'pharmacy',
+        'restaurant',
+      ]
+    > &
+      Schema.Attribute.Required;
+  };
+}
+
 export interface ProjectPhotoItem extends Struct.ComponentSchema {
   collectionName: 'components_project_photo_items';
   info: {
@@ -200,6 +234,41 @@ export interface ProjectPhotoItem extends Struct.ComponentSchema {
     photo: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     sortOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     subcategory: Schema.Attribute.String;
+  };
+}
+
+export interface ProjectProjectFloor extends Struct.ComponentSchema {
+  collectionName: 'components_project_floors';
+  info: {
+    description: 'Floor-based structure for mixed-use buildings';
+    displayName: 'Project Floor';
+    icon: 'layout';
+  };
+  attributes: {
+    category: Schema.Attribute.Enumeration<
+      [
+        'mobile_floor',
+        'kids',
+        'womens_fashion',
+        'mens_fashion',
+        'foodcourt, ',
+        'standard_office, ',
+        'premium_office, ',
+        'showroom,',
+        'electronics',
+      ]
+    > &
+      Schema.Attribute.Required;
+    ceilingHeight: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
+    floorplan: Schema.Attribute.Media<'images' | 'files'>;
+    floorSharedWith: Schema.Attribute.JSON;
+    hasLayoutPlan: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    number: Schema.Attribute.Integer & Schema.Attribute.Required;
+    totalArea: Schema.Attribute.Integer & Schema.Attribute.Required;
+    units: Schema.Attribute.Component<'project.floor-unit', true> &
+      Schema.Attribute.Required;
   };
 }
 
@@ -436,7 +505,9 @@ declare module '@strapi/strapi' {
       'project.document-item': ProjectDocumentItem;
       'project.feature-item': ProjectFeatureItem;
       'project.floor-availability': ProjectFloorAvailability;
+      'project.floor-unit': ProjectFloorUnit;
       'project.photo-item': ProjectPhotoItem;
+      'project.project-floor': ProjectProjectFloor;
       'project.unit-types': ProjectUnitTypes;
       'project.youtube-video': ProjectYoutubeVideo;
       'specifications.commercial': SpecificationsCommercial;

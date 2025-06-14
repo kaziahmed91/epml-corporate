@@ -731,11 +731,11 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
   attributes: {
     address: Schema.Attribute.String;
     amenities: Schema.Attribute.Component<'project.amenity-item', true>;
-    brochure: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     bulkPhotoUploads: Schema.Attribute.Component<
       'project.bulk-photo-upload',
       true
     >;
+    commercialFloors: Schema.Attribute.Component<'project.project-floor', true>;
     constructionEnd: Schema.Attribute.Date;
     constructionStart: Schema.Attribute.Date;
     constructionUpdates: Schema.Attribute.Relation<
@@ -780,7 +780,6 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
       'manyToOne',
       'api::project-type.project-type'
     >;
-    projectDocuments: Schema.Attribute.Component<'project.document-item', true>;
     publishedAt: Schema.Attribute.DateTime;
     roadWidth: Schema.Attribute.Decimal;
     slug: Schema.Attribute.UID<'name'>;

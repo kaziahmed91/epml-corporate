@@ -1,0 +1,46 @@
+{
+  "collectionName": "components_project_floor_units",
+  "info": {
+    "displayName": "Floor Unit",
+    "icon": "building",
+    "description": "Individual unit within a floor"
+  },
+  "options": {},
+  "attributes": {
+    "number": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "shop",
+        "office",
+        "showroom",
+        "studio",
+        "penthouse",
+        "duplex",
+        "warehouse",
+        "atm",
+        "food_court",
+        "bank",
+        "clinic",
+        "salon",
+        "pharmacy",
+        "restaurant"
+      ]
+    },
+    "area": {
+      "type": "integer",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "isAvailable": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

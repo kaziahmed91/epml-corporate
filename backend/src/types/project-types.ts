@@ -23,11 +23,11 @@ export interface ProjectData {
   features?: FeatureItem[];
   amenities?: AmenityItem[];
   Unit?: UnitType[];
+  projectFloors?: ProjectFloor[];
   constructionUpdates?: ConstructionUpdate[];
   testimonials?: TestimonialData[];
   mediaFiles?: MediaFile[];
   youtubeVideos?: YouTubeVideo[];
-  projectDocuments?: DocumentItem[];
 }
 
 export interface FeatureItem {
@@ -183,4 +183,76 @@ export interface DocumentItem {
     | "Other";
   description?: string;
   displayOrder: number;
+}
+
+export interface ProjectFloor {
+  number: number;
+  name: string;
+  layoutGroup: 
+    | "ground"
+    | "mixed_commercial"
+    | "standard_shops"
+    | "commercial_top"
+    | "residential_standard"
+    | "offices"
+    | "basement"
+    | "parking"
+    | "utility";
+  category:
+    | "premium_retail"
+    | "premium_commercial"
+    | "standard_retail"
+    | "standard_commercial"
+    | "residential"
+    | "office_space"
+    | "parking"
+    | "utility"
+    | "mixed_use";
+  purpose?:
+    | "mens_fashion"
+    | "womens_fashion"
+    | "mixed_retail_office"
+    | "mobile_tech"
+    | "electronics"
+    | "food_court"
+    | "professional_offices"
+    | "apartments"
+    | "parking"
+    | "utility"
+    | "mixed_purpose";
+  totalArea: number;
+  ceilingHeight?: string;
+  hasLayoutPlan?: boolean;
+  sharedWith?: number[];
+  units: FloorUnit[];
+  features?: string[];
+  description?: string;
+}
+
+export interface FloorUnit {
+  number: string;
+  type:
+    | "shop"
+    | "office"
+    | "showroom"
+    | "1bhk"
+    | "2bhk"
+    | "3bhk"
+    | "4bhk"
+    | "studio"
+    | "penthouse"
+    | "duplex"
+    | "warehouse"
+    | "atm"
+    | "food_court"
+    | "bank"
+    | "clinic"
+    | "salon"
+    | "pharmacy"
+    | "restaurant";
+  area: number;
+  description?: string;
+  isAvailable?: boolean;
+  price?: number;
+  features?: string[];
 }

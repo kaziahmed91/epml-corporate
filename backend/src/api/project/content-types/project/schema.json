@@ -50,37 +50,30 @@
     },
     "youtubeVideos": {
       "type": "component",
-      "repeatable": true,
-      "component": "project.youtube-video"
-    },
-    "projectDocuments": {
-      "type": "component",
-      "repeatable": true,
-      "required": false,
-      "component": "project.document-item"
+      "component": "project.youtube-video",
+      "repeatable": true
     },
     "photos": {
       "type": "component",
+      "component": "project.photo-item",
       "repeatable": true,
-      "required": false,
-      "component": "project.photo-item"
+      "required": false
     },
     "bulkPhotoUploads": {
       "type": "component",
+      "component": "project.bulk-photo-upload",
       "repeatable": true,
-      "required": false,
-      "component": "project.bulk-photo-upload"
-    },
-    "brochure": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": ["images", "files", "videos", "audios"]
+      "required": false
     },
     "Unit": {
       "type": "component",
-      "repeatable": true,
-      "component": "project.unit-types"
+      "component": "project.unit-types",
+      "repeatable": true
+    },
+    "commercialFloors": {
+      "type": "component",
+      "component": "project.project-floor",
+      "repeatable": true
     },
     "slug": {
       "type": "uid",
@@ -111,13 +104,13 @@
     },
     "features": {
       "type": "component",
-      "repeatable": true,
-      "component": "project.feature-item"
+      "component": "project.feature-item",
+      "repeatable": true
     },
     "amenities": {
       "type": "component",
-      "repeatable": true,
-      "component": "project.amenity-item"
+      "component": "project.amenity-item",
+      "repeatable": true
     },
     "constructionUpdates": {
       "type": "relation",

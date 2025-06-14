@@ -141,9 +141,9 @@ export class MigrationRunner {
             features: projectData.features || [],
             amenities: projectData.amenities || [],
             Unit: projectData.Unit || [],
+            projectFloors: projectData.projectFloors || [],
             testimonials: projectData.testimonials || [],
             mediaFiles: projectData.mediaFiles || [],
-            projectDocuments: projectData.projectDocuments || [],
           };
 
           // Log the enhanced data for debugging

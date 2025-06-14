@@ -1,0 +1,384 @@
+{
+  "name": "Equity MIR Trade Center",
+  "slug": "equity-mir-trade-center",
+  "address": "Plot no. 280, 281, 283 & B.S. Plot no. 693, Mouza - Askarabad, Doublemoring, Dewanhat, Chattogram",
+  "constructionStart": null,
+  "constructionEnd": null,
+  "floors": "2 basement floors + 15 storied commercial building",
+  "description": "Discover a prime business destination at Dewanhat, Chattogram. Our meticulously chosen location places your enterprise at the intersection of opportunity and ease. Embrace the dynamic synergy of commerce and comfort in the vibrant hub of active Chattogram, where prospects thrive. A new vision for cosmopolitan commerce with 15 stories of modern commercial space featuring retail shops and office units.",
+  "landSize": "15 katha",
+  "landFacing": "Corner Plot",
+  "roadWidth": 30.49,
+  "parking_floors": 2,
+  "parking_spaces": 24,
+  "youtubeVideos": [],
+  "photos": [],
+  "bulkPhotoUploads": [],
+  "Unit": [],
+  "commercialFloors": [
+    {
+      "number": 0,
+      "name": "Ground Floor",
+      "category": "premium_retail",
+      "totalArea": 1590,
+      "ceilingHeight": "11'-10\"",
+      "hasLayoutPlan": true,
+      "floorSharedWith": null,
+      "units": [
+        {
+          "number": "01",
+          "type": "shop",
+          "area": 143
+        },
+        {
+          "number": "02",
+          "type": "shop",
+          "area": 157
+        },
+        {
+          "number": "03",
+          "type": "shop",
+          "area": 157
+        },
+        {
+          "number": "04",
+          "type": "shop",
+          "area": 183
+        },
+        {
+          "number": "05",
+          "type": "shop",
+          "area": 183
+        },
+        {
+          "number": "06",
+          "type": "shop",
+          "area": 130
+        },
+        {
+          "number": "07",
+          "type": "shop",
+          "area": 250
+        },
+        {
+          "number": "08",
+          "type": "shop",
+          "area": 207
+        },
+        {
+          "number": "09",
+          "type": "shop",
+          "area": 216
+        }
+      ]
+    },
+    {
+      "number": 1,
+      "name": "1st Floor",
+      "category": "premium_commercial",
+      "totalArea": 1859,
+      "ceilingHeight": "11'-0\"",
+      "hasLayoutPlan": true,
+      "floorSharedWith": null,
+      "units": [
+        {
+          "number": "101",
+          "type": "shop",
+          "area": 185
+        },
+        {
+          "number": "102",
+          "type": "shop",
+          "area": 185
+        },
+        {
+          "number": "103",
+          "type": "shop",
+          "area": 185
+        },
+        {
+          "number": "104",
+          "type": "shop",
+          "area": 123
+        },
+        {
+          "number": "105",
+          "type": "shop",
+          "area": 123
+        },
+        {
+          "number": "106",
+          "type": "shop",
+          "area": 150
+        },
+        {
+          "number": "107",
+          "type": "shop",
+          "area": 150
+        },
+        {
+          "number": "108",
+          "type": "shop",
+          "area": 168
+        },
+        {
+          "number": "109",
+          "type": "shop",
+          "area": 163
+        },
+        {
+          "number": "110",
+          "type": "shop",
+          "area": 430
+        },
+        {
+          "number": "111",
+          "type": "shop",
+          "area": 165
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "name": "2nd Floor",
+      "category": "standard_retail",
+      "totalArea": 2534,
+      "ceilingHeight": "11'-0\"",
+      "hasLayoutPlan": true,
+      "floorSharedWith": [3, 4, 5, 6],
+      "units": [
+        {
+          "number": "201",
+          "type": "shop",
+          "area": 1072
+        },
+        {
+          "number": "202",
+          "type": "shop",
+          "area": 237
+        },
+        {
+          "number": "203",
+          "type": "shop",
+          "area": 237
+        },
+        {
+          "number": "204",
+          "type": "shop",
+          "area": 205
+        },
+        {
+          "number": "205",
+          "type": "shop",
+          "area": 205
+        },
+        {
+          "number": "206",
+          "type": "shop",
+          "area": 123
+        },
+        {
+          "number": "207",
+          "type": "shop",
+          "area": 123
+        },
+        {
+          "number": "208",
+          "type": "shop",
+          "area": 150
+        },
+        {
+          "number": "209",
+          "type": "shop",
+          "area": 150
+        },
+        {
+          "number": "210",
+          "type": "shop",
+          "area": 168
+        },
+        {
+          "number": "211",
+          "type": "shop",
+          "area": 163
+        },
+        {
+          "number": "212",
+          "type": "shop",
+          "area": 165
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "name": "7th Floor",
+      "category": "standard_commercial",
+      "totalArea": 2800,
+      "ceilingHeight": "11'-0\"",
+      "hasLayoutPlan": true,
+      "floorSharedWith": null,
+      "units": [
+        {
+          "number": "701",
+          "type": "showroom",
+          "area": 1500
+        },
+        {
+          "number": "702",
+          "type": "office",
+          "area": 650
+        },
+        {
+          "number": "703",
+          "type": "office",
+          "area": 650
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "name": "9th Floor",
+      "category": "office_space",
+      "totalArea": 3273,
+      "ceilingHeight": "11'-0\"",
+      "hasLayoutPlan": true,
+      "floorSharedWith": [10, 11, 12, 13, 14],
+      "units": [
+        {
+          "number": "A",
+          "type": "office",
+          "area": 1097
+        },
+        {
+          "number": "B",
+          "type": "office",
+          "area": 562
+        },
+        {
+          "number": "C",
+          "type": "office",
+          "area": 443
+        },
+        {
+          "number": "D",
+          "type": "office",
+          "area": 579
+        },
+        {
+          "number": "E",
+          "type": "office",
+          "area": 574
+        },
+        {
+          "number": "F",
+          "type": "office",
+          "area": 760
+        }
+      ]
+    }
+  ],
+  "features": [
+    {
+      "name": "Prime Business Location",
+      "icon": "map-pin",
+      "category": "convenience"
+    },
+    {
+      "name": "Modern Commercial Architecture",
+      "icon": "building",
+      "category": "convenience"
+    },
+    {
+      "name": "Central Air Conditioning",
+      "icon": "wind",
+      "category": "utilities"
+    },
+    {
+      "name": "Four Passenger Lifts",
+      "icon": "arrow-up",
+      "category": "convenience"
+    },
+    {
+      "name": "24/7 Security & CCTV",
+      "icon": "shield",
+      "category": "security"
+    },
+    {
+      "name": "Fire Fighting Equipment",
+      "icon": "shield-check",
+      "category": "security"
+    },
+    {
+      "name": "Emergency Power Backup",
+      "icon": "zap",
+      "category": "utilities"
+    },
+    {
+      "name": "Wi-Fi System",
+      "icon": "wifi",
+      "category": "technology"
+    },
+    {
+      "name": "WASA Water Connection",
+      "icon": "droplet",
+      "category": "utilities"
+    },
+    {
+      "name": "Individual Power Meters",
+      "icon": "gauge",
+      "category": "utilities"
+    }
+  ],
+  "amenities": [
+    {
+      "name": "2-Level Basement Parking",
+      "icon": "car",
+      "category": "parking"
+    },
+    {
+      "name": "Electric Sub-Station",
+      "icon": "cpu",
+      "category": "utilities"
+    },
+    {
+      "name": "Generator Room",
+      "icon": "zap",
+      "category": "utilities"
+    },
+    {
+      "name": "Drivers Seating Area",
+      "icon": "users",
+      "category": "services"
+    },
+    {
+      "name": "Common Washrooms",
+      "icon": "users",
+      "category": "services"
+    },
+    {
+      "name": "AC Outdoor Equipment Area",
+      "icon": "wind",
+      "category": "utilities"
+    },
+    {
+      "name": "Shopping Entry Plaza",
+      "icon": "shopping-bag",
+      "category": "outdoor"
+    },
+    {
+      "name": "Multiple Floor Commercial Space",
+      "icon": "building-2",
+      "category": "services"
+    },
+    {
+      "name": "Individual Shop Rolling Shutters",
+      "icon": "shield",
+      "category": "security"
+    },
+    {
+      "name": "Landscaped Entry",
+      "icon": "trees",
+      "category": "outdoor"
+    }
+  ]
+}

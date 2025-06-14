@@ -23,7 +23,9 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": ["files"]
+      "allowedTypes": [
+        "files"
+      ]
     },
     "category": {
       "type": "enumeration",

@@ -1,0 +1,315 @@
+{
+  "name": "Equity Anirban",
+  "slug": "equity-anirban",
+  "address": "Agrabad CDA, Road 1 & 2, Chattogram",
+  "constructionStart": null,
+  "constructionEnd": null,
+  "floors": "15 stories, 1 semi-basement & 1 basement",
+  "description": "Discover the essence of a refined form of living at Equity Anirban. This exceptional residence, crafted with precision and brilliance by Architect U Tun Yine, reshapes urban living in Agrabad, Chattogram. Picture yourself surrounded by thoughtfully designed spaces while indulging in premium amenities, all in a corner plot location that offers unparalleled convenience. Equity Anirban is more than an address; it's an invitation to experience the very best.",
+  "landSize": "19.51 katha",
+  "landFacing": "Corner Plot",
+  "roadWidth": 23.0,
+  "parking_floors": 3,
+  "parking_spaces": 65,
+  "youtubeVideos": [],
+  "photos": [],
+  "bulkPhotoUploads": [],
+  "Unit": [
+    {
+      "name": "Type A",
+      "unitCategory": "residential",
+      "type": "3bed",
+      "dimensions": {
+        "totalArea": 1777,
+        "carpetArea": null,
+        "balconyArea": null,
+        "length": null,
+        "width": null,
+        "height": null
+      },
+      "residentialSpecs": {
+        "bedrooms": 3,
+        "bathrooms": 3,
+        "livingRooms": 1,
+        "diningRooms": 1,
+        "kitchens": 1,
+        "balconies": 3,
+        "studyRooms": 0,
+        "servantRooms": 0,
+        "storeRooms": 0,
+        "parkingSpaces": 1,
+        "additionalFeatures": {
+          "master_bedroom": "11'-8\" x 15'-0\"",
+          "child_bedroom": "13'-0\" x 11'-0\"",
+          "guest_bedroom": "10'-0\" x 10'-0\"",
+          "family_living": "6'-6\" x 16'-0\"",
+          "living": "16'-0\" x 10'-0\"",
+          "dining": "11'-0\" x 17'-5\"",
+          "kitchen": "10'-5\" x 7'-0\""
+        }
+      },
+      "facing": ["East"],
+      "hasLayoutPlan": true,
+      "description": "Spacious 3-bedroom apartment with family living area"
+    },
+    {
+      "name": "Type B",
+      "unitCategory": "residential",
+      "type": "3bed",
+      "dimensions": {
+        "totalArea": 2191,
+        "carpetArea": null,
+        "balconyArea": null,
+        "length": null,
+        "width": null,
+        "height": null
+      },
+      "residentialSpecs": {
+        "bedrooms": 3,
+        "bathrooms": 3,
+        "livingRooms": 1,
+        "diningRooms": 1,
+        "kitchens": 1,
+        "balconies": 3,
+        "studyRooms": 0,
+        "servantRooms": 0,
+        "storeRooms": 0,
+        "parkingSpaces": 1,
+        "additionalFeatures": {
+          "master_bedroom": "12'-0\" x 16'-0\"",
+          "child_bedroom": "12'-0\" x 12'-0\"",
+          "guest_bedroom": "10'-0\" x 15'-0\"",
+          "family_living": "17'-5\" x 9'-4\"",
+          "living": "14'-0\" x 12'-1\"",
+          "dining": "21'-1\" x 12'-1\"",
+          "kitchen": "7'-0\" x 4'-0\""
+        }
+      },
+      "facing": ["North"],
+      "hasLayoutPlan": true,
+      "description": "Largest 3-bedroom apartment with spacious dining area"
+    },
+    {
+      "name": "Type C",
+      "unitCategory": "residential",
+      "type": "3bed",
+      "dimensions": {
+        "totalArea": 1817,
+        "carpetArea": null,
+        "balconyArea": null,
+        "length": null,
+        "width": null,
+        "height": null
+      },
+      "residentialSpecs": {
+        "bedrooms": 3,
+        "bathrooms": 3,
+        "livingRooms": 1,
+        "diningRooms": 1,
+        "kitchens": 1,
+        "balconies": 2,
+        "studyRooms": 0,
+        "servantRooms": 0,
+        "storeRooms": 0,
+        "parkingSpaces": 1,
+        "additionalFeatures": {
+          "master_bedroom": "14'-5\" x 11'-0\"",
+          "child_bedroom": "14'-5\" x 11'-0\"",
+          "guest_bedroom": "13'-0\" x 10'-7\"",
+          "family_living": "15'-2\" x 7'-0\"",
+          "living": "13'-0\" x 18'-7\"",
+          "dining": "13'-0\" x 13'-0\"",
+          "kitchen": "8'-1\" x 9'-5\""
+        }
+      },
+      "facing": ["East"],
+      "hasLayoutPlan": true,
+      "description": "Well-designed 3-bedroom apartment with spacious living room"
+    },
+    {
+      "name": "Type D",
+      "unitCategory": "residential",
+      "type": "3bed",
+      "dimensions": {
+        "totalArea": 1884,
+        "carpetArea": null,
+        "balconyArea": null,
+        "length": null,
+        "width": null,
+        "height": null
+      },
+      "residentialSpecs": {
+        "bedrooms": 3,
+        "bathrooms": 3,
+        "livingRooms": 1,
+        "diningRooms": 1,
+        "kitchens": 1,
+        "balconies": 3,
+        "studyRooms": 0,
+        "servantRooms": 0,
+        "storeRooms": 1,
+        "parkingSpaces": 1,
+        "additionalFeatures": {
+          "master_bedroom": "11'-0\" x 15'-0\"",
+          "child_bedroom": "12'-0\" x 11'-7\"",
+          "guest_bedroom": "10'-0\" x 12'-0\"",
+          "family_living": "15'-2\" x 7'-0\"",
+          "living": "13'-8\" x 13'-4\"",
+          "dining": "17'-5\" x 12'-0\"",
+          "kitchen": "7'-0\" x 4'-0\"",
+          "dressing_room": "4'-0\" x 4'-0\""
+        }
+      },
+      "facing": ["North-East"],
+      "hasLayoutPlan": true,
+      "description": "Premium 3-bedroom apartment with dressing room"
+    },
+    {
+      "name": "Type E",
+      "unitCategory": "residential",
+      "type": "3bed",
+      "dimensions": {
+        "totalArea": 1530,
+        "carpetArea": null,
+        "balconyArea": null,
+        "length": null,
+        "width": null,
+        "height": null
+      },
+      "residentialSpecs": {
+        "bedrooms": 3,
+        "bathrooms": 3,
+        "livingRooms": 1,
+        "diningRooms": 1,
+        "kitchens": 1,
+        "balconies": 3,
+        "studyRooms": 0,
+        "servantRooms": 0,
+        "storeRooms": 0,
+        "parkingSpaces": 1,
+        "additionalFeatures": {
+          "master_bedroom": "12'-8\" x 11'-1\"",
+          "child_bedroom": "10'-0\" x 12'-0\"",
+          "guest_bedroom": "10'-0\" x 10'-0\"",
+          "living": "16'-0\" x 10'-8\"",
+          "dining": "11'-4\" x 14'-6\"",
+          "kitchen": "9'-10\" x 6'-6\"",
+          "utility": "4' wide"
+        }
+      },
+      "facing": ["South-West"],
+      "hasLayoutPlan": true,
+      "description": "Compact 3-bedroom apartment with utility area"
+    }
+  ],
+  "commercialFloors": [],
+  "features": [
+    {
+      "name": "Exclusive Corner Plot",
+      "icon": "location",
+      "category": "convenience"
+    },
+    {
+      "name": "Vertical Manicured Gardens",
+      "icon": "leaf",
+      "category": "convenience"
+    },
+    {
+      "name": "CCTV Camera with 15 days recording",
+      "icon": "shield",
+      "category": "security"
+    },
+    {
+      "name": "Fire Safety System",
+      "icon": "shield-check",
+      "category": "security"
+    },
+    {
+      "name": "Emergency Power Backup",
+      "icon": "zap",
+      "category": "utilities"
+    },
+    {
+      "name": "Intercom System",
+      "icon": "phone",
+      "category": "technology"
+    },
+    {
+      "name": "Passenger & Bed Lifts",
+      "icon": "arrow-up",
+      "category": "convenience"
+    },
+    {
+      "name": "WASA Water Connection",
+      "icon": "droplet",
+      "category": "utilities"
+    },
+    {
+      "name": "Deep Tube Well Backup",
+      "icon": "droplet",
+      "category": "utilities"
+    },
+    {
+      "name": "Broadband & Wi-Fi Ready",
+      "icon": "wifi",
+      "category": "technology"
+    }
+  ],
+  "amenities": [
+    {
+      "name": "Barbecue Terrace",
+      "icon": "grill",
+      "category": "outdoor"
+    },
+    {
+      "name": "Rooftop Recreation Room",
+      "icon": "home",
+      "category": "recreation"
+    },
+    {
+      "name": "Indoor Gaming Lounge",
+      "icon": "gamepad-2",
+      "category": "recreation"
+    },
+    {
+      "name": "Table Tennis",
+      "icon": "table-tennis",
+      "category": "recreation"
+    },
+    {
+      "name": "Foosball Table",
+      "icon": "users",
+      "category": "recreation"
+    },
+    {
+      "name": "Cloth Drying Area",
+      "icon": "shirt",
+      "category": "services"
+    },
+    {
+      "name": "Ground Level Greenery",
+      "icon": "trees",
+      "category": "outdoor"
+    },
+    {
+      "name": "Children's Play Area",
+      "icon": "baby",
+      "category": "outdoor"
+    },
+    {
+      "name": "65 Parking Spaces",
+      "icon": "car",
+      "category": "parking"
+    },
+    {
+      "name": "Management Office",
+      "icon": "building",
+      "category": "services"
+    },
+    {
+      "name": "Security Room",
+      "icon": "shield",
+      "category": "services"
+    }
+  ]
+}
