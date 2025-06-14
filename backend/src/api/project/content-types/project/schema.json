@@ -124,6 +124,12 @@
       "relation": "oneToMany",
       "target": "api::construction-update.construction-update",
       "mappedBy": "project"
+    },
+    "documents": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::document.document",
+      "mappedBy": "project"
     }
   }
 }

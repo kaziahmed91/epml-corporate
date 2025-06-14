@@ -8,8 +8,18 @@ export default ({ env }) => ({
         api_secret: env('CLOUDINARY_SECRET'),
       },
       actionOptions: {
-        upload: {},
-        uploadStream: {},
+        upload: {
+          folder: 'project-documents',
+          resource_type: 'auto',
+          use_filename: true,
+          unique_filename: true,
+        },
+        uploadStream: {
+          folder: 'project-documents',
+          resource_type: 'auto',
+          use_filename: true,
+          unique_filename: true,
+        },
       },
     },
   },

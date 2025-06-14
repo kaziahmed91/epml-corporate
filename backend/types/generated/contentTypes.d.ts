@@ -513,6 +513,57 @@ export interface ApiConstructionUpdateConstructionUpdate
   };
 }
 
+export interface ApiDocumentDocument extends Struct.CollectionTypeSchema {
+  collectionName: 'documents';
+  info: {
+    description: 'Project documents including brochures, floorplans, permits, and other paper-based documents';
+    displayName: 'Document';
+    pluralName: 'documents';
+    singularName: 'document';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    category: Schema.Attribute.Enumeration<
+      [
+        'Brochure',
+        'Floor Plans',
+        'Permits',
+        'Legal Documents',
+        'Specifications',
+        'Architectural Drawings',
+        'Construction Documents',
+        'Marketing Materials',
+        'Other',
+      ]
+    > &
+      Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    displayOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    file: Schema.Attribute.Media<'files'> & Schema.Attribute.Required;
+    fileSize: Schema.Attribute.BigInteger;
+    isPublic: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::document.document'
+    > &
+      Schema.Attribute.Private;
+    mimeType: Schema.Attribute.String;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    project: Schema.Attribute.Relation<'manyToOne', 'api::project.project'>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    uploadedAt: Schema.Attribute.DateTime;
+  };
+}
+
 export interface ApiFeatureTemplateFeatureTemplate
   extends Struct.CollectionTypeSchema {
   collectionName: 'feature_templates';
@@ -695,6 +746,7 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
+    documents: Schema.Attribute.Relation<'oneToMany', 'api::document.document'>;
     features: Schema.Attribute.Component<'project.feature-item', true>;
     floors: Schema.Attribute.String;
     landFacing: Schema.Attribute.Enumeration<
@@ -1341,6 +1393,7 @@ declare module '@strapi/strapi' {
       'api::amenity-template.amenity-template': ApiAmenityTemplateAmenityTemplate;
       'api::city.city': ApiCityCity;
       'api::construction-update.construction-update': ApiConstructionUpdateConstructionUpdate;
+      'api::document.document': ApiDocumentDocument;
       'api::feature-template.feature-template': ApiFeatureTemplateFeatureTemplate;
       'api::location.location': ApiLocationLocation;
       'api::project-status.project-status': ApiProjectStatusProjectStatus;
