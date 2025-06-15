@@ -1,7 +1,7 @@
 {
   "collectionName": "components_project_unit_types",
   "info": {
-    "displayName": "Unit Types",
+    "displayName": "Residential Unit Types",
     "description": "Comprehensive unit specifications for residential and commercial properties"
   },
   "options": {},
@@ -17,39 +17,19 @@
     },
     "type": {
       "type": "enumeration",
-      "enum": [
-        "studio",
-        "1bed",
-        "2bed",
-        "3bed",
-        "4bed",
-        "penthouse",
-        "duplex",
-        "shop",
-        "showroom",
-        "atm",
-        "food_court",
-        "bank",
-        "office",
-        "warehouse"
-      ]
+      "enum": ["studio", "1bed", "2bed", "3bed", "4bed"]
     },
     "dimensions": {
       "type": "component",
       "repeatable": false,
       "component": "specifications.dimensions"
     },
-    "residentialSpecs": {
+    "specifications": {
       "type": "component",
       "repeatable": false,
       "component": "specifications.residential"
     },
-    "commercialSpecs": {
-      "type": "component",
-      "repeatable": false,
-      "component": "specifications.commercial"
-    },
-    "floorPlan": {
+    "layoutPlan": {
       "type": "media",
       "multiple": false,
       "required": false,
@@ -78,11 +58,6 @@
         "South-West"
       ],
       "multiple": true
-    },
-    "floors": {
-      "type": "component",
-      "repeatable": true,
-      "component": "project.floor-availability"
     },
     "features": {
       "type": "component",

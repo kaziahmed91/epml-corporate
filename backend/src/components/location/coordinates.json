@@ -2,17 +2,42 @@
   "collectionName": "components_location_coordinates",
   "info": {
     "displayName": "Coordinates",
-    "description": "GPS coordinates for map integration"
+    "description": "Geographic location data with coordinates and mapping information"
   },
   "options": {},
   "attributes": {
+    "address": {
+      "type": "text",
+      "required": true
+    },
     "latitude": {
       "type": "decimal",
-      "required": true
+      "required": false
     },
     "longitude": {
       "type": "decimal",
-      "required": true
+      "required": false
+    },
+    "googleMapLink": {
+      "type": "string",
+      "required": false
+    },
+    "area": {
+      "type": "string",
+      "required": false
+    },
+    "nearest_landmark": {
+      "type": "string",
+      "required": false
+    },
+    "zipCode": {
+      "type": "string",
+      "required": false
+    },
+    "accessibility": {
+      "type": "component",
+      "component": "common.text-list-item",
+      "repeatable": true
     }
   }
 }

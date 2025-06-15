@@ -614,7 +614,7 @@ export interface ApiFeatureTemplateFeatureTemplate
 export interface ApiLocationLocation extends Struct.CollectionTypeSchema {
   collectionName: 'locations';
   info: {
-    description: '';
+    description: 'Area names within cities (e.g., Khulshi, Nasirabad, Mehedibag)';
     displayName: 'Location';
     pluralName: 'locations';
     singularName: 'location';
@@ -636,11 +636,16 @@ export interface ApiLocationLocation extends Struct.CollectionTypeSchema {
     Name: Schema.Attribute.Enumeration<
       [
         'Khulshi',
+        'Nasirabad',
         'Mehedibagh',
-        'Agrabad Commercial ',
-        'Devpahar',
+        'Amirabag',
+        'Agrabad Commercial',
         'Agrabad Residential',
+        'Devpahar',
         'Sirajuddaula Road',
+        'Halishahar',
+        'Panchlaish',
+        'GEC',
       ]
     >;
     projects: Schema.Attribute.Relation<'oneToMany', 'api::project.project'>;
@@ -729,7 +734,6 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    address: Schema.Attribute.String;
     amenities: Schema.Attribute.Component<'project.amenity-item', true>;
     bulkPhotoUploads: Schema.Attribute.Component<
       'project.bulk-photo-upload',
@@ -742,6 +746,7 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::construction-update.construction-update'
     >;
+    coordinates: Schema.Attribute.Component<'location.coordinates', false>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -781,9 +786,9 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
       'api::project-type.project-type'
     >;
     publishedAt: Schema.Attribute.DateTime;
+    residentialUnits: Schema.Attribute.Component<'project.unit-types', true>;
     roadWidth: Schema.Attribute.Decimal;
     slug: Schema.Attribute.UID<'name'>;
-    Unit: Schema.Attribute.Component<'project.unit-types', true>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

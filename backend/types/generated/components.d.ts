@@ -16,12 +16,18 @@ export interface CommonTextListItem extends Struct.ComponentSchema {
 export interface LocationCoordinates extends Struct.ComponentSchema {
   collectionName: 'components_location_coordinates';
   info: {
-    description: 'GPS coordinates for map integration';
+    description: 'Geographic location data with coordinates and mapping information';
     displayName: 'Coordinates';
   };
   attributes: {
-    latitude: Schema.Attribute.Decimal & Schema.Attribute.Required;
-    longitude: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    accessibility: Schema.Attribute.Component<'common.text-list-item', true>;
+    address: Schema.Attribute.Text & Schema.Attribute.Required;
+    area: Schema.Attribute.String;
+    googleMapLink: Schema.Attribute.String;
+    latitude: Schema.Attribute.Decimal;
+    longitude: Schema.Attribute.Decimal;
+    nearest_landmark: Schema.Attribute.String;
+    zipCode: Schema.Attribute.String;
   };
 }
 
@@ -142,34 +148,6 @@ export interface ProjectFeatureItem extends Struct.ComponentSchema {
   };
 }
 
-export interface ProjectFloorAvailability extends Struct.ComponentSchema {
-  collectionName: 'components_project_floor_availabilities';
-  info: {
-    description: 'Floor numbers where unit type is available';
-    displayName: 'Floor Availability';
-  };
-  attributes: {
-    floorNumber: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMax<
-        {
-          min: 0;
-        },
-        number
-      >;
-    isAvailable: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
-    notes: Schema.Attribute.String;
-    unitCount: Schema.Attribute.Integer &
-      Schema.Attribute.SetMinMax<
-        {
-          min: 1;
-        },
-        number
-      > &
-      Schema.Attribute.DefaultTo<1>;
-  };
-}
-
 export interface ProjectFloorUnit extends Struct.ComponentSchema {
   collectionName: 'components_project_floor_units';
   info: {
@@ -276,13 +254,9 @@ export interface ProjectUnitTypes extends Struct.ComponentSchema {
   collectionName: 'components_project_unit_types';
   info: {
     description: 'Comprehensive unit specifications for residential and commercial properties';
-    displayName: 'Unit Types';
+    displayName: 'Residential Unit Types';
   };
   attributes: {
-    commercialSpecs: Schema.Attribute.Component<
-      'specifications.commercial',
-      false
-    >;
     description: Schema.Attribute.Text;
     dimensions: Schema.Attribute.Component<'specifications.dimensions', false>;
     facing: Schema.Attribute.Enumeration<
@@ -298,32 +272,16 @@ export interface ProjectUnitTypes extends Struct.ComponentSchema {
       ]
     >;
     features: Schema.Attribute.Component<'common.text-list-item', true>;
-    floorPlan: Schema.Attribute.Media<'images' | 'files'>;
-    floors: Schema.Attribute.Component<'project.floor-availability', true>;
     hasLayoutPlan: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     images: Schema.Attribute.Component<'project.photo-item', true>;
+    layoutPlan: Schema.Attribute.Media<'images' | 'files'>;
     name: Schema.Attribute.String & Schema.Attribute.Required;
-    residentialSpecs: Schema.Attribute.Component<
+    specifications: Schema.Attribute.Component<
       'specifications.residential',
       false
     >;
     type: Schema.Attribute.Enumeration<
-      [
-        'studio',
-        '1bed',
-        '2bed',
-        '3bed',
-        '4bed',
-        'penthouse',
-        'duplex',
-        'shop',
-        'showroom',
-        'atm',
-        'food_court',
-        'bank',
-        'office',
-        'warehouse',
-      ]
+      ['studio', '1bed', '2bed', '3bed', '4bed']
     >;
     unitCategory: Schema.Attribute.Enumeration<
       ['residential', 'commercial', 'parking', 'utility']
@@ -504,7 +462,6 @@ declare module '@strapi/strapi' {
       'project.bulk-photo-upload': ProjectBulkPhotoUpload;
       'project.document-item': ProjectDocumentItem;
       'project.feature-item': ProjectFeatureItem;
-      'project.floor-availability': ProjectFloorAvailability;
       'project.floor-unit': ProjectFloorUnit;
       'project.photo-item': ProjectPhotoItem;
       'project.project-floor': ProjectProjectFloor;

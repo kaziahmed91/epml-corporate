@@ -15,9 +15,6 @@
     "name": {
       "type": "string"
     },
-    "address": {
-      "type": "string"
-    },
     "constructionStart": {
       "type": "date"
     },
@@ -65,7 +62,7 @@
       "repeatable": true,
       "required": false
     },
-    "Unit": {
+    "residentialUnits": {
       "type": "component",
       "component": "project.unit-types",
       "repeatable": true
@@ -123,6 +120,12 @@
       "relation": "oneToMany",
       "target": "api::document.document",
       "mappedBy": "project"
+    },
+    "coordinates": {
+      "type": "component",
+      "component": "location.coordinates",
+      "repeatable": false,
+      "required": false
     }
   }
 }

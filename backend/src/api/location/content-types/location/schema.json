@@ -5,7 +5,7 @@
     "singularName": "location",
     "pluralName": "locations",
     "displayName": "Location",
-    "description": ""
+    "description": "Area names within cities (e.g., Khulshi, Nasirabad, Mehedibag)"
   },
   "options": {
     "draftAndPublish": true
@@ -28,11 +28,16 @@
       "type": "enumeration",
       "enum": [
         "Khulshi",
+        "Nasirabad",
         "Mehedibagh",
-        "Agrabad Commercial ",
-        "Devpahar",
+        "Amirabag",
+        "Agrabad Commercial",
         "Agrabad Residential",
-        "Sirajuddaula Road"
+        "Devpahar",
+        "Sirajuddaula Road",
+        "Halishahar",
+        "Panchlaish",
+        "GEC"
       ]
     }
   }
