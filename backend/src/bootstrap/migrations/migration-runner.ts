@@ -82,20 +82,20 @@ export class MigrationRunner {
       {
         ...migrationsData.migrations[2],
         up: async (strapi: Strapi) => {
-          console.log("🏢 Running Equity Anirban project migration...");
+          console.log("🏢 Running Equity Anirban project v2 migration...");
           const maps = await this.getFoundationMaps(strapi);
           const factory = new ProjectSeederFactory(strapi);
           const projectData = await getProjectBySlug("equity-anirban");
 
           if (!projectData) {
-            throw new Error("Equity Anirban project data not found");
+            throw new Error("Equity Anirban v2 project data not found");
           }
 
           const enhancedProjectData = {
             ...projectData,
-            project_type: maps.typeMap["Residential"],
-            location: maps.locationMap["Agrabad Residential"],
-            project_status: maps.statusMap["Ongoing"],
+            project_type: maps.typeMap[projectData.project_type],
+            location: maps.locationMap[projectData.location],
+            project_status: maps.statusMap[projectData.project_status],
           };
 
           const project = await factory.seedProject(
@@ -105,56 +105,28 @@ export class MigrationRunner {
           return { entityCount: 1, projectId: project.id };
         },
         down: async (strapi: Strapi) => {
-          console.log("🗑️  Rolling back Equity Anirban project...");
+          console.log("🗑️  Rolling back Equity Anirban v2 project...");
           await this.rollbackProject("equity-anirban");
         },
       },
       {
-        id: "2025-01-01-004",
-        name: "create-equity-azeez-neer-project",
-        description: "Equity Azeez Neer project with all related data",
-        dependencies: ["2025-01-01-001", "2025-01-01-002"],
-        affectedEntities: [
-          "api::project.project",
-          "api::construction-update.construction-update",
-        ],
-        affectedTables: ["projects"],
+        ...migrationsData.migrations[3],
         up: async (strapi: Strapi) => {
-          console.log("🏢 Running Equity Azeez Neer project migration...");
+          console.log("🏢 Running Equity Aziz Neer project v2 migration...");
           const maps = await this.getFoundationMaps(strapi);
           const factory = new ProjectSeederFactory(strapi);
-          const projectData = await getProjectBySlug("aziz-neer");
+          const projectData = await getProjectBySlug("equity-aziz-neer");
 
           if (!projectData) {
-            throw new Error("Equity Azeez Neer project data not found");
+            throw new Error("Equity Aziz Neer v2 project data not found");
           }
 
-          // Enhance project data with required fields before seeding
           const enhancedProjectData = {
             ...projectData,
-            project_type: maps.typeMap["Residential"],
-            location: maps.locationMap["Agrabad Residential"],
-            project_status: maps.statusMap["Ongoing"],
-            // Ensure arrays are initialized if not present
-            youtubeVideos: projectData.youtubeVideos || [],
-            constructionUpdates: projectData.constructionUpdates || [],
-            features: projectData.features || [],
-            amenities: projectData.amenities || [],
-            Unit: projectData.Unit || [],
-            projectFloors: projectData.projectFloors || [],
-            testimonials: projectData.testimonials || [],
-            mediaFiles: projectData.mediaFiles || [],
+            project_type: maps.typeMap[projectData.project_type],
+            location: maps.locationMap[projectData.location],
+            project_status: maps.statusMap[projectData.project_status],
           };
-
-          // Log the enhanced data for debugging
-          console.log("📝 Enhanced project data:", {
-            name: enhancedProjectData.name,
-            slug: enhancedProjectData.slug,
-            address: enhancedProjectData.address,
-            project_type: enhancedProjectData.project_type,
-            location: enhancedProjectData.location,
-            project_status: enhancedProjectData.project_status,
-          });
 
           const seededProject = await factory.seedProject(
             enhancedProjectData,
@@ -163,8 +135,38 @@ export class MigrationRunner {
           return { entityCount: 1, projectId: seededProject.id };
         },
         down: async (strapi: Strapi) => {
-          console.log("🗑️  Rolling back Equity Azeez Neer project...");
-          await this.rollbackProject("aziz-neer");
+          console.log("🗑️  Rolling back Equity Aziz Neer v2 project...");
+          await this.rollbackProject("equity-aziz-neer");
+        },
+      },
+      {
+        ...migrationsData.migrations[4],
+        up: async (strapi: Strapi) => {
+          console.log("🏢 Running Equity MIR Trade Center project migration...");
+          const maps = await this.getFoundationMaps(strapi);
+          const factory = new ProjectSeederFactory(strapi);
+          const projectData = await getProjectBySlug("equity-mir-trade-center");
+
+          if (!projectData) {
+            throw new Error("Equity MIR Trade Center v2 project data not found");
+          }
+
+          const enhancedProjectData = {
+            ...projectData,
+            project_type: maps.typeMap[projectData.project_type],
+            location: maps.locationMap[projectData.location],
+            project_status: maps.statusMap[projectData.project_status],
+          };
+
+          const seededProject = await factory.seedProject(
+            enhancedProjectData,
+            "2025-01-01-005",
+          );
+          return { entityCount: 1, projectId: seededProject.id };
+        },
+        down: async (strapi: Strapi) => {
+          console.log("🗑️  Rolling back Equity MIR Trade Center project...");
+          await this.rollbackProject("equity-mir-trade-center");
         },
       },
     ];

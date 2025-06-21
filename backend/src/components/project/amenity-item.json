@@ -24,7 +24,8 @@
         "services",
         "outdoor",
         "security",
-        "utilities"
+        "utilities",
+        "accessibility"
       ]
     }
   }

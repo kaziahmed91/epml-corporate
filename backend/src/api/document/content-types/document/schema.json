@@ -22,10 +22,25 @@
     "file": {
       "type": "media",
       "multiple": false,
-      "required": true,
+      "required": false,
       "allowedTypes": [
         "files"
       ]
+    },
+    "r2Key": {
+      "type": "string"
+    },
+    "r2Url": {
+      "type": "string"
+    },
+    "originalName": {
+      "type": "string"
+    },
+    "fileSize": {
+      "type": "biginteger"
+    },
+    "mimeType": {
+      "type": "string"
     },
     "category": {
       "type": "enumeration",
@@ -46,13 +61,7 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::project.project",
-      "inversedBy": "documents"
-    },
-    "fileSize": {
-      "type": "biginteger"
-    },
-    "mimeType": {
-      "type": "string"
+      "inversedBy": "projectDocuments"
     },
     "uploadedAt": {
       "type": "datetime",

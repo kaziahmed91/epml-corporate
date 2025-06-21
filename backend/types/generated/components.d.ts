@@ -61,6 +61,7 @@ export interface ProjectAmenityItem extends Struct.ComponentSchema {
         'outdoor',
         'security',
         'utilities',
+        'accessibility',
       ]
     >;
     icon: Schema.Attribute.String & Schema.Attribute.Required;
@@ -104,25 +105,32 @@ export interface ProjectBulkPhotoUpload extends Struct.ComponentSchema {
 export interface ProjectDocumentItem extends Struct.ComponentSchema {
   collectionName: 'components_project_document_items';
   info: {
-    description: 'Individual project documents with display names';
+    description: 'Project document with Cloudinary storage support';
     displayName: 'Document Item';
     icon: 'file-text';
   };
   attributes: {
     category: Schema.Attribute.Enumeration<
       [
+        'Brochure',
         'Floor Plans',
-        'Architectural Drawings',
-        'Approvals',
+        'Permits',
         'Legal Documents',
         'Specifications',
+        'Architectural Drawings',
+        'Construction Documents',
+        'Marketing Materials',
+        'Terms & Conditions',
+        'Approvals',
         'Other',
       ]
-    >;
+    > &
+      Schema.Attribute.Required;
     description: Schema.Attribute.Text;
-    displayName: Schema.Attribute.String & Schema.Attribute.Required;
     displayOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
-    document: Schema.Attribute.Media<'files' | 'images'>;
+    file: Schema.Attribute.Media<'files'>;
+    isPublic: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -176,6 +184,8 @@ export interface ProjectFloorUnit extends Struct.ComponentSchema {
         'salon',
         'pharmacy',
         'restaurant',
+        'parking',
+        'commercial_space',
       ]
     > &
       Schema.Attribute.Required;
@@ -229,11 +239,15 @@ export interface ProjectProjectFloor extends Struct.ComponentSchema {
         'kids',
         'womens_fashion',
         'mens_fashion',
-        'foodcourt, ',
-        'standard_office, ',
-        'premium_office, ',
-        'showroom,',
+        'foodcourt',
+        'standard_office',
+        'premium_office',
+        'showroom',
         'electronics',
+        'parking',
+        'retail',
+        'commercial',
+        'office',
       ]
     > &
       Schema.Attribute.Required;

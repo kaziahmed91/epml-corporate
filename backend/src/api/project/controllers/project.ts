@@ -13,26 +13,27 @@ export default factories.createCoreController('api::project.project', ({ strapi 
         photos: {
           populate: ['photo']
         },
-        Unit: {
+        residentialUnits: {
           populate: {
             images: {
               populate: ['photo']
             },
-            floorPlan: true,
+            layoutPlan: true,
             dimensions: true,
-            residentialSpecs: {
+            specifications: {
               populate: ['additionalFeatures']
             },
-            commercialSpecs: {
-              populate: ['additionalFeatures']
-            },
-            floors: true,
             features: true
           }
         },
-        brochure: true,
+        commercialFloors: {
+          populate: {
+            floorplan: true,
+            units: true
+          }
+        },
         projectDocuments: {
-          populate: ['document']
+          populate: ['file']
         },
         youtubeVideos: true,
         project_type: true,
@@ -60,26 +61,27 @@ export default factories.createCoreController('api::project.project', ({ strapi 
         photos: {
           populate: ['photo']
         },
-        Unit: {
+        residentialUnits: {
           populate: {
             images: {
               populate: ['photo']
             },
-            floorPlan: true,
+            layoutPlan: true,
             dimensions: true,
-            residentialSpecs: {
+            specifications: {
               populate: ['additionalFeatures']
             },
-            commercialSpecs: {
-              populate: ['additionalFeatures']
-            },
-            floors: true,
             features: true
           }
         },
-        brochure: true,
+        commercialFloors: {
+          populate: {
+            floorplan: true,
+            units: true
+          }
+        },
         projectDocuments: {
-          populate: ['document']
+          populate: ['file']
         },
         youtubeVideos: true,
         project_type: true,
@@ -244,6 +246,43 @@ export default factories.createCoreController('api::project.project', ({ strapi 
     } catch (error) {
       strapi.log.error('Error processing bulk photos:', error);
       return ctx.internalServerError('Failed to process bulk photos');
+    }
+  },
+
+  async refreshDocuments(ctx) {
+    const { id } = ctx.params;
+    
+    try {
+      // Force refresh the project with its documents
+      const project = await strapi.entityService.findOne('api::project.project', id, {
+        populate: {
+          projectDocuments: {
+            populate: ['file']
+          }
+        }
+      });
+      
+      if (!project) {
+        return ctx.notFound('Project not found');
+      }
+      
+      // Force a cache refresh by updating the project's updatedAt timestamp
+      await strapi.entityService.update('api::project.project', id, {
+        data: {
+          updatedAt: new Date()
+        }
+      });
+      
+      strapi.log.info(`Admin cache refreshed for project ${id} documents`);
+      
+      return ctx.send({
+        message: 'Documents cache refreshed successfully',
+        documentCount: (project as any).projectDocuments?.length || 0
+      });
+      
+    } catch (error) {
+      strapi.log.error('Error refreshing documents cache:', error);
+      return ctx.internalServerError('Failed to refresh documents cache');
     }
   },
 

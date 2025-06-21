@@ -39,6 +39,20 @@ export class StrapiSeeder {
 
     if (existing.length > 0) {
       console.log(`ℹ️  Found existing ${uid}: ${(existing[0] as any).id}`);
+      
+      // For projects, update the existing entry with new data
+      if (uid === 'api::project.project') {
+        console.log(`🔄 Updating existing project: ${(existing[0] as any).name}`);
+        const updated = await this.strapi.entityService.update(uid as any, (existing[0] as any).id, {
+          data: {
+            ...createData,
+            publishedAt: new Date().toISOString(),
+          },
+        }) as T;
+        console.log(`✅ Updated ${uid}: ${(updated as any).id}`);
+        return updated;
+      }
+      
       return existing[0];
     }
 
@@ -47,6 +61,12 @@ export class StrapiSeeder {
 
   async createWithComponents<T = any>(uid: string, data: Record<string, any>): Promise<T> {
     const processedData = await this.processComponents(data);
+    
+    // For projects, use findOrCreate to handle existing slugs
+    if (uid === 'api::project.project' && processedData.slug) {
+      return await this.findOrCreate<T>(uid, { slug: processedData.slug }, processedData);
+    }
+    
     return await this.createEntry<T>(uid, processedData);
   }
 

@@ -1,384 +1,603 @@
 {
-  "name": "Equity MIR Trade Center",
+  "name": "equity MIR TRADE CENTER",
   "slug": "equity-mir-trade-center",
   "address": "Plot no. 280, 281, 283 & B.S. Plot no. 693, Mouza - Askarabad, Doublemoring, Dewanhat, Chattogram",
+  "description": "A prime business destination at Dewanhat, Chattogram. Our meticulously chosen location places your enterprise at the intersection of opportunity and ease. Embrace the dynamic synergy of commerce and comfort in the vibrant hub of active Chattogram, where prospects thrive.",
   "constructionStart": null,
   "constructionEnd": null,
-  "floors": "2 basement floors + 15 storied commercial building",
-  "description": "Discover a prime business destination at Dewanhat, Chattogram. Our meticulously chosen location places your enterprise at the intersection of opportunity and ease. Embrace the dynamic synergy of commerce and comfort in the vibrant hub of active Chattogram, where prospects thrive. A new vision for cosmopolitan commerce with 15 stories of modern commercial space featuring retail shops and office units.",
-  "landSize": "15 katha",
+  "floors": "15 stories + 2 basement parking levels",
+  "landSize": "15 Katha (10,800 sq ft)",
   "landFacing": "Corner Plot",
   "roadWidth": 30.49,
   "parking_floors": 2,
   "parking_spaces": 24,
-  "youtubeVideos": [],
-  "photos": [],
-  "bulkPhotoUploads": [],
-  "Unit": [],
+  "project_type": "Commercial",
+  "location": "Dewanhat",
+  "project_status": "Upcoming",
+  "coordinates": {
+    "address": "Plot no. 280, 281, 283 & B.S. Plot no. 693, Mouza - Askarabad, Doublemoring, Dewanhat, Chattogram",
+    "latitude": 22.3569,
+    "longitude": 91.7832,
+    "googleMapLink": "https://maps.google.com/?q=22.3569,91.7832",
+    "area": "Dewanhat",
+    "nearest_landmark": "Dewanhat Circle",
+    "zipCode": "4000",
+    "accessibility": [
+      { "text": "Adjacent to Sheikh Mujib Road" },
+      { "text": "Near Dewanhat Overbridge" },
+      { "text": "Close to Dewanhat Circle" },
+      { "text": "Direct access to Dhaka Trunk Road" },
+      { "text": "Proximity to Fire Service Station" }
+    ]
+  },
   "commercialFloors": [
     {
       "number": 0,
       "name": "Ground Floor",
-      "category": "premium_retail",
-      "totalArea": 1590,
-      "ceilingHeight": "11'-10\"",
+      "category": "retail",
+      "totalArea": 1675,
+      "ceilingHeight": "11 feet",
+      "description": "Ground floor retail shops with landscaped entrance and street access",
       "hasLayoutPlan": true,
-      "floorSharedWith": null,
+      "floorSharedWith": [],
       "units": [
         {
-          "number": "01",
+          "number": "001",
           "type": "shop",
-          "area": 143
+          "area": 143,
+          "description": "Ground floor shop with front access",
+          "isAvailable": true
         },
         {
-          "number": "02",
+          "number": "002",
           "type": "shop",
-          "area": 157
+          "area": 157,
+          "description": "Ground floor shop with side access",
+          "isAvailable": true
         },
         {
-          "number": "03",
+          "number": "003",
           "type": "shop",
-          "area": 157
+          "area": 157,
+          "description": "Ground floor shop",
+          "isAvailable": true
         },
         {
-          "number": "04",
+          "number": "004",
           "type": "shop",
-          "area": 183
+          "area": 183,
+          "description": "Ground floor shop",
+          "isAvailable": true
         },
         {
-          "number": "05",
+          "number": "005",
           "type": "shop",
-          "area": 183
+          "area": 183,
+          "description": "Ground floor shop",
+          "isAvailable": true
         },
         {
-          "number": "06",
+          "number": "006",
           "type": "shop",
-          "area": 130
+          "area": 130,
+          "description": "Ground floor shop",
+          "isAvailable": true
         },
         {
-          "number": "07",
+          "number": "007",
           "type": "shop",
-          "area": 250
+          "area": 250,
+          "description": "Large ground floor shop",
+          "isAvailable": true
         },
         {
-          "number": "08",
+          "number": "008",
           "type": "shop",
-          "area": 207
+          "area": 207,
+          "description": "Ground floor shop",
+          "isAvailable": true
         },
         {
-          "number": "09",
+          "number": "009",
           "type": "shop",
-          "area": 216
+          "area": 216,
+          "description": "Ground floor corner shop",
+          "isAvailable": true
         }
       ]
     },
     {
       "number": 1,
-      "name": "1st Floor",
-      "category": "premium_commercial",
-      "totalArea": 1859,
-      "ceilingHeight": "11'-0\"",
+      "name": "First Floor",
+      "category": "retail",
+      "totalArea": 1897,
+      "ceilingHeight": "11 feet",
+      "description": "First floor shopping spaces with modern layout",
       "hasLayoutPlan": true,
-      "floorSharedWith": null,
+      "floorSharedWith": [],
       "units": [
         {
           "number": "101",
           "type": "shop",
-          "area": 185
+          "area": 186,
+          "description": "First floor shop",
+          "isAvailable": true
         },
         {
           "number": "102",
           "type": "shop",
-          "area": 185
+          "area": 185,
+          "description": "First floor shop",
+          "isAvailable": true
         },
         {
           "number": "103",
           "type": "shop",
-          "area": 185
+          "area": 185,
+          "description": "First floor shop",
+          "isAvailable": true
         },
         {
           "number": "104",
           "type": "shop",
-          "area": 123
+          "area": 123,
+          "description": "Compact first floor shop",
+          "isAvailable": true
         },
         {
           "number": "105",
           "type": "shop",
-          "area": 123
+          "area": 123,
+          "description": "Compact first floor shop",
+          "isAvailable": true
         },
         {
           "number": "106",
           "type": "shop",
-          "area": 150
+          "area": 150,
+          "description": "First floor shop",
+          "isAvailable": true
         },
         {
           "number": "107",
           "type": "shop",
-          "area": 150
+          "area": 150,
+          "description": "First floor shop",
+          "isAvailable": true
         },
         {
           "number": "108",
           "type": "shop",
-          "area": 168
+          "area": 168,
+          "description": "First floor shop",
+          "isAvailable": true
         },
         {
           "number": "109",
           "type": "shop",
-          "area": 163
+          "area": 163,
+          "description": "First floor shop",
+          "isAvailable": true
         },
         {
           "number": "110",
           "type": "shop",
-          "area": 430
+          "area": 430,
+          "description": "Large first floor shop",
+          "isAvailable": true
         },
         {
           "number": "111",
           "type": "shop",
-          "area": 165
+          "area": 165,
+          "description": "First floor corner shop",
+          "isAvailable": true
         }
       ]
     },
     {
       "number": 2,
-      "name": "2nd Floor",
-      "category": "standard_retail",
-      "totalArea": 2534,
-      "ceilingHeight": "11'-0\"",
+      "name": "Second Floor",
+      "category": "retail",
+      "totalArea": 2340,
+      "ceilingHeight": "11 feet",
+      "description": "Second floor shopping spaces with identical layout shared with 3rd floor",
       "hasLayoutPlan": true,
-      "floorSharedWith": [3, 4, 5, 6],
+      "floorSharedWith": [3],
       "units": [
         {
           "number": "201",
           "type": "shop",
-          "area": 1072
+          "area": 1072,
+          "description": "Large showroom space",
+          "isAvailable": true
         },
         {
           "number": "202",
           "type": "shop",
-          "area": 237
+          "area": 237,
+          "description": "Medium shop space",
+          "isAvailable": true
         },
         {
           "number": "203",
           "type": "shop",
-          "area": 237
+          "area": 237,
+          "description": "Medium shop space",
+          "isAvailable": true
         },
         {
           "number": "204",
           "type": "shop",
-          "area": 205
+          "area": 205,
+          "description": "Shop space",
+          "isAvailable": true
         },
         {
           "number": "205",
           "type": "shop",
-          "area": 205
+          "area": 205,
+          "description": "Shop space",
+          "isAvailable": true
         },
         {
           "number": "206",
           "type": "shop",
-          "area": 123
+          "area": 123,
+          "description": "Compact shop space",
+          "isAvailable": true
         },
         {
           "number": "207",
           "type": "shop",
-          "area": 123
+          "area": 123,
+          "description": "Compact shop space",
+          "isAvailable": true
         },
         {
           "number": "208",
           "type": "shop",
-          "area": 150
+          "area": 150,
+          "description": "Shop space",
+          "isAvailable": true
         },
         {
           "number": "209",
           "type": "shop",
-          "area": 150
+          "area": 150,
+          "description": "Shop space",
+          "isAvailable": true
         },
         {
           "number": "210",
           "type": "shop",
-          "area": 168
+          "area": 168,
+          "description": "Shop space",
+          "isAvailable": true
         },
         {
           "number": "211",
           "type": "shop",
-          "area": 163
+          "area": 163,
+          "description": "Shop space",
+          "isAvailable": true
         },
         {
           "number": "212",
           "type": "shop",
-          "area": 165
+          "area": 855,
+          "description": "Large shop space",
+          "isAvailable": true
+        },
+        {
+          "number": "213",
+          "type": "shop",
+          "area": 165,
+          "description": "Corner shop space",
+          "isAvailable": true
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "name": "Fourth Floor",
+      "category": "retail",
+      "totalArea": 2177,
+      "ceilingHeight": "11 feet",
+      "description": "Fourth floor shopping spaces with identical layout shared with 5th and 6th floors",
+      "hasLayoutPlan": true,
+      "floorSharedWith": [5, 6],
+      "units": [
+        {
+          "number": "401",
+          "type": "shop",
+          "area": 1072,
+          "description": "Large showroom space",
+          "isAvailable": true
+        },
+        {
+          "number": "402",
+          "type": "shop",
+          "area": 237,
+          "description": "Medium shop space",
+          "isAvailable": true
+        },
+        {
+          "number": "403",
+          "type": "shop",
+          "area": 237,
+          "description": "Medium shop space",
+          "isAvailable": true
+        },
+        {
+          "number": "404",
+          "type": "shop",
+          "area": 205,
+          "description": "Shop space",
+          "isAvailable": true
+        },
+        {
+          "number": "405",
+          "type": "shop",
+          "area": 205,
+          "description": "Shop space",
+          "isAvailable": true
+        },
+        {
+          "number": "406",
+          "type": "shop",
+          "area": 123,
+          "description": "Compact shop space",
+          "isAvailable": true
+        },
+        {
+          "number": "407",
+          "type": "shop",
+          "area": 123,
+          "description": "Compact shop space",
+          "isAvailable": true
+        },
+        {
+          "number": "408",
+          "type": "shop",
+          "area": 150,
+          "description": "Shop space",
+          "isAvailable": true
+        },
+        {
+          "number": "409",
+          "type": "shop",
+          "area": 150,
+          "description": "Shop space",
+          "isAvailable": true
+        },
+        {
+          "number": "410",
+          "type": "shop",
+          "area": 168,
+          "description": "Shop space",
+          "isAvailable": true
+        },
+        {
+          "number": "411",
+          "type": "shop",
+          "area": 163,
+          "description": "Shop space",
+          "isAvailable": true
+        },
+        {
+          "number": "412",
+          "type": "shop",
+          "area": 484,
+          "description": "Medium shop space",
+          "isAvailable": true
+        },
+        {
+          "number": "413",
+          "type": "shop",
+          "area": 165,
+          "description": "Corner shop space",
+          "isAvailable": true
         }
       ]
     },
     {
       "number": 7,
-      "name": "7th Floor",
-      "category": "standard_commercial",
-      "totalArea": 2800,
-      "ceilingHeight": "11'-0\"",
+      "name": "Seventh Floor",
+      "category": "commercial",
+      "totalArea": 4823,
+      "ceilingHeight": "10 feet",
+      "description": "Large open commercial area suitable for various business activities, identical layout shared with 8th floor",
       "hasLayoutPlan": true,
-      "floorSharedWith": null,
+      "floorSharedWith": [8],
       "units": [
         {
           "number": "701",
-          "type": "showroom",
-          "area": 1500
-        },
-        {
-          "number": "702",
-          "type": "office",
-          "area": 650
-        },
-        {
-          "number": "703",
-          "type": "office",
-          "area": 650
+          "type": "commercial_space",
+          "area": 4823,
+          "description": "Open plan commercial space ideal for offices, training centers, or large retail operations",
+          "isAvailable": true
         }
       ]
     },
     {
       "number": 9,
-      "name": "9th Floor",
-      "category": "office_space",
-      "totalArea": 3273,
-      "ceilingHeight": "11'-0\"",
+      "name": "Ninth Floor",
+      "category": "office",
+      "totalArea": 3459,
+      "ceilingHeight": "10 feet",
+      "description": "Professional office spaces with identical layout shared with floors 10-14",
       "hasLayoutPlan": true,
       "floorSharedWith": [10, 11, 12, 13, 14],
       "units": [
         {
-          "number": "A",
+          "number": "9A",
           "type": "office",
-          "area": 1097
+          "area": 1097,
+          "description": "Large corner office with excellent views",
+          "isAvailable": true
         },
         {
-          "number": "B",
+          "number": "9B",
           "type": "office",
-          "area": 562
+          "area": 562,
+          "description": "Medium-sized office space",
+          "isAvailable": true
         },
         {
-          "number": "C",
+          "number": "9C",
           "type": "office",
-          "area": 443
+          "area": 443,
+          "description": "Compact office space",
+          "isAvailable": true
         },
         {
-          "number": "D",
+          "number": "9D",
           "type": "office",
-          "area": 579
+          "area": 579,
+          "description": "Medium-sized office space",
+          "isAvailable": true
         },
         {
-          "number": "E",
+          "number": "9E",
           "type": "office",
-          "area": 574
+          "area": 574,
+          "description": "Medium-sized office space",
+          "isAvailable": true
         },
         {
-          "number": "F",
+          "number": "9F",
           "type": "office",
-          "area": 760
+          "area": 760,
+          "description": "Large office space",
+          "isAvailable": true
         }
       ]
     }
   ],
   "features": [
     {
-      "name": "Prime Business Location",
-      "icon": "map-pin",
-      "category": "convenience"
-    },
-    {
-      "name": "Modern Commercial Architecture",
-      "icon": "building",
-      "category": "convenience"
-    },
-    {
-      "name": "Central Air Conditioning",
-      "icon": "wind",
-      "category": "utilities"
-    },
-    {
-      "name": "Four Passenger Lifts",
-      "icon": "arrow-up",
-      "category": "convenience"
-    },
-    {
-      "name": "24/7 Security & CCTV",
-      "icon": "shield",
+      "name": "24/7 CCTV Security System",
+      "icon": "security-camera",
       "category": "security"
     },
     {
-      "name": "Fire Fighting Equipment",
-      "icon": "shield-check",
-      "category": "security"
+      "name": "Four Passenger Lifts (8 Person/600kg Capacity)",
+      "icon": "elevator",
+      "category": "convenience"
     },
     {
-      "name": "Emergency Power Backup",
-      "icon": "zap",
+      "name": "Emergency Power Generator",
+      "icon": "battery",
       "category": "utilities"
     },
     {
-      "name": "Wi-Fi System",
+      "name": "Central Air Conditioning (1st-6th Floor)",
+      "icon": "air-conditioner",
+      "category": "convenience"
+    },
+    {
+      "name": "Fire Fighting System",
+      "icon": "fire-extinguisher",
+      "category": "security"
+    },
+    {
+      "name": "Wi-Fi Internet System",
       "icon": "wifi",
       "category": "technology"
     },
     {
       "name": "WASA Water Connection",
-      "icon": "droplet",
+      "icon": "water-drop",
       "category": "utilities"
     },
     {
-      "name": "Individual Power Meters",
-      "icon": "gauge",
+      "name": "BPDB Power Connection",
+      "icon": "plug",
+      "category": "utilities"
+    },
+    {
+      "name": "Individual Electricity Meters (2kw per shop)",
+      "icon": "meter",
+      "category": "utilities"
+    },
+    {
+      "name": "Backup Power for Lights & Fans (1kw)",
+      "icon": "generator",
       "category": "utilities"
     }
   ],
   "amenities": [
     {
-      "name": "2-Level Basement Parking",
+      "name": "24 Dedicated Parking Spaces",
       "icon": "car",
       "category": "parking"
     },
     {
-      "name": "Electric Sub-Station",
-      "icon": "cpu",
-      "category": "utilities"
-    },
-    {
-      "name": "Generator Room",
-      "icon": "zap",
-      "category": "utilities"
+      "name": "Two-Level Basement Parking",
+      "icon": "parking-garage",
+      "category": "parking"
     },
     {
       "name": "Drivers Seating Area",
-      "icon": "users",
+      "icon": "seat",
       "category": "services"
     },
     {
       "name": "Common Washrooms",
-      "icon": "users",
+      "icon": "restroom",
       "category": "services"
     },
     {
-      "name": "AC Outdoor Equipment Area",
-      "icon": "wind",
-      "category": "utilities"
+      "name": "Two Emergency Staircases",
+      "icon": "stairs",
+      "category": "accessibility"
     },
     {
-      "name": "Shopping Entry Plaza",
-      "icon": "shopping-bag",
+      "name": "Landscaped Ground Floor Entrance",
+      "icon": "tree",
       "category": "outdoor"
     },
     {
-      "name": "Multiple Floor Commercial Space",
-      "icon": "building-2",
-      "category": "services"
-    },
-    {
-      "name": "Individual Shop Rolling Shutters",
+      "name": "Rolling Shutters for Shops",
       "icon": "shield",
       "category": "security"
+    }
+  ],
+  "youtubeVideos": [],
+  "photos": [],
+  "bulkPhotoUploads": [],
+  "residentialUnits": [],
+  "documents": [
+    {
+      "name": "equity MIR Trade Center Brochure",
+      "description": "Complete commercial project information and specifications",
+      "cloudinaryUrl": "https://res.cloudinary.com/self-projects/raw/upload/v1/documents/equity-mir-trade-center-brochure.pdf",
+      "category": "Brochure",
+      "displayOrder": 1,
+      "isPublic": true,
+      "fileSize": "3.1 MB",
+      "mimeType": "application/pdf"
     },
     {
-      "name": "Landscaped Entry",
-      "icon": "trees",
-      "category": "outdoor"
+      "name": "Floor Plans - All Levels",
+      "description": "Detailed architectural floor plans for basement, retail, commercial and office floors",
+      "cloudinaryUrl": "https://res.cloudinary.com/self-projects/raw/upload/v1/documents/equity-mir-trade-center-floor-plans.pdf",
+      "category": "Floor Plans",
+      "displayOrder": 2,
+      "isPublic": true,
+      "fileSize": "4.8 MB",
+      "mimeType": "application/pdf"
+    },
+    {
+      "name": "Commercial Space Specifications",
+      "description": "Detailed specifications for fixtures, fittings, and finishes",
+      "cloudinaryUrl": "https://res.cloudinary.com/self-projects/raw/upload/v1/documents/equity-mir-trade-center-specifications.pdf",
+      "category": "Specifications",
+      "displayOrder": 3,
+      "isPublic": true,
+      "fileSize": "2.2 MB",
+      "mimeType": "application/pdf"
     }
   ]
 }

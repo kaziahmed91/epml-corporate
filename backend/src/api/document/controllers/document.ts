@@ -8,8 +8,31 @@ export default factories.createCoreController('api::document.document', ({ strap
   async create(ctx) {
     const { data, files } = ctx.request.body;
     
+    // Support both traditional Strapi file upload and R2 data from Next.js frontend
+    if (data.r2Key && data.r2Url) {
+      // Document was uploaded via Next.js frontend to R2
+      try {
+        const entity = await strapi.entityService.create('api::document.document', {
+          data: {
+            ...data,
+            uploadedAt: new Date(),
+            publishedAt: new Date(),
+          },
+          populate: ['project'],
+        });
+
+        strapi.log.info(`Document created from R2 upload: ${entity.id}`);
+        return this.transformResponse(entity);
+        
+      } catch (error) {
+        strapi.log.error('Document creation from R2 data error:', error);
+        return ctx.internalServerError(`Failed to create document: ${error.message}`);
+      }
+    }
+    
+    // Traditional Strapi file upload (fallback for admin panel)
     if (!files || !files.file) {
-      return ctx.badRequest('No file provided');
+      return ctx.badRequest('No file provided or R2 data missing');
     }
 
     const fileData = files.file;
@@ -23,6 +46,10 @@ export default factories.createCoreController('api::document.document', ({ strap
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
       'application/vnd.ms-powerpoint',
       'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+      'text/plain',
+      'application/zip',
+      'application/acad', // .dwg files
+      'application/dxf', // .dxf files
       'image/jpeg',
       'image/png',
       'image/gif',
@@ -30,53 +57,33 @@ export default factories.createCoreController('api::document.document', ({ strap
     ];
 
     if (!allowedMimeTypes.includes(fileData.type)) {
-      return ctx.badRequest('File type not allowed. Please upload PDF, Word, Excel, PowerPoint, or image files.');
+      return ctx.badRequest('File type not allowed. Please upload PDF, Word, Excel, PowerPoint, text, zip, CAD, or image files.');
     }
 
-    // Validate file size (max 50MB)
-    const maxSize = 50 * 1024 * 1024; // 50MB in bytes
+    // Validate file size (max 100MB)
+    const maxSize = 100 * 1024 * 1024; // 100MB in bytes
     if (fileData.size > maxSize) {
-      return ctx.badRequest('File size too large. Maximum size is 50MB.');
+      return ctx.badRequest('File size too large. Maximum size is 100MB.');
     }
 
     try {
-      // Get project info for folder organization
-      let projectInfo = null;
-      if (data.project) {
-        projectInfo = await strapi.entityService.findOne('api::project.project', data.project, {
-          fields: ['id', 'name', 'slug'],
-        });
-      }
-
-      // Create a project-specific filename prefix
-      const projectPrefix = projectInfo 
-        ? `${(projectInfo.slug || projectInfo.name || projectInfo.id).toString().trim().replace(/\s+/g, '-')}_`
-        : '';
-      
-      // Modify the file name to include project info
-      const originalName = fileData.name;
-      const fileExtension = originalName.substring(originalName.lastIndexOf('.'));
-      const baseName = originalName.substring(0, originalName.lastIndexOf('.'));
-      fileData.name = `${projectPrefix}${baseName}${fileExtension}`;
-
-      // Create the document entry
+      // Create the document entry in database with standard Strapi file upload
       const entity = await strapi.entityService.create('api::document.document', {
         data: {
           ...data,
-          fileSize: fileData.size,
-          mimeType: fileData.type,
-          uploadedAt: new Date(),
-        },
-        files: {
           file: fileData,
+          uploadedAt: new Date(),
+          publishedAt: new Date(),
         },
         populate: ['file', 'project'],
       });
 
+      strapi.log.info(`Document created with Cloudinary upload: ${entity.id}`);
       return this.transformResponse(entity);
+      
     } catch (error) {
-      console.error('Document upload error:', error);
-      return ctx.internalServerError('Failed to upload document');
+      strapi.log.error('Document upload error:', error);
+      return ctx.internalServerError(`Failed to upload document: ${error.message}`);
     }
   },
 
@@ -109,51 +116,71 @@ export default factories.createCoreController('api::document.document', ({ strap
 
   async update(ctx) {
     const { id } = ctx.params;
-    const { data, files } = ctx.request.body;
-
-    const updateData: any = { ...data };
-
-    // If a new file is provided, validate it
-    if (files && files.file) {
-      const fileData = files.file;
-      
-      const allowedMimeTypes = [
-        'application/pdf',
-        'application/msword',
-        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-        'application/vnd.ms-excel',
-        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-        'application/vnd.ms-powerpoint',
-        'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-        'image/jpeg',
-        'image/png',
-        'image/gif',
-        'image/webp'
-      ];
-
-      if (!allowedMimeTypes.includes(fileData.type)) {
-        return ctx.badRequest('File type not allowed. Please upload PDF, Word, Excel, PowerPoint, or image files.');
-      }
-
-      const maxSize = 50 * 1024 * 1024; // 50MB in bytes
-      if (fileData.size > maxSize) {
-        return ctx.badRequest('File size too large. Maximum size is 50MB.');
-      }
-
-      updateData.fileSize = fileData.size;
-      updateData.mimeType = fileData.type;
-    }
+    const { data } = ctx.request.body;
 
     try {
       const entity = await strapi.entityService.update('api::document.document', id, {
-        data: updateData,
-        files: files ? { file: files.file } : undefined,
+        data: data,
         populate: ['file', 'project'],
       });
 
       return this.transformResponse(entity);
     } catch (error) {
-      return ctx.internalServerError('Failed to update document');
+      strapi.log.error('Document update error:', error);
+      return ctx.internalServerError(`Failed to update document: ${error.message}`);
     }
   },
+
+  async delete(ctx) {
+    const { id } = ctx.params;
+
+    try {
+      const entity = await strapi.entityService.delete('api::document.document', id, {
+        populate: ['file', 'project'],
+      });
+
+      return this.transformResponse(entity);
+    } catch (error) {
+      strapi.log.error('Document delete error:', error);
+      return ctx.internalServerError(`Failed to delete document: ${error.message}`);
+    }
+  },
+
+  async findByProject(ctx) {
+    const { projectId } = ctx.params;
+    const { query } = ctx;
+    
+    if (!projectId) {
+      return ctx.badRequest('Project ID is required');
+    }
+
+    try {
+      // Validate that project exists
+      const project = await strapi.entityService.findOne('api::project.project', projectId, {
+        fields: ['id', 'name', 'slug'],
+      });
+
+      if (!project) {
+        return ctx.notFound('Project not found');
+      }
+
+      const queryFilters = (query.filters && typeof query.filters === 'object') ? query.filters : {};
+      
+      const documents = await strapi.entityService.findMany('api::document.document', {
+        ...query,
+        filters: {
+          ...queryFilters,
+          project: projectId,
+        },
+        populate: ['file', 'project'],
+        sort: { displayOrder: 'asc', createdAt: 'desc' },
+      });
+
+      return this.transformResponse(documents);
+    } catch (error) {
+      strapi.log.error('Find documents by project error:', error);
+      return ctx.internalServerError(`Failed to find documents: ${error.message}`);
+    }
+  },
+
 }));

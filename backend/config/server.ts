@@ -7,4 +7,14 @@ export default ({ env }: { env: any }) => ({
   webhooks: {
     populateRelations: env.bool('WEBHOOKS_POPULATE_RELATIONS', false),
   },
+  url: env('PUBLIC_URL', ''),
+  proxy: env.bool('IS_PROXIED', false),
+  cron: {
+    enabled: env.bool('CRON_ENABLED', false),
+  },
+  transfer: {
+    remote: {
+      enabled: true,
+    },
+  },
 });

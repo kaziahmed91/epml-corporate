@@ -28,9 +28,11 @@ export async function getProjectBySlug(
 }
 
 const equityAnirban =
-  require("./seeders/data/projects/anirban.json") as ProjectData;
+  require("./seeders/data/projects/anirban_v2.json") as ProjectData;
 const azeezNeer =
-  require("./seeders/data/projects/azeez-neer.json") as ProjectData;
+  require("./seeders/data/projects/aziz-neer_v2.json") as ProjectData;
+const mirTradeCenter =
+  require("./seeders/data/projects/mir-trade-center_v2.json") as ProjectData;
 // Add more projects as needed
 // const equityMidcity = require('./equity-midcity.json') as ProjectData;
 // const futureProject = require('./future-project.json') as ProjectData;
@@ -39,15 +41,17 @@ const projects: Record<string, ProjectData[]> = {
   development: [
     equityAnirban,
     azeezNeer,
+    mirTradeCenter,
     // equityMidcity,
     // futureProject
   ],
   staging: [
     equityAnirban,
     azeezNeer,
+    mirTradeCenter,
     // equityMidcity
   ],
-  production: [equityAnirban, azeezNeer],
+  production: [equityAnirban, azeezNeer, mirTradeCenter],
 };
 
 export const getProjectsForEnvironment = (

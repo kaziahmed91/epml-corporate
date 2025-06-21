@@ -25,20 +25,7 @@
       "inversedBy": "locations"
     },
     "Name": {
-      "type": "enumeration",
-      "enum": [
-        "Khulshi",
-        "Nasirabad",
-        "Mehedibagh",
-        "Amirabag",
-        "Agrabad Commercial",
-        "Agrabad Residential",
-        "Devpahar",
-        "Sirajuddaula Road",
-        "Halishahar",
-        "Panchlaish",
-        "GEC"
-      ]
+      "type": "string"
     }
   }
 }

@@ -28,7 +28,9 @@
         "clinic",
         "salon",
         "pharmacy",
-        "restaurant"
+        "restaurant",
+        "parking",
+        "commercial_space"
       ]
     },
     "area": {

@@ -26,11 +26,15 @@
         "kids",
         "womens_fashion",
         "mens_fashion",
-        "foodcourt, ",
-        "standard_office, ",
-        "premium_office, ",
-        "showroom,",
-        "electronics"
+        "foodcourt",
+        "standard_office",
+        "premium_office",
+        "showroom",
+        "electronics",
+        "parking",
+        "retail",
+        "commercial",
+        "office"
       ]
     },
     "totalArea": {

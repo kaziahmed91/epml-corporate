@@ -1,36 +1,57 @@
 {
   "name": "Equity Anirban",
-  "slug": "equity-anirban",
   "address": "Agrabad CDA, Road 1 & 2, Chattogram",
   "constructionStart": null,
   "constructionEnd": null,
-  "floors": "15 stories, 1 semi-basement & 1 basement",
-  "description": "Discover the essence of a refined form of living at Equity Anirban. This exceptional residence, crafted with precision and brilliance by Architect U Tun Yine, reshapes urban living in Agrabad, Chattogram. Picture yourself surrounded by thoughtfully designed spaces while indulging in premium amenities, all in a corner plot location that offers unparalleled convenience. Equity Anirban is more than an address; it's an invitation to experience the very best.",
+  "floors": "15 stories + 1 semi-basement + 1 basement",
+  "description": "Discover the essence of a refined form of living at Equity Anirban. This exceptional residence, crafted with precision and brilliance by Architect U Tun Yine, reshapes urban living in Agrabad, Chattogram. Picture yourself surrounded by thoughtfully designed spaces while indulging in premium amenities, all in a corner plot location that offers unparalleled convenience.",
   "landSize": "19.51 katha",
   "landFacing": "Corner Plot",
-  "roadWidth": 23.0,
-  "parking_floors": 3,
+  "roadWidth": null,
+  "parking_floors": 2,
   "parking_spaces": 65,
+  "slug": "equity-anirban",
+  "project_type": "Residential",
+  "location": "Agrabad Residential ",
+  "project_status": "Ongoing",
+  "coordinates": {
+    "address": "Agrabad CDA, Road 1 & 2, Chattogram, Bangladesh",
+    "latitude": 22.3373,
+    "longitude": 91.8325,
+    "googleMapLink": "https://maps.google.com/?q=22.3373,91.8325",
+    "area": "Agrabad CDA",
+    "nearest_landmark": "Near Akhtaruzzaman Center, CDA Central Jame Masjid",
+    "zipCode": "4100",
+    "accessibility": [
+      { "text": "15 minutes from International Airport" },
+      { "text": "20 minutes from Patenga Sea Beach" },
+      { "text": "10 minutes from Cricket Stadium" },
+      { "text": "8 minutes from Ethnological Museum" },
+      { "text": "5 minutes from Jamboree Park" },
+      { "text": "3 minutes from Maa O Shishu Hospital Chittagong" },
+      { "text": "2 minutes from Hotel Agrabad" }
+    ]
+  },
   "youtubeVideos": [],
   "photos": [],
   "bulkPhotoUploads": [],
-  "Unit": [
+  "residentialUnits": [
     {
       "name": "Type A",
       "unitCategory": "residential",
       "type": "3bed",
       "dimensions": {
         "totalArea": 1777,
-        "carpetArea": null,
-        "balconyArea": null,
+        "carpetArea": 1550,
+        "balconyArea": 227,
         "length": null,
         "width": null,
-        "height": null
+        "height": 10
       },
-      "residentialSpecs": {
+      "specifications": {
         "bedrooms": 3,
         "bathrooms": 3,
-        "livingRooms": 1,
+        "livingRooms": 2,
         "diningRooms": 1,
         "kitchens": 1,
         "balconies": 3,
@@ -38,19 +59,22 @@
         "servantRooms": 0,
         "storeRooms": 0,
         "parkingSpaces": 1,
-        "additionalFeatures": {
-          "master_bedroom": "11'-8\" x 15'-0\"",
-          "child_bedroom": "13'-0\" x 11'-0\"",
-          "guest_bedroom": "10'-0\" x 10'-0\"",
-          "family_living": "6'-6\" x 16'-0\"",
-          "living": "16'-0\" x 10'-0\"",
-          "dining": "11'-0\" x 17'-5\"",
-          "kitchen": "10'-5\" x 7'-0\""
-        }
+        "additionalFeatures": [
+          { "text": "Master Bedroom: 11'-8\" x 15'-0\" with attached balcony" },
+          { "text": "Child Bedroom: 13'-0\" x 11'-0\" well-sized second bedroom" },
+          { "text": "Guest Bedroom: 10'-0\" x 10'-0\" comfortable guest room" },
+          { "text": "Family Living: 6'-6\" x 16'-0\" additional family space" },
+          { "text": "Living Room: 16'-0\" x 10'-0\" main living area" },
+          { "text": "Dining Room: 11'-0\" x 17'-5\" spacious dining area" },
+          { "text": "Kitchen: 10'-5\" x 7'-0\" modern kitchen design" },
+          { "text": "Balcony Facing: multiple directions with corner plot advantage" }
+        ]
       },
-      "facing": ["East"],
-      "hasLayoutPlan": true,
-      "description": "Spacious 3-bedroom apartment with family living area"
+      "facing": "East",
+      "floors": [3, 5, 7, 9, 11, 13],
+      "features": [{ "text": "corner_unit" }, { "text": "cross_ventilation" }, { "text": "multiple_balconies" }],
+      "description": "Spacious 3-bedroom unit with excellent ventilation and corner positioning offering unparalleled convenience",
+      "hasLayoutPlan": true
     },
     {
       "name": "Type B",
@@ -58,36 +82,38 @@
       "type": "3bed",
       "dimensions": {
         "totalArea": 2191,
-        "carpetArea": null,
-        "balconyArea": null,
+        "carpetArea": 1950,
+        "balconyArea": 241,
         "length": null,
         "width": null,
-        "height": null
+        "height": 10
       },
-      "residentialSpecs": {
+      "specifications": {
         "bedrooms": 3,
         "bathrooms": 3,
-        "livingRooms": 1,
+        "livingRooms": 2,
         "diningRooms": 1,
         "kitchens": 1,
-        "balconies": 3,
+        "balconies": 2,
         "studyRooms": 0,
         "servantRooms": 0,
         "storeRooms": 0,
         "parkingSpaces": 1,
-        "additionalFeatures": {
-          "master_bedroom": "12'-0\" x 16'-0\"",
-          "child_bedroom": "12'-0\" x 12'-0\"",
-          "guest_bedroom": "10'-0\" x 15'-0\"",
-          "family_living": "17'-5\" x 9'-4\"",
-          "living": "14'-0\" x 12'-1\"",
-          "dining": "21'-1\" x 12'-1\"",
-          "kitchen": "7'-0\" x 4'-0\""
-        }
+        "additionalFeatures": [
+          { "text": "Master Bedroom: 12'-0\" x 16'-0\" large master bedroom" },
+          { "text": "Child Bedroom: 12'-0\" x 12'-0\" square shaped bedroom" },
+          { "text": "Guest Bedroom: 10'-0\" x 15'-0\" spacious guest accommodation" },
+          { "text": "Family Living: 17'-5\" x 9'-4\" extended family area" },
+          { "text": "Living Room: 14'-0\" x 12'-1\" main living space" },
+          { "text": "Dining Room: 21'-1\" x 12'-1\" large dining area perfect for entertaining" },
+          { "text": "Kitchen: 7'-0\" x 4'-0\" compact efficient kitchen" }
+        ]
       },
-      "facing": ["North"],
-      "hasLayoutPlan": true,
-      "description": "Largest 3-bedroom apartment with spacious dining area"
+      "facing": "North",
+      "floors": [4, 6, 8, 10, 12, 14],
+      "features": [{ "text": "largest_unit" }, { "text": "premium_layout" }, { "text": "extended_dining" }],
+      "description": "Premium 3-bedroom unit with the largest floor area and exceptional layout for modern family living",
+      "hasLayoutPlan": true
     },
     {
       "name": "Type C",
@@ -95,13 +121,91 @@
       "type": "3bed",
       "dimensions": {
         "totalArea": 1817,
-        "carpetArea": null,
-        "balconyArea": null,
+        "carpetArea": 1600,
+        "balconyArea": 217,
         "length": null,
         "width": null,
-        "height": null
+        "height": 10
       },
-      "residentialSpecs": {
+      "specifications": {
+        "bedrooms": 3,
+        "bathrooms": 3,
+        "livingRooms": 2,
+        "diningRooms": 1,
+        "kitchens": 1,
+        "balconies": 3,
+        "studyRooms": 0,
+        "servantRooms": 0,
+        "storeRooms": 0,
+        "parkingSpaces": 1,
+        "additionalFeatures": [
+          { "text": "Master Bedroom: 14'-5\" x 11'-0\" well-proportioned master room" },
+          { "text": "Child Bedroom: 14'-5\" x 11'-0\" matching size bedroom" },
+          { "text": "Guest Bedroom: 13'-0\" x 10'-7\" comfortable guest space" },
+          { "text": "Family Living: 15'-2\" x 7'-0\" family gathering area" },
+          { "text": "Living Room: 13'-0\" x 18'-7\" spacious main living area" },
+          { "text": "Dining Room: 13'-0\" x 13'-0\" square dining space" },
+          { "text": "Kitchen: 8'-1\" x 9'-5\" well-designed kitchen" }
+        ]
+      },
+      "facing": "South",
+      "floors": [3, 4, 5, 7, 9],
+      "features": [{ "text": "balanced_layout" }, { "text": "optimal_room_sizes" }, { "text": "multiple_balconies" }],
+      "description": "Well-designed 3-bedroom unit with balanced proportions and good natural lighting throughout",
+      "hasLayoutPlan": true
+    },
+    {
+      "name": "Type D",
+      "unitCategory": "residential",
+      "type": "3bed",
+      "dimensions": {
+        "totalArea": 1884,
+        "carpetArea": 1670,
+        "balconyArea": 214,
+        "length": null,
+        "width": null,
+        "height": 10
+      },
+      "specifications": {
+        "bedrooms": 3,
+        "bathrooms": 3,
+        "livingRooms": 2,
+        "diningRooms": 1,
+        "kitchens": 1,
+        "balconies": 3,
+        "studyRooms": 0,
+        "servantRooms": 0,
+        "storeRooms": 0,
+        "parkingSpaces": 1,
+        "additionalFeatures": [
+          { "text": "Master Bedroom: 11'-0\" x 15'-0\" rectangular master bedroom" },
+          { "text": "Child Bedroom: 12'-0\" x 11'-7\" good-sized second bedroom" },
+          { "text": "Guest Bedroom: 10'-0\" x 12'-0\" rectangular guest room" },
+          { "text": "Family Living: 15'-2\" x 7'-0\" extended family space" },
+          { "text": "Living Room: 13'-8\" x 13'-4\" nearly square living area" },
+          { "text": "Dining Room: 17'-5\" x 12'-0\" large dining space" },
+          { "text": "Kitchen: 7'-0\" x 4'-0\" efficient kitchen layout" }
+        ]
+      },
+      "facing": "East",
+      "floors": [6, 8, 10, 13, 15],
+      "features": [{ "text": "premium_positioning" }, { "text": "good_views" }, { "text": "separate_family_area" }],
+      "description": "Elegant 3-bedroom unit with efficient layout and premium floor positioning for optimal views",
+      "hasLayoutPlan": true
+    },
+    {
+      "name": "Type E",
+      "unitCategory": "residential",
+      "type": "3bed",
+      "dimensions": {
+        "totalArea": 1530,
+        "carpetArea": 1350,
+        "balconyArea": 180,
+        "length": null,
+        "width": null,
+        "height": 10
+      },
+      "specifications": {
         "bedrooms": 3,
         "bathrooms": 3,
         "livingRooms": 1,
@@ -112,173 +216,99 @@
         "servantRooms": 0,
         "storeRooms": 0,
         "parkingSpaces": 1,
-        "additionalFeatures": {
-          "master_bedroom": "14'-5\" x 11'-0\"",
-          "child_bedroom": "14'-5\" x 11'-0\"",
-          "guest_bedroom": "13'-0\" x 10'-7\"",
-          "family_living": "15'-2\" x 7'-0\"",
-          "living": "13'-0\" x 18'-7\"",
-          "dining": "13'-0\" x 13'-0\"",
-          "kitchen": "8'-1\" x 9'-5\""
-        }
+        "additionalFeatures": [
+          { "text": "Master Bedroom: 12'-8\" x 11'-1\" comfortable master suite" },
+          { "text": "Child Bedroom: 10'-0\" x 12'-0\" well-sized children's room" },
+          { "text": "Guest Bedroom: 10'-0\" x 10'-0\" square guest bedroom" },
+          { "text": "Living Room: 16'-0\" x 10'-8\" spacious main living area" },
+          { "text": "Dining Room: 11'-4\" x 14'-6\" rectangular dining space" },
+          { "text": "Kitchen: 9'-10\" x 6'-6\" practical kitchen design" }
+        ]
       },
-      "facing": ["East"],
-      "hasLayoutPlan": true,
-      "description": "Well-designed 3-bedroom apartment with spacious living room"
-    },
-    {
-      "name": "Type D",
-      "unitCategory": "residential",
-      "type": "3bed",
-      "dimensions": {
-        "totalArea": 1884,
-        "carpetArea": null,
-        "balconyArea": null,
-        "length": null,
-        "width": null,
-        "height": null
-      },
-      "residentialSpecs": {
-        "bedrooms": 3,
-        "bathrooms": 3,
-        "livingRooms": 1,
-        "diningRooms": 1,
-        "kitchens": 1,
-        "balconies": 3,
-        "studyRooms": 0,
-        "servantRooms": 0,
-        "storeRooms": 1,
-        "parkingSpaces": 1,
-        "additionalFeatures": {
-          "master_bedroom": "11'-0\" x 15'-0\"",
-          "child_bedroom": "12'-0\" x 11'-7\"",
-          "guest_bedroom": "10'-0\" x 12'-0\"",
-          "family_living": "15'-2\" x 7'-0\"",
-          "living": "13'-8\" x 13'-4\"",
-          "dining": "17'-5\" x 12'-0\"",
-          "kitchen": "7'-0\" x 4'-0\"",
-          "dressing_room": "4'-0\" x 4'-0\""
-        }
-      },
-      "facing": ["North-East"],
-      "hasLayoutPlan": true,
-      "description": "Premium 3-bedroom apartment with dressing room"
-    },
-    {
-      "name": "Type E",
-      "unitCategory": "residential",
-      "type": "3bed",
-      "dimensions": {
-        "totalArea": 1530,
-        "carpetArea": null,
-        "balconyArea": null,
-        "length": null,
-        "width": null,
-        "height": null
-      },
-      "residentialSpecs": {
-        "bedrooms": 3,
-        "bathrooms": 3,
-        "livingRooms": 1,
-        "diningRooms": 1,
-        "kitchens": 1,
-        "balconies": 3,
-        "studyRooms": 0,
-        "servantRooms": 0,
-        "storeRooms": 0,
-        "parkingSpaces": 1,
-        "additionalFeatures": {
-          "master_bedroom": "12'-8\" x 11'-1\"",
-          "child_bedroom": "10'-0\" x 12'-0\"",
-          "guest_bedroom": "10'-0\" x 10'-0\"",
-          "living": "16'-0\" x 10'-8\"",
-          "dining": "11'-4\" x 14'-6\"",
-          "kitchen": "9'-10\" x 6'-6\"",
-          "utility": "4' wide"
-        }
-      },
-      "facing": ["South-West"],
-      "hasLayoutPlan": true,
-      "description": "Compact 3-bedroom apartment with utility area"
+      "facing": "South",
+      "floors": [3, 4, 5, 6, 11, 12, 14],
+      "features": [{ "text": "compact_efficient" }, { "text": "affordable_option" }, { "text": "optimal_space_utilization" }],
+      "description": "Compact 3-bedroom unit designed for efficiency and affordability, perfect for small families",
+      "hasLayoutPlan": true
     }
   ],
   "commercialFloors": [],
   "features": [
     {
       "name": "Exclusive Corner Plot",
-      "icon": "location",
+      "icon": "map-pin",
       "category": "convenience"
     },
     {
       "name": "Vertical Manicured Gardens",
-      "icon": "leaf",
+      "icon": "tree-pine",
       "category": "convenience"
     },
     {
-      "name": "CCTV Camera with 15 days recording",
-      "icon": "shield",
-      "category": "security"
+      "name": "15 Stories Building Structure",
+      "icon": "building",
+      "category": "convenience"
     },
     {
-      "name": "Fire Safety System",
-      "icon": "shield-check",
-      "category": "security"
+      "name": "65 Parking Spaces",
+      "icon": "car",
+      "category": "convenience"
     },
     {
-      "name": "Emergency Power Backup",
+      "name": "Emergency Power Supply (Generator)",
       "icon": "zap",
       "category": "utilities"
     },
     {
-      "name": "Intercom System",
-      "icon": "phone",
-      "category": "technology"
+      "name": "Fire Safety System",
+      "icon": "shield",
+      "category": "security"
     },
     {
-      "name": "Passenger & Bed Lifts",
+      "name": "CCTV Surveillance (15-day recording)",
+      "icon": "camera",
+      "category": "security"
+    },
+    {
+      "name": "Intercom System with Land Phone",
+      "icon": "phone",
+      "category": "utilities"
+    },
+    {
+      "name": "Two Lifts (Passenger 630kg & Bed 750kg)",
       "icon": "arrow-up",
+      "category": "utilities"
+    },
+    {
+      "name": "Earthquake Resistant Structure",
+      "icon": "shield-check",
+      "category": "security"
+    },
+    {
+      "name": "Premium Finishing Materials",
+      "icon": "award",
       "category": "convenience"
     },
     {
-      "name": "WASA Water Connection",
-      "icon": "droplet",
+      "name": "WASA Connection with Deep Tube Well Backup",
+      "icon": "droplets",
       "category": "utilities"
-    },
-    {
-      "name": "Deep Tube Well Backup",
-      "icon": "droplet",
-      "category": "utilities"
-    },
-    {
-      "name": "Broadband & Wi-Fi Ready",
-      "icon": "wifi",
-      "category": "technology"
     }
   ],
   "amenities": [
     {
-      "name": "Barbecue Terrace",
+      "name": "Rooftop Barbecue Terrace",
       "icon": "grill",
-      "category": "outdoor"
-    },
-    {
-      "name": "Rooftop Recreation Room",
-      "icon": "home",
       "category": "recreation"
     },
     {
-      "name": "Indoor Gaming Lounge",
+      "name": "Entertainment & Gaming Lounge",
       "icon": "gamepad-2",
       "category": "recreation"
     },
     {
-      "name": "Table Tennis",
-      "icon": "table-tennis",
-      "category": "recreation"
-    },
-    {
-      "name": "Foosball Table",
-      "icon": "users",
+      "name": "Recreation Room",
+      "icon": "tv",
       "category": "recreation"
     },
     {
@@ -287,8 +317,8 @@
       "category": "services"
     },
     {
-      "name": "Ground Level Greenery",
-      "icon": "trees",
+      "name": "Ground Level Landscaped Gardens",
+      "icon": "flower",
       "category": "outdoor"
     },
     {
@@ -297,19 +327,57 @@
       "category": "outdoor"
     },
     {
-      "name": "65 Parking Spaces",
-      "icon": "car",
-      "category": "parking"
+      "name": "Community Spaces",
+      "icon": "users",
+      "category": "community"
     },
     {
       "name": "Management Office",
-      "icon": "building",
+      "icon": "briefcase",
       "category": "services"
     },
     {
-      "name": "Security Room",
+      "name": "Security Room with 24/7 Monitoring",
       "icon": "shield",
-      "category": "services"
+      "category": "security"
+    },
+    {
+      "name": "Mechanical & Utility Rooms",
+      "icon": "settings",
+      "category": "utilities"
+    }
+  ],
+  "constructionUpdates": [],
+  "documents": [
+    {
+      "name": "Equity Anirban Complete Brochure",
+      "description": "Complete project brochure with all floor plans, specifications, and material details",
+      "cloudinaryUrl": "https://res.cloudinary.com/self-projects/raw/upload/v1/documents/equity-anirban-brochure.pdf",
+      "category": "Brochure",
+      "displayOrder": 1,
+      "isPublic": true,
+      "fileSize": "2.5 MB",
+      "mimeType": "application/pdf"
+    },
+    {
+      "name": "Material Specifications Document", 
+      "description": "Detailed material and finishing specifications including porcelain tiles, ceramic fixtures, and premium fittings",
+      "cloudinaryUrl": "https://res.cloudinary.com/self-projects/raw/upload/v1/documents/equity-anirban-specifications.pdf",
+      "category": "Specifications",
+      "displayOrder": 2,
+      "isPublic": true,
+      "fileSize": "1.8 MB",
+      "mimeType": "application/pdf"
+    },
+    {
+      "name": "Typical Floor Plans (All Unit Types)",
+      "description": "Complete floor plans for all five unit types A, B, C, D, and E",
+      "cloudinaryUrl": "https://res.cloudinary.com/self-projects/raw/upload/v1/documents/equity-anirban-floor-plans.pdf",
+      "category": "Floor Plans",
+      "displayOrder": 3,
+      "isPublic": true,
+      "fileSize": "3.2 MB",
+      "mimeType": "application/pdf"
     }
   ]
 }

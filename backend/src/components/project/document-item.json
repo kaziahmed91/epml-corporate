@@ -3,40 +3,49 @@
   "info": {
     "displayName": "Document Item",
     "icon": "file-text",
-    "description": "Individual project documents with display names"
+    "description": "Project document with Cloudinary storage support"
   },
   "options": {},
   "attributes": {
-    "displayName": {
+    "name": {
       "type": "string",
       "required": true
-    },
-    "document": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "files",
-        "images"
-      ]
     },
     "description": {
       "type": "text"
     },
+    "file": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "files"
+      ]
+    },
     "category": {
       "type": "enumeration",
       "enum": [
+        "Brochure",
         "Floor Plans",
-        "Architectural Drawings",
-        "Approvals",
+        "Permits", 
         "Legal Documents",
         "Specifications",
+        "Architectural Drawings",
+        "Construction Documents",
+        "Marketing Materials",
+        "Terms & Conditions",
+        "Approvals",
         "Other"
-      ]
+      ],
+      "required": true
     },
     "displayOrder": {
       "type": "integer",
       "default": 0
+    },
+    "isPublic": {
+      "type": "boolean",
+      "default": true
     }
   }
 }

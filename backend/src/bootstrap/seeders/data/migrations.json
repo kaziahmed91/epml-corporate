@@ -28,8 +28,8 @@
     },
     {
       "id": "2025-01-01-003",
-      "name": "create-equity-anirban-project",
-      "description": "Equity Anirban project with all related data",
+      "name": "create-equity-anirban-project-v2",
+      "description": "Equity Anirban project v2 with complete specifications and updated data",
       "dependencies": ["2025-01-01-001", "2025-01-01-002"],
       "affectedEntities": [
         "api::project.project",
@@ -39,8 +39,19 @@
     },
     {
       "id": "2025-01-01-004",
-      "name": "create-equity-azeez-neer-project",
-      "description": "Equity Azeez Neer project with all related data",
+      "name": "create-equity-aziz-neer-project-v2",
+      "description": "Equity Aziz Neer project v2 with complete specifications and updated data",
+      "dependencies": ["2025-01-01-001", "2025-01-01-002"],
+      "affectedEntities": [
+        "api::project.project",
+        "api::construction-update.construction-update"
+      ],
+      "affectedTables": ["projects"]
+    },
+    {
+      "id": "2025-01-01-005",
+      "name": "create-equity-mir-trade-center-project",
+      "description": "Equity MIR Trade Center commercial project with complete floor specifications",
       "dependencies": ["2025-01-01-001", "2025-01-01-002"],
       "affectedEntities": [
         "api::project.project",

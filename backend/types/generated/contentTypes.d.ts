@@ -544,7 +544,7 @@ export interface ApiDocumentDocument extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
     displayOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
-    file: Schema.Attribute.Media<'files'> & Schema.Attribute.Required;
+    file: Schema.Attribute.Media<'files'>;
     fileSize: Schema.Attribute.BigInteger;
     isPublic: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -555,8 +555,11 @@ export interface ApiDocumentDocument extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     mimeType: Schema.Attribute.String;
     name: Schema.Attribute.String & Schema.Attribute.Required;
+    originalName: Schema.Attribute.String;
     project: Schema.Attribute.Relation<'manyToOne', 'api::project.project'>;
     publishedAt: Schema.Attribute.DateTime;
+    r2Key: Schema.Attribute.String;
+    r2Url: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -633,21 +636,7 @@ export interface ApiLocationLocation extends Struct.CollectionTypeSchema {
       'api::location.location'
     > &
       Schema.Attribute.Private;
-    Name: Schema.Attribute.Enumeration<
-      [
-        'Khulshi',
-        'Nasirabad',
-        'Mehedibagh',
-        'Amirabag',
-        'Agrabad Commercial',
-        'Agrabad Residential',
-        'Devpahar',
-        'Sirajuddaula Road',
-        'Halishahar',
-        'Panchlaish',
-        'GEC',
-      ]
-    >;
+    Name: Schema.Attribute.String;
     projects: Schema.Attribute.Relation<'oneToMany', 'api::project.project'>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
@@ -751,7 +740,6 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
-    documents: Schema.Attribute.Relation<'oneToMany', 'api::document.document'>;
     features: Schema.Attribute.Component<'project.feature-item', true>;
     floors: Schema.Attribute.String;
     landFacing: Schema.Attribute.Enumeration<
@@ -784,6 +772,10 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     project_type: Schema.Attribute.Relation<
       'manyToOne',
       'api::project-type.project-type'
+    >;
+    projectDocuments: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::document.document'
     >;
     publishedAt: Schema.Attribute.DateTime;
     residentialUnits: Schema.Attribute.Component<'project.unit-types', true>;

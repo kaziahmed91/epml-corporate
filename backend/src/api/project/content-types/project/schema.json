@@ -115,7 +115,7 @@
       "target": "api::construction-update.construction-update",
       "mappedBy": "project"
     },
-    "documents": {
+    "projectDocuments": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::document.document",
