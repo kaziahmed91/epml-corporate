@@ -3,7 +3,13 @@
     "allow": [
       "Bash(cat:*)",
       "Bash(yarn upgrade-interactive:*)",
-      "Bash(yarn build)"
+      "Bash(yarn build)",
+      "Bash(find:*)",
+      "Bash(mkdir:*)",
+      "Bash(rm:*)",
+      "Bash(yarn develop)",
+      "Bash(grep:*)",
+      "Bash(curl:*)"
     ],
     "deny": []
   },

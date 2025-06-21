@@ -1,4 +1,6 @@
-// Common Strapi response types
+// Legacy types for backward compatibility
+// These types are deprecated - use types from @/api/types instead
+
 export interface StrapiResponse<T> {
   data: T;
   meta: {
@@ -64,7 +66,7 @@ export interface StrapiMultipleMedia {
   }>;
 }
 
-// Project related types
+// Legacy Project types - DEPRECATED
 export interface ProjectAttributes {
   title: string;
   slug: string;
@@ -102,7 +104,7 @@ export type Project = StrapiData<ProjectAttributes>;
 export type ProjectResponse = StrapiResponse<Project[]>;
 export type SingleProjectResponse = StrapiResponse<Project>;
 
-// News article related types
+// Legacy News types - DEPRECATED
 export interface NewsAttributes {
   title: string;
   slug: string;
@@ -125,7 +127,7 @@ export type NewsArticle = StrapiData<NewsAttributes>;
 export type NewsResponse = StrapiResponse<NewsArticle[]>;
 export type SingleNewsResponse = StrapiResponse<NewsArticle>;
 
-// Job related types
+// Legacy Job types - DEPRECATED
 export interface JobAttributes {
   title: string;
   department: string;
