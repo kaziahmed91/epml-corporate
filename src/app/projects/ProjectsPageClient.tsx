@@ -10,9 +10,17 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { getStrapiMedia } from "@/lib/strapi";
 import LocationMap from "@/components/LocationMap/LocationMap";
 import { Search, MapPin, Building, Car, Square, Home } from "lucide-react";
+import type { 
+  Project, 
+  City, 
+  Location, 
+  ProjectStatus, 
+  ProjectType,
+  PhotoItem 
+} from '@/types';
 
-// Helper function to get first main photo
-const getMainPhoto = (photos: any[]) => {
+// Helper function to get first main photo with proper typing
+const getMainPhoto = (photos: PhotoItem[]): any => {
   if (!photos || photos.length === 0) return null;
   const mainPhoto = photos.find(p => p.isMain) || photos[0];
   return mainPhoto?.photo;
@@ -31,10 +39,10 @@ const formatUnitTypes = (residentialUnits: any[], commercialFloors: any[]) => {
 };
 
 interface ProjectsPageClientProps {
-  allProjects: any[];
-  projectTypes: any[];
-  projectStatuses: any[];
-  locations: any[];
+  allProjects: Project[];
+  projectTypes: ProjectType[];
+  projectStatuses: ProjectStatus[];
+  locations: Location[];
 }
 
 export function ProjectsPageClient({ 
@@ -52,35 +60,56 @@ export function ProjectsPageClient({
 
   // Filter and sort projects
   const filteredProjects = useMemo(() => {
-    let filtered = allProjects.filter((project: any) => {
+    let filtered = allProjects.filter((project: Project | any) => {
+      // Helper to check if this is an API Project vs fallback data
+      const isAPIProject = (p: any): p is Project => p && typeof p.id === 'number';
+      
+      // Get values safely from either API or fallback data
+      const name = isAPIProject(project) ? project.name : project.title || '';
+      const description = project.description || '';
+      const status = isAPIProject(project) 
+        ? project.projectStatus?.data?.name 
+        : project.status;
+      const type = isAPIProject(project)
+        ? project.projectType?.data?.name
+        : project.type;
+      const location = isAPIProject(project)
+        ? project.location?.data?.name
+        : project.location;
+      
       const matchesSearch = !searchTerm || 
-        project.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        project.description?.toLowerCase().includes(searchTerm.toLowerCase());
+        name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        description.toLowerCase().includes(searchTerm.toLowerCase());
       
-      const matchesStatus = !selectedStatus || 
-        (project.project_status?.Statuses || project.status) === selectedStatus;
-      
-      const matchesType = !selectedType || 
-        (project.project_type?.Type || project.type) === selectedType;
-      
-      const matchesLocation = !selectedLocation || 
-        (project.location?.Name || project.location) === selectedLocation;
+      const matchesStatus = !selectedStatus || status === selectedStatus;
+      const matchesType = !selectedType || type === selectedType;
+      const matchesLocation = !selectedLocation || location === selectedLocation;
       
       return matchesSearch && matchesStatus && matchesType && matchesLocation;
     });
 
     // Sort projects
-    filtered.sort((a: any, b: any) => {
-      switch (sortBy) {
-        case 'name':
-          return (a.name || a.title || '').localeCompare(b.name || b.title || '');
-        case 'status':
-          return (a.project_status?.Statuses || a.status || '').localeCompare(b.project_status?.Statuses || b.status || '');
-        case 'location':
-          return (a.location?.Name || a.location || '').localeCompare(b.location?.Name || b.location || '');
-        default:
-          return 0;
-      }
+    filtered.sort((a: Project | any, b: Project | any) => {
+      const isAPIProjectA = (p: any): p is Project => p && typeof p.id === 'number';
+      const isAPIProjectB = (p: any): p is Project => p && typeof p.id === 'number';
+      
+      const getCompareValue = (project: Project | any, field: string) => {
+        const isAPI = isAPIProjectA(project);
+        switch (field) {
+          case 'name':
+            return isAPI ? project.name : project.title || '';
+          case 'status':
+            return isAPI ? project.projectStatus?.data?.name || '' : project.status || '';
+          case 'location':
+            return isAPI ? project.location?.data?.name || '' : project.location || '';
+          default:
+            return '';
+        }
+      };
+      
+      const valueA = getCompareValue(a, sortBy);
+      const valueB = getCompareValue(b, sortBy);
+      return valueA.localeCompare(valueB);
     });
 
     return filtered;
@@ -162,11 +191,15 @@ export function ProjectsPageClient({
                 className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 bg-white p-2 border"
               >
                 <option value="">All Locations</option>
-                {locations.map((location: any) => (
-                  <option key={location.id} value={location.Name || location.name}>
-                    {location.Name || location.name}
-                  </option>
-                ))}
+                {locations.map((location: Location | any) => {
+                  const isAPILocation = (l: any): l is Location => l && typeof l.id === 'number';
+                  const name = isAPILocation(location) ? location.name : location.name || location.Name;
+                  return (
+                    <option key={location.id} value={name}>
+                      {name}
+                    </option>
+                  );
+                })}
               </select>
             </div>
             <div>
@@ -179,11 +212,15 @@ export function ProjectsPageClient({
                 className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 bg-white p-2 border"
               >
                 <option value="">All Types</option>
-                {projectTypes.map((type: any) => (
-                  <option key={type.id} value={type.Type || type.Name}>
-                    {type.Type || type.Name}
-                  </option>
-                ))}
+                {projectTypes.map((type: ProjectType | any) => {
+                  const isAPIType = (t: any): t is ProjectType => t && typeof t.id === 'number';
+                  const name = isAPIType(type) ? type.name : type.Type || type.Name || type.name;
+                  return (
+                    <option key={type.id} value={name}>
+                      {name}
+                    </option>
+                  );
+                })}
               </select>
             </div>
             <div>
@@ -196,11 +233,15 @@ export function ProjectsPageClient({
                 className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 bg-white p-2 border"
               >
                 <option value="">All Statuses</option>
-                {projectStatuses.map((status: any) => (
-                  <option key={status.id} value={status.Statuses || status.Name}>
-                    {status.Statuses || status.Name}
-                  </option>
-                ))}
+                {projectStatuses.map((status: ProjectStatus | any) => {
+                  const isAPIStatus = (s: any): s is ProjectStatus => s && typeof s.id === 'number';
+                  const name = isAPIStatus(status) ? status.name : status.Statuses || status.Name || status.name;
+                  return (
+                    <option key={status.id} value={name}>
+                      {name}
+                    </option>
+                  );
+                })}
               </select>
             </div>
             <div>
@@ -242,12 +283,22 @@ export function ProjectsPageClient({
       <section className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-bold mb-8">All Projects</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project: any) => {
-            const mainPhoto = getMainPhoto(project.photos);
-            const projectStatus = project.project_status?.Statuses || project.status || "Unknown";
-            const projectType = project.project_type?.Type || project.type || "Unknown Type";
-            const projectLocation = project.location?.Name || project.location || "Location TBD";
-            const unitTypes = formatUnitTypes(project.residentialUnits, project.commercialFloors);
+          {filteredProjects.map((project: Project | any) => {
+            const isAPIProject = (p: any): p is Project => p && typeof p.id === 'number';
+            
+            const mainPhoto = isAPIProject(project) ? getMainPhoto(project.photos || []) : null;
+            const projectStatus = isAPIProject(project) 
+              ? project.projectStatus?.data?.name || "Unknown"
+              : project.status || "Unknown";
+            const projectType = isAPIProject(project)
+              ? project.projectType?.data?.name || "Unknown Type"
+              : project.type || "Unknown Type";
+            const projectLocation = isAPIProject(project)
+              ? project.location?.data?.name || "Location TBD"
+              : project.location || "Location TBD";
+            const unitTypes = isAPIProject(project) 
+              ? formatUnitTypes(project.residentialUnits || [], project.commercialFloors || [])
+              : 'Mixed Use';
             
             return (
               <div
@@ -263,7 +314,7 @@ export function ProjectsPageClient({
                           ? getStrapiMedia({ data: mainPhoto }) || "/landscape.jpg"
                           : "/landscape.jpg"
                       }
-                      alt={project.name || project.title}
+                      alt={isAPIProject(project) ? project.name : project.title || 'Project'}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
@@ -290,7 +341,7 @@ export function ProjectsPageClient({
                     </Badge>
                   </div>
                   {/* Photo Count */}
-                  {project.photos && project.photos.length > 1 && (
+                  {isAPIProject(project) && project.photos && project.photos.length > 1 && (
                     <div className="absolute bottom-4 left-4 bg-black/70 text-white px-2 py-1 rounded text-xs">
                       +{project.photos.length - 1} more photos
                     </div>
@@ -301,7 +352,7 @@ export function ProjectsPageClient({
                 <div className="p-6">
                   {/* Title */}
                   <h3 className="text-xl font-bold mb-2 text-gray-900">
-                    {project.name || project.title}
+                    {isAPIProject(project) ? project.name : project.title || 'Project'}
                   </h3>
                   
                   {/* Location and Type */}
@@ -319,25 +370,25 @@ export function ProjectsPageClient({
 
                   {/* Property Specifications */}
                   <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
-                    {project.floors && (
+                    {isAPIProject(project) && project.totalFloors && (
                       <div className="flex items-center text-gray-600">
                         <Building className="h-4 w-4 mr-1 text-blue-500" />
-                        <span>{project.floors}</span>
+                        <span>{project.totalFloors} Floors</span>
                       </div>
                     )}
-                    {project.landSize && (
+                    {isAPIProject(project) && project.landSize && (
                       <div className="flex items-center text-gray-600">
                         <Square className="h-4 w-4 mr-1 text-green-500" />
-                        <span className="truncate">{project.landSize}</span>
+                        <span className="truncate">{project.landSize} {project.landSizeUnit || 'sqft'}</span>
                       </div>
                     )}
-                    {project.parking_spaces && (
+                    {isAPIProject(project) && project.parkingSpaces && (
                       <div className="flex items-center text-gray-600">
                         <Car className="h-4 w-4 mr-1 text-purple-500" />
-                        <span>{project.parking_spaces} Parking</span>
+                        <span>{project.parkingSpaces} Parking</span>
                       </div>
                     )}
-                    {(project.residentialUnits?.length > 0 || project.commercialFloors?.length > 0) && (
+                    {isAPIProject(project) && (project.residentialUnits?.length > 0 || project.commercialFloors?.length > 0) && (
                       <div className="flex items-center text-gray-600">
                         <Home className="h-4 w-4 mr-1 text-orange-500" />
                         <span className="truncate">{unitTypes}</span>
@@ -346,7 +397,7 @@ export function ProjectsPageClient({
                   </div>
 
                   {/* Key Features */}
-                  {project.features && project.features.length > 0 && (
+                  {isAPIProject(project) && project.features && project.features.length > 0 && (
                     <div className="mb-4">
                       <h4 className="text-sm font-semibold text-gray-800 mb-2">Key Features</h4>
                       <div className="flex flex-wrap gap-1">
@@ -365,7 +416,7 @@ export function ProjectsPageClient({
                   )}
 
                   {/* Amenities */}
-                  {project.amenities && project.amenities.length > 0 && (
+                  {isAPIProject(project) && project.amenities && project.amenities.length > 0 && (
                     <div className="mb-4">
                       <h4 className="text-sm font-semibold text-gray-800 mb-2">Amenities</h4>
                       <div className="flex flex-wrap gap-1">

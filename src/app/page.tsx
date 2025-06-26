@@ -3,8 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { getProjects, getRecentNews } from "@/api/queries";
+import { getProjects, getRecentNews } from "@/lib/api/queries";
 import { getStrapiMedia } from "@/lib/strapi";
+import type { Project } from '@/types';
 
 export const revalidate = 3600; // Revalidate this page every hour
 
@@ -13,119 +14,16 @@ export default async function Home() {
   const projects = await getProjects({}, "*");
 
   // If no projects are found, use a default set of projects
-  const featuredProjects =
+  const featuredProjects: Project[] =
     projects.length > 0
       ? projects.slice(0, 3) // Limit to first 3 projects
-      : [
-          {
-            id: 1,
-            slug: "skyline-residences",
-            title: "Skyline Residences",
-            location: {
-              name: "Downtown District",
-            },
-            type: {
-              name: "Residential",
-            },
-            status: {
-              name: "Ongoing",
-            },
-            featuredImage: {
-              data: {
-                attributes: {
-                  url: "/landscape.jpg",
-                },
-              },
-            },
-            description: "Luxury apartments with panoramic city views.",
-          },
-          {
-            id: 2,
-            slug: "harbor-heights",
-            title: "Harbor Heights",
-            location: {
-              name: "Waterfront Area",
-            },
-            type: {
-              name: "Mixed Use",
-            },
-            status: {
-              name: "Upcoming",
-            },
-            featuredImage: {
-              data: {
-                attributes: {
-                  url: "/landscape.jpg",
-                },
-              },
-            },
-            description:
-              "Modern living spaces with commercial outlets on the ground floor.",
-          },
-          {
-            id: 3,
-            slug: "green-valley",
-            title: "Green Valley",
-            location: {
-              name: "Suburban District",
-            },
-            type: {
-              name: "Residential",
-            },
-            status: {
-              name: "Completed",
-            },
-            featuredImage: {
-              data: {
-                attributes: {
-                  url: "/landscape.jpg",
-                },
-              },
-            },
-            description:
-              "Eco-friendly residential community with extensive green spaces.",
-          },
-        ];
+      : []; // Use empty array to avoid type conflicts with dummy data
 
   // Fetch latest news from Strapi
-  const news = await getRecentNews(2);
+  const news = await getRecentNews();
 
-  // If no news articles are found, use default news data
-  const latestNews =
-    news && Array.isArray(news) && news?.length > 0
-      ? news
-      : [
-          {
-            id: 1,
-            slug: "new-development-announced",
-            title: "New Development Announced",
-            publishedAt: "2025-05-15",
-            excerpt:
-              "EPML has announced plans for a new luxury development in the city center.",
-            featuredImage: {
-              data: {
-                attributes: {
-                  url: "/landscape.jpg",
-                },
-              },
-            },
-          },
-          {
-            id: 2,
-            slug: "project-completion",
-            title: "Project Completion Ahead of Schedule",
-            publishedAt: "2025-05-10",
-            excerpt:
-              "The Green Valley development has been completed three months ahead of schedule.",
-            featuredImage: {
-              data: {
-                attributes: {
-                  url: "/landscape.jpg",
-                },
-              },
-            },
-          },
-        ];
+  // If no news articles are found, use empty array to avoid type conflicts
+  const latestNews = news ? [news] : [];
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
@@ -184,12 +82,12 @@ export default async function Home() {
                   <AspectRatio ratio={16 / 9}>
                     <Image
                       src={
-                        project.featuredImage?.data
-                          ? getStrapiMedia(project.featuredImage) ||
+                        project.photos && project.photos.length > 0
+                          ? getStrapiMedia(project.photos[0].photo) ||
                             "/landscape.jpg"
                           : "/landscape.jpg"
                       }
-                      alt={project?.title || ""}
+                      alt={project?.name || ""}
                       fill
                       className="object-cover"
                     />
@@ -197,14 +95,14 @@ export default async function Home() {
                 </div>
                 <div className="p-6">
                   <div className="flex justify-between items-start mb-2">
-                    <h3 className="text-xl font-semibold">{project.title}</h3>
+                    <h3 className="text-xl font-semibold">{project.name}</h3>
                     <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-semibold rounded">
-                      {project.status?.name || project.status}
+                      {project.projectStatus?.data?.name || 'Active'}
                     </span>
                   </div>
                   <p className="text-sm text-gray-600 mb-2">
-                    {project.location?.name || "Location TBD"} •{" "}
-                    {project.type?.name || "Residential"}
+                    {project.location?.data?.name || "Location TBD"} •{" "}
+                    {project.projectType?.data?.name || "Residential"}
                   </p>
                   <p className="mb-4">{project.description}</p>
                   <Button asChild variant="outline" className="w-full">
@@ -272,7 +170,7 @@ export default async function Home() {
                 <div className="md:w-1/3 relative h-48 md:h-auto">
                   <Image
                     src={
-                      newsItem.featuredImage?.data
+                      newsItem.featuredImage
                         ? getStrapiMedia(newsItem.featuredImage) ||
                           "/landscape.jpg"
                         : "/landscape.jpg"
@@ -284,14 +182,14 @@ export default async function Home() {
                 </div>
                 <div className="md:w-2/3 p-6">
                   <p className="text-sm text-gray-500 mb-2">
-                    {new Date(newsItem.publishedAt).toLocaleDateString()}
+                    {new Date(newsItem.publishDate).toLocaleDateString()}
                   </p>
                   <h3 className="text-xl font-semibold mb-2">
                     {newsItem.title}
                   </h3>
-                  <p className="mb-4">{newsItem.excerpt}</p>
+                  <p className="mb-4">{newsItem.content.substring(0, 150)}...</p>
                   <Button asChild variant="link" className="p-0">
-                    <Link href={`/news/${newsItem.slug}`}>Read More</Link>
+                    <Link href={`/news/${newsItem.id}`}>Read More</Link>
                   </Button>
                 </div>
               </div>

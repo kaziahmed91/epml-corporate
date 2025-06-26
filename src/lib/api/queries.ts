@@ -1,22 +1,44 @@
 import { fetchAPI, POPULATE_QUERIES, buildFiltersQuery, formatStrapiResponse } from '@/lib/strapi';
 import type {
   Project,
-  ProjectFilters,
   City,
   Location,
   ProjectStatus,
   ProjectType,
   Document,
-  DocumentFilters,
   ConstructionUpdate,
-  ConstructionUpdateFilters,
   Testimonial,
-  TestimonialFilters,
   RecentNews,
   FeatureTemplate,
   AmenityTemplate,
-  ContactFormData
-} from '@/api/types';
+  ContactFormData,
+  ProjectFilters,
+  DocumentFilters,
+  ConstructionUpdateFilters,
+  TestimonialFilters,
+  ProjectResponse,
+  ProjectsResponse,
+  CityResponse,
+  CitiesResponse,
+  LocationResponse,
+  LocationsResponse,
+  ProjectStatusResponse,
+  ProjectStatusesResponse,
+  ProjectTypeResponse,
+  ProjectTypesResponse,
+  DocumentResponse,
+  DocumentsResponse,
+  ConstructionUpdateResponse,
+  ConstructionUpdatesResponse,
+  TestimonialResponse,
+  TestimonialsResponse,
+  FeatureTemplateResponse,
+  FeatureTemplatesResponse,
+  AmenityTemplateResponse,
+  AmenityTemplatesResponse,
+  RecentNewsResponse,
+  ProjectAdvancedQuery
+} from '@/types';
 
 /**
  * Fetches a single project by slug with full population
@@ -151,7 +173,7 @@ export async function getCities(): Promise<City[]> {
  */
 export async function getLocations(): Promise<Location[]> {
   try {
-    const data = await fetchAPI(`/locations?${POPULATE_QUERIES.locationWithCity}`);
+    const data = await fetchAPI(`/locations?populate=*`);
     return formatStrapiResponse(data) || [];
   } catch (error) {
     console.error('Error fetching locations:', error);
@@ -227,9 +249,9 @@ export async function getDocumentsByProject(
   projectId: number, 
   isPublic?: boolean
 ): Promise<Document[]> {
-  const filters: DocumentFilters = { project: projectId };
+  const filters: DocumentFilters = { project: { $eq: projectId } };
   if (isPublic !== undefined) {
-    filters.isPublic = isPublic;
+    filters.isPublic = { $eq: isPublic };
   }
   
   return getDocuments(filters);
@@ -259,7 +281,7 @@ export async function getConstructionUpdates(
  * @param projectId The project ID to filter by
  */
 export async function getConstructionUpdatesByProject(projectId: number): Promise<ConstructionUpdate[]> {
-  return getConstructionUpdates({ project: projectId });
+  return getConstructionUpdates({ project: { $eq: projectId } });
 }
 
 /**
@@ -283,7 +305,7 @@ export async function getTestimonials(filters: TestimonialFilters = {}): Promise
  * Fetches featured testimonials
  */
 export async function getFeaturedTestimonials(): Promise<Testimonial[]> {
-  return getTestimonials({ isFeatured: true });
+  return getTestimonials({ isFeatured: { $eq: true } });
 }
 
 /**
@@ -293,7 +315,7 @@ export async function getFeaturedTestimonials(): Promise<Testimonial[]> {
 export async function getTestimonialsByType(
   testimonialType: 'customer' | 'partner' | 'employee' | 'media'
 ): Promise<Testimonial[]> {
-  return getTestimonials({ testimonialType });
+  return getTestimonials({ testimonialType: { $eq: testimonialType } });
 }
 
 /**

@@ -154,6 +154,10 @@ This comprehensive guide outlines best practices, conventions, and standards for
 - Optimize React component rendering using memoization techniques (e.g., React.memo).
 - Avoid unnecessary re-renders.
 - Lazy load components and images when possible.
+- Ensure react components are kept as lean as possible by extracting repeated elements into separate components. 
+- Ensure pages, are broken down into components, containers particularly by following the atomic react component structure. 
+- If files get too long, ensure they are broken down into separate files and folder structures. 
+- Ensure files, folders, components are colocated as close as possible so that they are easier to find. 
 
 
 ## State Management

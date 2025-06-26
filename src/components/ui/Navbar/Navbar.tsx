@@ -8,7 +8,6 @@ import {
   MobileNavHeader,
   MobileNavMenu,
   MobileNavToggle,
-  NavbarLogo,
   NavbarButton,
   ProductItem,
   HoveredLink,

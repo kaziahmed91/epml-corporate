@@ -1,15 +1,23 @@
 import qs from "qs";
+import type { 
+  StrapiResponse, 
+  StrapiCollectionResponse, 
+  StrapiQuery, 
+  StrapiMedia,
+  StrapiError,
+  StrapiErrorResponse 
+} from '@/types';
 
 const strapiToken = process.env.STRAPI_API_TOKEN;
 
 // Define specific populate queries for different content types
 export const POPULATE_QUERIES = {
-  project: 'populate[project_status]=*&populate[project_type]=*&populate[location][populate][city]=*&populate[photos]=*&populate[residentialUnits][populate][residential]=*&populate[commercialFloors][populate][commercial]=*&populate[features]=*&populate[amenities]=*&populate[youtubeVideos]=*&populate[coordinates]=*&populate[projectDocuments]=*&populate[bulkPhotoUploads]=*&populate[constructionUpdates]=*',
+  project: 'populate[project_status]=*&populate[project_type]=*&populate[location][populate][city]=*&populate[photos]=*&populate[residentialUnits][populate][residential]=*&populate[commercialFloors][populate][commercial]=*&populate[features]=*&populate[amenities]=*&populate[youtubeVideos]=*&populate[coordinates]=*&populate[projectDocuments]=*&populate[bulkPhotoUploads][populate][photos]=*&populate[constructionUpdates]=*',
   projectBasic: 'populate[project_status]=*&populate[project_type]=*&populate[location][populate][city]=*&populate[photos]=*',
   document: 'populate[project]=*',
   constructionUpdate: 'populate[project]=*',
   testimonial: 'populate=*',
-  locationWithCity: 'populate[city]=*',
+  locationWithCity: 'populate=city',
   all: 'populate=*'
 };
 
@@ -171,25 +179,66 @@ export async function deleteAPI(
 
 /**
  * Get media URL from Strapi
+ * Updated for Strapi v5 compatibility
  */
 export function getStrapiMedia(media: any) {
-  if (!media || !media.data) return null;
+  if (!media) return null;
 
-  const { url } = media.data.attributes;
+  // Handle different media formats
+  let url;
+  
+  if (media.data) {
+    // Wrapped in data object (Strapi v4/v5 API response)
+    if (media.data.attributes) {
+      // Strapi v4 format
+      url = media.data.attributes.url;
+    } else {
+      // Strapi v5 format - data is directly available
+      url = media.data.url;
+    }
+  } else if (media.url) {
+    // Direct media object (Strapi v5 direct access)
+    url = media.url;
+  }
+
+  if (!url) return null;
+  
   const imageUrl = url.startsWith("/") ? getStrapiURL(url) : url;
   return imageUrl;
 }
 
 /**
  * Get multiple media URLs from Strapi
+ * Updated for Strapi v5 compatibility
  */
 export function getStrapiMediaMultiple(media: any) {
-  if (!media || !media.data || !Array.isArray(media.data)) return [];
+  if (!media) return [];
 
-  return media.data.map((item: any) => {
-    const { url, alternativeText, caption } = item.attributes;
+  let mediaArray = [];
+  
+  if (media.data && Array.isArray(media.data)) {
+    // Wrapped in data array (API response format)
+    mediaArray = media.data;
+  } else if (Array.isArray(media)) {
+    // Direct array (direct access format)
+    mediaArray = media;
+  } else {
+    return [];
+  }
+
+  return mediaArray.map((item: any) => {
+    // Handle both Strapi v4 and v5 formats
+    let url, alternativeText, caption;
+    if (item.attributes) {
+      // Strapi v4 format
+      ({ url, alternativeText, caption } = item.attributes);
+    } else {
+      // Strapi v5 format
+      ({ url, alternativeText, caption } = item);
+    }
+
     return {
-      url: url.startsWith("/") ? getStrapiURL(url) : url,
+      url: url && url.startsWith("/") ? getStrapiURL(url) : url || '',
       alt: alternativeText || '',
       caption: caption || ''
     };
@@ -198,26 +247,44 @@ export function getStrapiMediaMultiple(media: any) {
 
 /**
  * Helper to extract relation data from Strapi response
+ * Updated for Strapi v5 compatibility
  */
 export function extractRelationData(relation: any) {
   if (!relation || !relation.data) return null;
   
-  return {
-    id: relation.data.id,
-    ...relation.data.attributes
-  };
+  // Handle both Strapi v4 and v5 formats
+  if (relation.data.attributes) {
+    // Strapi v4 format
+    return {
+      id: relation.data.id,
+      ...relation.data.attributes
+    };
+  } else {
+    // Strapi v5 format
+    return relation.data;
+  }
 }
 
 /**
  * Helper to extract multiple relation data from Strapi response
+ * Updated for Strapi v5 compatibility
  */
 export function extractMultipleRelationData(relation: any) {
   if (!relation || !relation.data || !Array.isArray(relation.data)) return [];
   
-  return relation.data.map((item: any) => ({
-    id: item.id,
-    ...item.attributes
-  }));
+  return relation.data.map((item: any) => {
+    // Handle both Strapi v4 and v5 formats
+    if (item.attributes) {
+      // Strapi v4 format
+      return {
+        id: item.id,
+        ...item.attributes
+      };
+    } else {
+      // Strapi v5 format
+      return item;
+    }
+  });
 }
 
 /**

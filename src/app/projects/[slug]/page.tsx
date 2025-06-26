@@ -4,7 +4,16 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
-import { getProject } from '@/api/queries';
+import { ProjectImageGrid } from '@/components/ui/ImageGrid';
+import { getProject } from '@/lib/api/queries';
+import type { 
+  Project, 
+  ProjectDetailPageProps,
+  PhotoItem,
+  BulkPhotoUpload,
+  ProjectFeature,
+  ProjectAmenity 
+} from '@/types';
 import { getStrapiMedia } from '@/lib/strapi';
 import { projectsDetail } from '@/lib/data/projectsData'; // Fallback data
 import { 
@@ -19,13 +28,39 @@ import {
   Mail,
   Download,
   ChevronLeft,
-  Star
+  Star,
+  Shield,
+  Camera,
+  Wifi,
+  Zap,
+  Battery,
+  Award,
+  Droplets,
+  ArrowUp,
+  ShieldCheck,
+  Plug,
+  Gauge,
+  Wind,
+  Tv,
+  Briefcase,
+  Settings,
+  Sparkles,
+  Lock,
+  Sun,
+  Monitor,
+  Lightbulb,
+  Activity,
+  Coffee,
+  ShoppingCart,
+  Flower2,
+  TreePine,
+  Gamepad2,
+  Wrench,
+  HardHat,
+  CheckCircle
 } from 'lucide-react';
 
-// Defining types for our props
-type ProjectDetailPageProps = {
-  params: Promise<{ slug: string }>;
-};
+// Type is now imported from @/types
 
 // Set revalidation period
 export const revalidate = 3600; // Revalidate every hour
@@ -52,28 +87,30 @@ export async function generateMetadata({ params }: ProjectDetailPageProps) {
     };
   }
   
+  const projectName = (project as Project).name || (project as any).title || 'Project';
+  
   return {
-    title: `${project.name || project.title} | EPML Properties`,
-    description: project.description || `Discover ${project.name || project.title} - a premium development by EPML Properties`,
+    title: `${projectName} | EPML Properties`,
+    description: project.description || `Discover ${projectName} - a premium development by EPML Properties`,
     openGraph: {
-      title: `${project.name || project.title} | EPML Properties`,
+      title: `${projectName} | EPML Properties`,
       description: project.description,
-      images: project.photos && project.photos.length > 0 
-        ? [getStrapiMedia({ data: project.photos.find(p => p.isMain)?.photo || project.photos[0]?.photo }) || '/landscape.jpg']
+      images: (project as Project).photos && (project as Project).photos?.length > 0 
+        ? [getStrapiMedia((project as Project).photos?.find(p => p.isMain)?.photo || (project as Project).photos?.[0]?.photo) || '/landscape.jpg']
         : ['/landscape.jpg'],
     },
   };
 }
 
-// Helper functions
-const getMainPhoto = (photos: any[]) => {
+// Helper functions with proper typing
+const getMainPhoto = (photos: PhotoItem[]): any => {
   if (!photos || photos.length === 0) return null;
   const mainPhoto = photos.find(p => p.isMain) || photos[0];
   return mainPhoto?.photo;
 };
 
-const formatUnitTypes = (residentialUnits: any[], commercialFloors: any[]) => {
-  const types = [];
+const formatUnitTypes = (residentialUnits: any[], commercialFloors: any[]): string => {
+  const types: string[] = [];
   if (residentialUnits && residentialUnits.length > 0) {
     types.push(`${residentialUnits.length} Residential`);
   }
@@ -83,12 +120,109 @@ const formatUnitTypes = (residentialUnits: any[], commercialFloors: any[]) => {
   return types.join(', ') || 'Mixed Use';
 };
 
-export default async function ProjectDetailPage({ params }: ProjectDetailPageProps) {
+// Icon mapping for features and amenities
+const getFeatureIcon = (iconKey: string): React.ReactNode => {
+  const iconMap: { [key: string]: React.ReactNode } = {
+    // Security icons
+    'security-camera': <Camera className="h-5 w-5" />,
+    'shield': <Shield className="h-5 w-5" />,
+    'shield-check': <ShieldCheck className="h-5 w-5" />,
+    'camera': <Camera className="h-5 w-5" />,
+    'lock': <Lock className="h-5 w-5" />,
+    'fire-extinguisher': <Star className="h-5 w-5" />,
+    
+    // Utilities icons
+    'elevator': <ArrowUp className="h-5 w-5" />,
+    'arrow-up': <ArrowUp className="h-5 w-5" />,
+    'battery': <Battery className="h-5 w-5" />,
+    'generator': <Zap className="h-5 w-5" />,
+    'zap': <Zap className="h-5 w-5" />,
+    'plug': <Plug className="h-5 w-5" />,
+    'meter': <Gauge className="h-5 w-5" />,
+    'droplets': <Droplets className="h-5 w-5" />,
+    'water-drop': <Droplets className="h-5 w-5" />,
+    'phone': <Phone className="h-5 w-5" />,
+    'wifi': <Wifi className="h-5 w-5" />,
+    'lightbulb': <Lightbulb className="h-5 w-5" />,
+    
+    // Convenience icons
+    'air-conditioner': <Wind className="h-5 w-5" />,
+    'map-pin': <MapPin className="h-5 w-5" />,
+    'building': <Building className="h-5 w-5" />,
+    'car': <Car className="h-5 w-5" />,
+    'award': <Award className="h-5 w-5" />,
+    'tree-pine': <TreePine className="h-5 w-5" />,
+    'sparkles': <Sparkles className="h-5 w-5" />,
+    'sun': <Sun className="h-5 w-5" />,
+    'wind': <Wind className="h-5 w-5" />,
+    
+    // Parking icons
+    'parking-garage': <Car className="h-5 w-5" />,
+    'parking-meter': <Car className="h-5 w-5" />,
+    
+    // Services icons
+    'seat': <Square className="h-5 w-5" />,
+    'restroom': <Home className="h-5 w-5" />,
+    'briefcase': <Briefcase className="h-5 w-5" />,
+    'settings': <Settings className="h-5 w-5" />,
+    'activity': <Activity className="h-5 w-5" />,
+    
+    // Recreation icons
+    'grill': <HardHat className="h-5 w-5" />,
+    'gamepad-2': <Gamepad2 className="h-5 w-5" />,
+    'tv': <Tv className="h-5 w-5" />,
+    'dumbbell': <Activity className="h-5 w-5" />,
+    'waves': <Wind className="h-5 w-5" />,
+    
+    // Outdoor icons
+    'tree': <TreePine className="h-5 w-5" />,
+    'flower': <Flower2 className="h-5 w-5" />,
+    'baby': <Star className="h-5 w-5" />,
+    'trees': <TreePine className="h-5 w-5" />,
+    
+    // Community icons
+    'users': <Users className="h-5 w-5" />,
+    'coffee': <Coffee className="h-5 w-5" />,
+    'shopping-cart': <ShoppingCart className="h-5 w-5" />,
+    
+    // Accessibility icons
+    'stairs': <ArrowUp className="h-5 w-5" />,
+    
+    // Other icons
+    'shirt': <Square className="h-5 w-5" />,
+    'computer': <Monitor className="h-5 w-5" />,
+    'flame': <Star className="h-5 w-5" />,
+  };
+  
+  return iconMap[iconKey] || <CheckCircle className="h-5 w-5" />;
+};
+
+// Get category color for features and amenities
+const getCategoryColor = (category: string): string => {
+  const colorMap: { [key: string]: string } = {
+    'security': 'text-red-500 bg-red-50',
+    'utilities': 'text-blue-500 bg-blue-50', 
+    'convenience': 'text-green-500 bg-green-50',
+    'technology': 'text-purple-500 bg-purple-50',
+    'accessibility': 'text-orange-500 bg-orange-50',
+    'parking': 'text-indigo-500 bg-indigo-50',
+    'services': 'text-teal-500 bg-teal-50',
+    'recreation': 'text-pink-500 bg-pink-50',
+    'wellness': 'text-emerald-500 bg-emerald-50',
+    'community': 'text-amber-500 bg-amber-50',
+    'outdoor': 'text-lime-500 bg-lime-50',
+  };
+  
+  return colorMap[category] || 'text-gray-500 bg-gray-50';
+};
+
+export default async function ProjectDetailPage({ params }: ProjectDetailPageProps): Promise<JSX.Element> {
   // Await params first
   const { slug } = await params;
   
   // Fetch project data from Strapi API using the slug
   const projectData = await getProject(slug);
+  
   
   // Fall back to static data if API call fails or returns no data
   const project = projectData || projectsDetail[slug as keyof typeof projectsDetail];
@@ -109,14 +243,27 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
     );
   }
 
-  // Extract data with proper Strapi v5 format handling
-  const projectName = project.name || project.title;
-  const projectStatus = project.project_status?.Statuses || project.status || "Unknown";
-  const projectType = project.project_type?.Type || project.type || "Unknown Type";
-  const projectLocation = project.location?.Name || project.location || "Location TBD";
-  const projectCity = project.location?.city?.Name || project.city?.name || project.city || "";
-  const mainPhoto = getMainPhoto(project.photos);
-  const unitTypes = formatUnitTypes(project.residentialUnits, project.commercialFloors);
+  // Type-safe property accessors
+  const isAPIProject = (p: any): p is Project => p && typeof p.id === 'number';
+  
+  // Extract data with proper type checking
+  const projectName = isAPIProject(project) ? project.name : (project as any).title || 'Project';
+  const projectStatus = isAPIProject(project) 
+    ? project.projectStatus?.data?.name || "Unknown"
+    : (project as any).status || "Unknown";
+  const projectType = isAPIProject(project)
+    ? project.projectType?.data?.name || "Unknown Type"
+    : (project as any).type || "Unknown Type";
+  const projectLocation = isAPIProject(project)
+    ? project.location?.data?.name || "Location TBD"
+    : (project as any).location || "Location TBD";
+  const projectCity = isAPIProject(project)
+    ? project.location?.data?.city?.data?.name || ""
+    : (project as any).city || "";
+  const mainPhoto = isAPIProject(project) ? getMainPhoto(project.photos || []) : null;
+  const unitTypes = isAPIProject(project) 
+    ? formatUnitTypes(project.residentialUnits || [], project.commercialFloors || [])
+    : 'Mixed Use';
 
   return (
     <main className="min-h-screen pb-16">
@@ -126,10 +273,8 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           <Image 
             src={
               mainPhoto
-                ? getStrapiMedia({ data: mainPhoto }) || '/landscape.jpg'
-                : project.featuredImage?.data 
-                ? getStrapiMedia(project.featuredImage) 
-                : project.mainImage || '/landscape.jpg'
+                ? getStrapiMedia(mainPhoto) || '/landscape.jpg'
+                : (project as any).mainImage || '/landscape.jpg'
             }
             alt={projectName} 
             fill 
@@ -372,7 +517,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                         <AspectRatio ratio={4/3}>
                           <div className="relative h-full rounded-lg overflow-hidden bg-gray-100">
                             <Image 
-                              src={getStrapiMedia({ data: photo }) || '/landscape.jpg'} 
+                              src={getStrapiMedia(photo) || '/landscape.jpg'} 
                               alt={caption || `${projectName} - Image ${index + 1}`} 
                               fill 
                               className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -414,7 +559,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                   {project.gallery.data.map((image: any, index: number) => (
                     <div key={index} className="relative h-48 rounded-lg overflow-hidden">
                       <Image 
-                        src={getStrapiMedia({ data: image }) || '/landscape.jpg'} 
+                        src={getStrapiMedia(image) || '/landscape.jpg'} 
                         alt={`${projectName} - Image ${index + 1}`} 
                         fill 
                         className="object-cover hover:scale-105 transition-transform duration-300"
@@ -595,67 +740,114 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
               </div>
             )}
 
-            {/* Features & Amenities */}
+            {/* Enhanced Features & Amenities with Iconography */}
             <div>
               <h3 className="text-2xl font-bold mb-6">Features & Amenities</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Project Features */}
-                {project.features && project.features.length > 0 && (
-                  <div>
-                    <h4 className="text-xl font-semibold mb-4 text-green-600">Key Features</h4>
-                    <div className="space-y-3">
-                      {project.features.map((feature: any, index: number) => (
-                        <div key={index} className="flex items-start">
-                          <div className="h-5 w-5 text-green-500 mr-3 mt-0.5 flex-shrink-0">
-                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                            </svg>
-                          </div>
-                          <div>
-                            <h5 className="font-medium">{feature.name || (typeof feature === 'string' ? feature : 'Feature')}</h5>
-                            {feature.description && (
-                              <p className="text-sm text-gray-600 mt-1">{feature.description}</p>
-                            )}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-                
-                {/* Project Amenities */}
-                {project.amenities && project.amenities.length > 0 && (
-                  <div>
-                    <h4 className="text-xl font-semibold mb-4 text-blue-600">Amenities</h4>
-                    <div className="space-y-3">
-                      {project.amenities.map((amenity: any, index: number) => (
-                        <div key={index} className="flex items-start">
-                          <div className="h-5 w-5 text-blue-500 mr-3 mt-0.5 flex-shrink-0">
-                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                            </svg>
-                          </div>
-                          <div>
-                            <h5 className="font-medium">{amenity.name || (typeof amenity === 'string' ? amenity : 'Amenity')}</h5>
-                            {amenity.description && (
-                              <p className="text-sm text-gray-600 mt-1">{amenity.description}</p>
-                            )}
+              
+              {/* Project Features */}
+              {project.features && project.features.length > 0 && (
+                <div className="mb-12">
+                  <h4 className="text-xl font-semibold mb-6 text-green-600 flex items-center">
+                    <Sparkles className="h-5 w-5 mr-2" />
+                    Key Features
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {project.features.map((feature: any, index: number) => {
+                      const categoryColors = getCategoryColor(feature.category || 'convenience');
+                      
+                      return (
+                        <div key={index} className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow duration-200">
+                          <div className="flex items-start space-x-3">
+                            <div className={`p-2 rounded-lg ${categoryColors} flex-shrink-0`}>
+                              {getFeatureIcon(feature.icon || 'sparkles')}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <h5 className="font-semibold text-gray-900 mb-1 text-sm leading-tight">
+                                {feature.name || (typeof feature === 'string' ? feature : 'Feature')}
+                              </h5>
+                              {feature.description && (
+                                <p className="text-xs text-gray-600 leading-relaxed">{feature.description}</p>
+                              )}
+                              {feature.category && (
+                                <div className="mt-2">
+                                  <span className={`inline-block px-2 py-1 text-xs font-medium rounded-full ${
+                                    feature.category === 'security' ? 'bg-red-100 text-red-700' :
+                                    feature.category === 'utilities' ? 'bg-blue-100 text-blue-700' :
+                                    feature.category === 'convenience' ? 'bg-green-100 text-green-700' :
+                                    feature.category === 'technology' ? 'bg-purple-100 text-purple-700' :
+                                    'bg-gray-100 text-gray-700'
+                                  }`}>
+                                    {feature.category}
+                                  </span>
+                                </div>
+                              )}
+                            </div>
                           </div>
                         </div>
-                      ))}
-                    </div>
+                      );
+                    })}
                   </div>
-                )}
-                
-                {/* Fallback for legacy amenities/features */}
-                {(!project.features || project.features.length === 0) && (!project.amenities || project.amenities.length === 0) && (
-                  <div className="col-span-2">
-                    <div className="text-center py-8 bg-gray-50 rounded-lg">
-                      <p className="text-gray-500">Features and amenities information will be updated soon.</p>
-                    </div>
+                </div>
+              )}
+              
+              {/* Project Amenities */}
+              {project.amenities && project.amenities.length > 0 && (
+                <div className="mb-8">
+                  <h4 className="text-xl font-semibold mb-6 text-blue-600 flex items-center">
+                    <Star className="h-5 w-5 mr-2" />
+                    Premium Amenities
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {project.amenities.map((amenity: any, index: number) => {
+                      const categoryColors = getCategoryColor(amenity.category || 'services');
+                      
+                      return (
+                        <div key={index} className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow duration-200">
+                          <div className="flex items-start space-x-3">
+                            <div className={`p-2 rounded-lg ${categoryColors} flex-shrink-0`}>
+                              {getFeatureIcon(amenity.icon || 'star')}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <h5 className="font-semibold text-gray-900 mb-1 text-sm leading-tight">
+                                {amenity.name || (typeof amenity === 'string' ? amenity : 'Amenity')}
+                              </h5>
+                              {amenity.description && (
+                                <p className="text-xs text-gray-600 leading-relaxed">{amenity.description}</p>
+                              )}
+                              {amenity.category && (
+                                <div className="mt-2">
+                                  <span className={`inline-block px-2 py-1 text-xs font-medium rounded-full ${
+                                    amenity.category === 'parking' ? 'bg-indigo-100 text-indigo-700' :
+                                    amenity.category === 'services' ? 'bg-teal-100 text-teal-700' :
+                                    amenity.category === 'recreation' ? 'bg-pink-100 text-pink-700' :
+                                    amenity.category === 'outdoor' ? 'bg-lime-100 text-lime-700' :
+                                    amenity.category === 'community' ? 'bg-amber-100 text-amber-700' :
+                                    amenity.category === 'security' ? 'bg-red-100 text-red-700' :
+                                    'bg-gray-100 text-gray-700'
+                                  }`}>
+                                    {amenity.category}
+                                  </span>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
-                )}
-              </div>
+                </div>
+              )}
+              
+              {/* Fallback for no features/amenities */}
+              {(!project.features || project.features.length === 0) && (!project.amenities || project.amenities.length === 0) && (
+                <div className="text-center py-12 bg-gray-50 rounded-lg">
+                  <div className="mb-4">
+                    <Building className="h-16 w-16 mx-auto text-gray-400" />
+                  </div>
+                  <h4 className="text-lg font-semibold text-gray-600 mb-2">Features & Amenities</h4>
+                  <p className="text-gray-500">Detailed information will be available soon.</p>
+                </div>
+              )}
             </div>
 
             {/* Construction Progress - Only show if not completed */}
@@ -728,7 +920,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                         size="sm"
                         className="w-full justify-start"
                       >
-                        <a href={getStrapiMedia({ data: document.file }) || '#'} target="_blank" rel="noopener noreferrer">
+                        <a href={getStrapiMedia(document.file) || '#'} target="_blank" rel="noopener noreferrer">
                           <Download className="h-4 w-4 mr-2" />
                           {document.title || `${document.category} Document`}
                         </a>
@@ -811,20 +1003,72 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           </div>
         </div>
       </section>
+
+      {/* Photo Gallery Section */}
+      <section id="gallery" className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Project Gallery</h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Explore {projectName} through our interactive photo gallery showcasing the architecture, interiors, and development progress.
+            </p>
+          </div>
+
+          {/* Interactive Image Grid */}
+          {isAPIProject(project) ? (
+            <ProjectImageGrid 
+              photos={project.photos || []}
+              bulkPhotoUploads={project.bulkPhotoUploads || []}
+              projectName={projectName}
+            />
+          ) : (
+            <div className="text-center py-16 bg-white rounded-lg border-2 border-dashed border-gray-200">
+              <div className="max-w-md mx-auto">
+                <Camera className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+                <h3 className="text-lg font-semibold text-gray-600 mb-2">
+                  Photo Gallery Coming Soon
+                </h3>
+                <p className="text-gray-500 mb-6">
+                  We're currently preparing beautiful photos of {projectName}. 
+                  Check back soon to see our interactive gallery.
+                </p>
+                <Button asChild variant="outline">
+                  <Link href="/projects">
+                    View Other Projects
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          )}
+
+          {/* Gallery Actions */}
+          <div className="text-center mt-12 pt-8 border-t border-gray-200">
+            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+              Interested in {projectName}?
+            </h3>
+            <p className="text-gray-600 mb-4">Want to see more or schedule a site visit?</p>
+            <Button asChild size="lg">
+              <Link href={`/contact?project=${slug}&inquiry=viewing`}>
+                Schedule Site Visit
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
       
       {/* Call to Action */}
-      <section className="py-16 bg-blue-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">Interested in this project?</h2>
-          <p className="text-xl mb-8 max-w-3xl mx-auto">
+      <section className='py-16 bg-blue-900 text-white'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center'>
+          <h2 className='text-3xl font-bold mb-4'>Interested in this project?</h2>
+          <p className='text-xl mb-8 max-w-3xl mx-auto'>
             Contact our sales team for more information or to schedule a personal consultation.
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Button asChild size="lg" className="bg-white text-blue-900 hover:bg-gray-100">
-              <Link href="/contact">Contact Sales Team</Link>
+          <div className='flex flex-wrap justify-center gap-4'>
+            <Button asChild size='lg' className='bg-white text-blue-900 hover:bg-gray-100'>
+              <Link href='/contact'>Contact Sales Team</Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="border-white hover:bg-white/10">
-              <Link href="/projects">View Other Projects</Link>
+            <Button asChild variant='outline' size='lg' className='border-white hover:bg-white/10'>
+              <Link href='/projects'>View Other Projects</Link>
             </Button>
           </div>
         </div>
